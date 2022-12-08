@@ -18,6 +18,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import org.koin.androidx.compose.get
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
@@ -30,12 +31,12 @@ fun Snippets(
     val state = rememberLazyListState()
 
     LaunchedEffect(key1 = true) {
-        viewModel.loadSnippets()
+        viewModel.loadProducts()
     }
 
-    val snippets by viewModel.snippets.collectAsState()
+    val snippets by viewModel.products.collectAsState()
 
-    val buyer by viewModel.buyer.collectAsState()
+    val buyer by viewModel.buyer.collectAsState(initial = get())
 
     LazyColumn(
         state = state,
@@ -46,16 +47,15 @@ fun Snippets(
             .padding(paddingValues = paddingValues),
         contentPadding = PaddingValues(vertical = 16.dp)
     ) {
-        itemsIndexed(items = snippets) { index, item ->
+        itemsIndexed(items = snippets) { index, product ->
 
-            val enabledButton = item.quantity != 0 && buyer.amountOfMoney >= item.price
+            val enabledButton = product.quantity != 0 && buyer.amountOfMoney >= product.price
 
             Snippet(
-                snippet = item,
-                viewModel = viewModel,
+                product = product,
                 enabledButton = enabledButton
             ) {
-                viewModel.navigate(navController = navController, snippet = item)
+                viewModel.navigate(navController = navController, productModel = product)
             }
 
             if (index < snippets.lastIndex) {

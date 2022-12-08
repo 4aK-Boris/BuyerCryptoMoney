@@ -2,14 +2,20 @@ package aleksandr.fedotkin.buyercryptomoney.data.mappers
 
 import aleksandr.fedotkin.buyercryptomoney.data.dto.ProductDTO
 import aleksandr.fedotkin.buyercryptomoney.domain.model.ProductModel
+import aleksandr.fedotkin.buyercryptomoney.domain.model.SellerModel
 
 class ProductMapper {
 
-    fun map(productModel: ProductModel): ProductDTO {
-        return ProductDTO(
-            buyerId = productModel.buyerId,
-            sellerId = productModel.sellerId,
-            snippetId = productModel.snippetId
+    fun map(productDTO: ProductDTO, sellerModel: SellerModel): ProductModel {
+        return ProductModel(
+            id = productDTO.id,
+            sellerId = productDTO.sellerId,
+            quantity = productDTO.quantity,
+            imageUrl = productDTO.imageUrl,
+            title = productDTO.title,
+            rating = productDTO.rating,
+            price = productDTO.price,
+            sellerTitle = sellerModel.title
         )
     }
 }

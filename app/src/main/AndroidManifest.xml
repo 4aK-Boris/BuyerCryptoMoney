@@ -13,13 +13,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.BuyerCryptoMoney"
-        android:name=".MainApplication"
+        android:name=".core.MainApplication"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
+            android:name=".core.MainActivity"
             android:exported="true"
-            android:label="@string/app_name"
             android:theme="@style/Theme.BuyerCryptoMoney">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

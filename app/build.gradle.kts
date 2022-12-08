@@ -66,6 +66,8 @@ dependencies {
 
     implementation(Dependencies.Coil.landscapist)
 
+    implementation(Dependencies.OneSignal.oneSignal)
+
     implementation(Dependencies.Koin.koin)
     implementation(Dependencies.Koin.compose)
 

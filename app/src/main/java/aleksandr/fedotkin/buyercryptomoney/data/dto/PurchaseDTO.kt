@@ -4,6 +4,8 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class PurchaseDTO(
-    val productDTO: ProductDTO,
-    val bankCardDTO: BankCardDTO
+    val buyerId: Int,
+    val sellerId: Int,
+    val productId: Int,
+    val count: Int
 )

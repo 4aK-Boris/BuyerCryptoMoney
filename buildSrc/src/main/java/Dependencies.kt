@@ -69,6 +69,12 @@ object Dependencies {
         const val landscapist = "com.github.skydoves:landscapist-coil:$version"
     }
 
+    object OneSignal {
+
+        private const val version = "[4.0.0, 4.99.99]"
+        const val oneSignal = "com.onesignal:OneSignal:$version"
+    }
+
     object Plugins {
 
         const val gradleVersion = "7.3.1"

@@ -1,6 +1,6 @@
 package aleksandr.fedotkin.buyercryptomoney.presentation.ui.navigation
 
-import aleksandr.fedotkin.buyercryptomoney.ui.BankCard
+import aleksandr.fedotkin.buyercryptomoney.presentation.ui.screens.card.Card
 import aleksandr.fedotkin.buyercryptomoney.presentation.ui.screens.products.Products
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -27,20 +27,20 @@ fun Navigation(
             Products(navController = navController)
         }
         composable(
-            route = Screen.BankCard.route,
-            arguments = Screen.BankCard.arguments
+            route = Screen.Card.route,
+            arguments = Screen.Card.arguments
         ) { backStackEntry ->
-            val buyerId = backStackEntry.arguments?.getInt(Screen.BankCard.BUYER_ID)
-            val sellerId = backStackEntry.arguments?.getInt(Screen.BankCard.SELLER_ID)
-            val snippetId = backStackEntry.arguments?.getInt(Screen.BankCard.SNIPPET_ID)
+            val buyerId = backStackEntry.arguments?.getInt(Screen.Card.BUYER_ID)
+            val sellerId = backStackEntry.arguments?.getInt(Screen.Card.SELLER_ID)
+            val productId = backStackEntry.arguments?.getInt(Screen.Card.PRODUCT_ID)
             requireNotNull(buyerId) { "buyerId parameter wasn't found. Please make sure it's set!" }
             requireNotNull(sellerId) { "sellerId parameter wasn't found. Please make sure it's set!" }
-            requireNotNull(snippetId) { "snippetId parameter wasn't found. Please make sure it's set!" }
-            BankCard(
+            requireNotNull(productId) { "productId parameter wasn't found. Please make sure it's set!" }
+            Card(
                 navController = navController,
                 buyerId = buyerId,
                 sellerId = sellerId,
-                snippetId = snippetId
+                productId = productId
             )
         }
     }

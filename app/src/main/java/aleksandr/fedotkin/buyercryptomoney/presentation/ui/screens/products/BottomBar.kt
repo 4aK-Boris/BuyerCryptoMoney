@@ -39,6 +39,8 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
 
+private const val HALF = 500
+
 @Composable
 fun BottomBar(viewModel: ProductViewModel = koinViewModel()) {
 
@@ -48,12 +50,15 @@ fun BottomBar(viewModel: ProductViewModel = koinViewModel()) {
 
     val buyers by viewModel.buyers.collectAsState()
 
-    val listState = rememberLazyListState()
+    val state = rememberLazyListState()
     val coroutineScope = rememberCoroutineScope()
 
-    val index by remember { derivedStateOf { listState.firstVisibleItemIndex } }
+    val index by remember { derivedStateOf { state.firstVisibleItemIndex } }
+    val offset by remember { derivedStateOf { state.firstVisibleItemScrollOffset } }
 
-    viewModel.setBuyer(index = index)
+    LaunchedEffect(key1 = index) {
+        viewModel.setBuyerIndex(buyerIndex = index)
+    }
 
     BottomAppBar(
         modifier = Modifier
@@ -63,37 +68,27 @@ fun BottomBar(viewModel: ProductViewModel = koinViewModel()) {
         LazyRow(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier.fillMaxWidth(),
-            state = listState
+            state = state
         ) {
             items(buyers) {
                 Buyer(buyer = it)
 
-                if (!listState.isScrollInProgress) {
-                    if (listState.isHalfPastItemLeft()) {
-                        coroutineScope.scrollBasic(listState, left = true)
+                if (!state.isScrollInProgress) {
+                    if (offset <= HALF) {
+                        coroutineScope.scrollBasic(state, left = true)
                     } else {
-                        coroutineScope.scrollBasic(listState)
+                        coroutineScope.scrollBasic(state)
                     }
 
-                    if (listState.isHalfPastItemRight()) {
-                        coroutineScope.scrollBasic(listState)
+                    if (offset > HALF) {
+                        coroutineScope.scrollBasic(state)
                     } else {
-                        coroutineScope.scrollBasic(listState, left = true)
+                        coroutineScope.scrollBasic(state, left = true)
                     }
                 }
             }
         }
     }
-}
-
-@Composable
-private fun LazyListState.isHalfPastItemRight(): Boolean {
-    return firstVisibleItemScrollOffset > 500
-}
-
-@Composable
-private fun LazyListState.isHalfPastItemLeft(): Boolean {
-    return firstVisibleItemScrollOffset <= 500
 }
 
 private fun CoroutineScope.scrollBasic(listState: LazyListState, left: Boolean = false) {

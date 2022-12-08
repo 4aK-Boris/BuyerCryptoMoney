@@ -1,8 +1,7 @@
 package aleksandr.fedotkin.buyercryptomoney.domain.repositories
 
-import aleksandr.fedotkin.buyercryptomoney.domain.model.PurchaseModel
-import aleksandr.fedotkin.buyercryptomoney.domain.model.UpdateBuyerModel
+import aleksandr.fedotkin.buyercryptomoney.domain.model.BuyModel
 
 interface BuyRepository {
-    suspend fun buy(purchaseModel: PurchaseModel): UpdateBuyerModel
+    suspend fun buy(buyModel: BuyModel)
 }

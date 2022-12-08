@@ -1,14 +1,14 @@
 package aleksandr.fedotkin.buyercryptomoney.data.network
 
-import aleksandr.fedotkin.buyercryptomoney.BUY_URL
-import aleksandr.fedotkin.buyercryptomoney.GET_BUYERS_URL
-import aleksandr.fedotkin.buyercryptomoney.GET_SELLER_URL
-import aleksandr.fedotkin.buyercryptomoney.GET_SNIPPETS_URL
+import aleksandr.fedotkin.buyercryptomoney.core.BUY_URL
+import aleksandr.fedotkin.buyercryptomoney.core.GET_BUYERS_URL
+import aleksandr.fedotkin.buyercryptomoney.core.GET_SELLER_URL
+import aleksandr.fedotkin.buyercryptomoney.core.GET_SNIPPETS_URL
+import aleksandr.fedotkin.buyercryptomoney.core.SELLER_ID
+import aleksandr.fedotkin.buyercryptomoney.data.dto.BuyDTO
 import aleksandr.fedotkin.buyercryptomoney.data.dto.BuyerDTO
-import aleksandr.fedotkin.buyercryptomoney.data.dto.PurchaseDTO
 import aleksandr.fedotkin.buyercryptomoney.data.dto.SellerDTO
-import aleksandr.fedotkin.buyercryptomoney.data.dto.SnippetDTO
-import aleksandr.fedotkin.buyercryptomoney.data.dto.UpdateBuyerDTO
+import aleksandr.fedotkin.buyercryptomoney.data.dto.ProductDTO
 
 class NetworkAPIImpl(private val ktorClient: KtorClient): NetworkAPI {
 
@@ -17,15 +17,15 @@ class NetworkAPIImpl(private val ktorClient: KtorClient): NetworkAPI {
     }
 
 
-    override suspend fun getSeller(id: Int): SellerDTO {
-        return ktorClient.get(url = GET_SELLER_URL, parameters = mapOf("id" to id))
+    override suspend fun getSeller(sellerId: Int): SellerDTO {
+        return ktorClient.get(url = GET_SELLER_URL, parameters = mapOf(SELLER_ID to sellerId))
     }
 
-    override suspend fun getSnippets(): List<SnippetDTO> {
+    override suspend fun getSnippets(): List<ProductDTO> {
         return ktorClient.get(url = GET_SNIPPETS_URL)
     }
 
-    override suspend fun buy(purchase: PurchaseDTO): UpdateBuyerDTO {
-        return ktorClient.post(url = BUY_URL, body = purchase)
+    override suspend fun buy(buyDTO: BuyDTO) {
+        return ktorClient.post(url = BUY_URL, body = buyDTO)
     }
 }

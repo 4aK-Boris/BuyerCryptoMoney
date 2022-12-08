@@ -1,10 +1,9 @@
 package aleksandr.fedotkin.buyercryptomoney.data.network
 
-import aleksandr.fedotkin.buyercryptomoney.domain.common.data.BadRequest
-import aleksandr.fedotkin.buyercryptomoney.domain.common.data.InternalServerError
-import aleksandr.fedotkin.buyercryptomoney.domain.common.data.NoInternet
-import aleksandr.fedotkin.buyercryptomoney.domain.common.data.Unauthorized
-import aleksandr.fedotkin.buyercryptomoney.domain.common.data.UnknownNetworkException
+import aleksandr.fedotkin.buyercryptomoney.domain.common.BadRequest
+import aleksandr.fedotkin.buyercryptomoney.domain.common.InternalServerError
+import aleksandr.fedotkin.buyercryptomoney.domain.common.NoInternet
+import aleksandr.fedotkin.buyercryptomoney.domain.common.UnknownNetworkException
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.request.get
@@ -25,6 +24,8 @@ class KtorClient(private val client: HttpClient) {
         }
         response.body()
     } catch (ex: UnresolvedAddressException) {
+        throw NoInternet()
+    } catch (e: Exception) {
         throw NoInternet()
     }
 
@@ -51,7 +52,6 @@ class KtorClient(private val client: HttpClient) {
     fun handleError(response: HttpResponse) {
         when (response.status) {
             HttpStatusCode.BadRequest -> throw BadRequest()
-            HttpStatusCode.Unauthorized -> throw Unauthorized()
             HttpStatusCode.InternalServerError -> throw InternalServerError()
             else -> throw UnknownNetworkException()
         }

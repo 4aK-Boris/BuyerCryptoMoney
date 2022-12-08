@@ -1,7 +1,8 @@
 package aleksandr.fedotkin.buyercryptomoney.domain.di
 
 import aleksandr.fedotkin.buyercryptomoney.domain.usecases.BuyUseCase
-import aleksandr.fedotkin.buyercryptomoney.domain.usecases.DataUseCase
+import aleksandr.fedotkin.buyercryptomoney.domain.usecases.BuyerUseCase
+import aleksandr.fedotkin.buyercryptomoney.domain.usecases.ProductUseCase
 import org.koin.dsl.module
 
 val useCasesModule = module {
@@ -11,6 +12,10 @@ val useCasesModule = module {
     }
 
     factory {
-        DataUseCase(dataRepository = get())
+        ProductUseCase(productRepository = get())
+    }
+
+    factory {
+        BuyerUseCase(buyerRepository = get())
     }
 }

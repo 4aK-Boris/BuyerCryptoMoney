@@ -20,24 +20,24 @@ sealed interface Screen {
         override val route = name
     }
 
-    object BankCard: Screen {
+    object Card: Screen {
 
         const val BUYER_ID = "buyerId"
         const val SELLER_ID = "sellerId"
-        const val SNIPPET_ID = "snippetId"
+        const val PRODUCT_ID = "snippetId"
 
         override val name = "bankCard"
 
-        override val route = "$name/{$BUYER_ID}/{$SELLER_ID}/{$SNIPPET_ID}"
+        override val route = "$name/{$BUYER_ID}/{$SELLER_ID}/{$PRODUCT_ID}"
 
         override val arguments = listOf(
             navArgument(name = BUYER_ID) { type = NavType.IntType },
             navArgument(name = SELLER_ID) { type = NavType.IntType },
-            navArgument(name = SNIPPET_ID) { type = NavType.IntType },
+            navArgument(name = PRODUCT_ID) { type = NavType.IntType }
         )
 
-        fun createRoute(buyerId: Int, sellerId: Int, snippetId: Int): String {
-            return "$name/$buyerId/$sellerId/$snippetId"
+        fun createRoute(buyerId: Int, sellerId: Int, productId: Int): String {
+            return "$name/$buyerId/$sellerId/$productId"
         }
     }
 }
