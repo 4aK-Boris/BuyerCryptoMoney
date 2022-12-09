@@ -29,7 +29,7 @@ abstract class BaseActivity : ComponentActivity() {
                 ErrorDialog(
                     state = errorState,
                     errorMessage = errorMessage,
-                    closeDialog = baseViewModel::close
+                    closeDialog = baseViewModel.close
                 )
 
             }

@@ -4,6 +4,7 @@ import aleksandr.fedotkin.buyercryptomoney.domain.common.BadRequest
 import aleksandr.fedotkin.buyercryptomoney.domain.common.InternalServerError
 import aleksandr.fedotkin.buyercryptomoney.domain.common.NoInternet
 import aleksandr.fedotkin.buyercryptomoney.domain.common.UnknownNetworkException
+import android.util.Log
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.request.get
@@ -25,7 +26,10 @@ class KtorClient(private val client: HttpClient) {
         response.body()
     } catch (ex: UnresolvedAddressException) {
         throw NoInternet()
+    } catch (e: UnknownNetworkException) {
+        throw NoInternet()
     } catch (e: Exception) {
+        Log.d("LOG_TAG", e.toString())
         throw NoInternet()
     }
 

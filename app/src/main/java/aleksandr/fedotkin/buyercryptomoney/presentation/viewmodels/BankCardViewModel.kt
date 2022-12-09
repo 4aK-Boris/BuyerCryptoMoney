@@ -1,6 +1,7 @@
 package aleksandr.fedotkin.buyercryptomoney.presentation.viewmodels
 
 import aleksandr.fedotkin.buyercryptomoney.core.BaseViewModel
+import aleksandr.fedotkin.buyercryptomoney.core.ErrorHandler
 import aleksandr.fedotkin.buyercryptomoney.core.runOnIO
 import aleksandr.fedotkin.buyercryptomoney.domain.common.INVALID_FORMAT_CVC_EXCEPTION
 import aleksandr.fedotkin.buyercryptomoney.domain.common.INVALID_FORMAT_MONTH_EXCEPTION
@@ -18,8 +19,9 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.withContext
 
 class BankCardViewModel(
-    private val buyUseCase: BuyUseCase
-) : BaseViewModel() {
+    private val buyUseCase: BuyUseCase,
+    errorHandler: ErrorHandler
+) : BaseViewModel(errorHandler = errorHandler) {
 
     private val _number: MutableStateFlow<String> = MutableStateFlow(value = "")
     private val _month: MutableStateFlow<String> = MutableStateFlow(value = "")
@@ -49,6 +51,10 @@ class BankCardViewModel(
         _cvc.value = text
     }
 
+    fun onCountChanged(count: Int) {
+        _count.value = count
+    }
+
     fun buy(buyerId: Int, sellerId: Int, productId: Int, navController: NavController) = runOnIO {
         val purchaseModel = PurchaseModel(
             buyerId = buyerId,
@@ -73,12 +79,11 @@ class BankCardViewModel(
         }
     }
 
-    override fun getErrorActionsMap(): Map<Int, () -> Unit> {
-        return mapOf(
-            INVALID_FORMAT_NUMBER_CARD_EXCEPTION to { showError(message = "Номер карты введён неверно!") },
-            INVALID_FORMAT_CVC_EXCEPTION to { showError(message = "CVC введён неверно!") },
-            INVALID_FORMAT_MONTH_EXCEPTION to { showError(message = "Меяц введён неверно!") },
-            INVALID_FORMAT_YEAR_EXCEPTION to { showError(message = "Год введён неверно!") }
+    override val errorMap: Map<Int, String>
+        get() = mapOf(
+            INVALID_FORMAT_NUMBER_CARD_EXCEPTION to "Номер карты введён неверно!",
+            INVALID_FORMAT_CVC_EXCEPTION to "CVC введён неверно!",
+            INVALID_FORMAT_MONTH_EXCEPTION to "Меяц введён неверно!",
+            INVALID_FORMAT_YEAR_EXCEPTION to "Год введён неверно!"
         )
-    }
 }

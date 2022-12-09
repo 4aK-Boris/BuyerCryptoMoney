@@ -1,50 +1,26 @@
 package aleksandr.fedotkin.buyercryptomoney.core
 
-import aleksandr.fedotkin.buyercryptomoney.domain.common.BAD_REQUEST
-import aleksandr.fedotkin.buyercryptomoney.domain.common.INTERNAL_SERVER_ERROR
-import aleksandr.fedotkin.buyercryptomoney.domain.common.NO_INTERNET
-import aleksandr.fedotkin.buyercryptomoney.domain.common.Result
 import androidx.lifecycle.ViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
+import aleksandr.fedotkin.buyercryptomoney.domain.common.Result
 import kotlinx.coroutines.flow.StateFlow
 
-abstract class BaseViewModel: ViewModel() {
+abstract class BaseViewModel(private val errorHandler: ErrorHandler): ViewModel() {
 
-    private val _errorMessage: MutableStateFlow<String> = MutableStateFlow(value = "")
-    private val _errorState: MutableStateFlow<Boolean> = MutableStateFlow(value = false)
+    open val errorMap: Map<Int, String> = emptyMap()
 
-    val errorMessage: StateFlow<String> = _errorMessage
-    val errorState: StateFlow<Boolean> = _errorState
-
-    fun close() {
-        _errorState.value = false
+    init {
+        errorHandler.setErrorActionsMap(errorsMap = errorMap)
     }
 
-    private val loginErrorsMap: Map<Int, () -> Unit> by lazy { initErrorMap() }
+    val errorMessage: StateFlow<String> = errorHandler.errorMessage
+    val errorState: StateFlow<Boolean> = errorHandler.errorState
 
-    abstract fun getErrorActionsMap(): Map<Int, () -> Unit>
-
-    private fun initErrorMap(): Map<Int, () -> Unit> =
-        getErrorActionsMap().toMutableMap().apply {
-            putIfAbsent(BAD_REQUEST) { showError("Проблема на стороне клиента!") }
-            putIfAbsent(INTERNAL_SERVER_ERROR) { showError("Проблема с сервером") }
-            putIfAbsent(NO_INTERNET) { showError("Пожалуйста, проверьте сетевое подключение") }
-        }
-
-
-    protected fun showError(message: String) {
-        _errorState.value = true
-        _errorMessage.value = message
-    }
-
-    fun handleError(errorId: Int) {
-        loginErrorsMap[errorId]?.invoke() ?: showError("Unknown error: $errorId")
-    }
+    val close = errorHandler::close
 
     suspend fun <T> Result<T>.resultDefaultHandle(successBlock: suspend (T) -> Unit) {
         when (this) {
             is Result.Success -> successBlock(data)
-            is Result.Error -> handleError(extraErrorCode)
+            is Result.Error -> errorHandler.handleError(extraErrorCode)
         }
     }
 }

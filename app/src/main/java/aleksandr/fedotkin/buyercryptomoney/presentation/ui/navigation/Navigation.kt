@@ -33,14 +33,17 @@ fun Navigation(
             val buyerId = backStackEntry.arguments?.getInt(Screen.Card.BUYER_ID)
             val sellerId = backStackEntry.arguments?.getInt(Screen.Card.SELLER_ID)
             val productId = backStackEntry.arguments?.getInt(Screen.Card.PRODUCT_ID)
+            val maxCount = backStackEntry.arguments?.getInt(Screen.Card.MAX_COUNT)
             requireNotNull(buyerId) { "buyerId parameter wasn't found. Please make sure it's set!" }
             requireNotNull(sellerId) { "sellerId parameter wasn't found. Please make sure it's set!" }
             requireNotNull(productId) { "productId parameter wasn't found. Please make sure it's set!" }
+            requireNotNull(maxCount) { "maxCount parameter wasn't found. Please make sure it's set!" }
             Card(
                 navController = navController,
                 buyerId = buyerId,
                 sellerId = sellerId,
-                productId = productId
+                productId = productId,
+                maxCount = maxCount
             )
         }
     }

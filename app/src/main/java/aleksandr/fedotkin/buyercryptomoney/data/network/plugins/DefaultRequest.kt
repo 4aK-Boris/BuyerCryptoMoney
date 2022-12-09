@@ -3,7 +3,9 @@ package aleksandr.fedotkin.buyercryptomoney.data.network.plugins
 import aleksandr.fedotkin.buyercryptomoney.core.BASE_URL
 import io.ktor.client.HttpClientConfig
 import io.ktor.client.plugins.defaultRequest
+import io.ktor.http.ContentType
 import io.ktor.http.URLBuilder
+import io.ktor.http.contentType
 import io.ktor.http.encodedPath
 import io.ktor.http.takeFrom
 
@@ -18,5 +20,6 @@ fun HttpClientConfig<*>.configureDefaultRequest() {
         defaultHeaders.forEach {
             headers.append(it.key, it.value)
         }
+        contentType(ContentType.Application.Json)
     }
 }
