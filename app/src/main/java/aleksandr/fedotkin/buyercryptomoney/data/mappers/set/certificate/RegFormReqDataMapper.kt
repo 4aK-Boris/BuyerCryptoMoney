@@ -21,4 +21,16 @@ class RegFormReqDataMapper(
             thumbs = model.thumbs.map { byteArrayMapper.map(byteArray = it) }
         )
     }
+
+    fun map(dto: RegFormReqData): RegFormReqDataModel {
+        return RegFormReqDataModel(
+            rrpID = bigIntegerMapper.map(string = dto.rrpID),
+            lidEE = bigIntegerMapper.map(string = dto.lidEE),
+            challEE2 = bigIntegerMapper.map(string = dto.challEE2),
+            lidCA = bigIntegerMapper.map(string =dto.lidCA),
+            requestType = dto.requestType,
+            language = dto.language,
+            thumbs = dto.thumbs.map { byteArrayMapper.map(string = it) }
+        )
+    }
 }
