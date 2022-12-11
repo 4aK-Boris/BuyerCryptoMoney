@@ -14,4 +14,11 @@ class CryptoDataMapper(
             oaep = byteArrayMapper.map(byteArray = model.oaep)
         )
     }
+
+    fun map(dto: CryptoData): CryptoDataModel {
+        return CryptoDataModel(
+            cipherData = byteArrayMapper.map(string = dto.cipherData),
+            oaep = byteArrayMapper.map(string = dto.oaep)
+        )
+    }
 }
