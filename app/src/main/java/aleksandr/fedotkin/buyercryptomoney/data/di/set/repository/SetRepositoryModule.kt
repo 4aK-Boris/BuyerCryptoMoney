@@ -17,23 +17,39 @@ import org.koin.dsl.module
 
 val setRepositoryModule = module {
 
-    factoryOf(::CertificateRepositoryImpl) {
-        bind<CertificateRepository>()
+//    factory<CertificateRepository> {
+//        CertificateRepositoryImpl(
+//
+//        )
+//    }
+
+    factory<KeyRepository> {
+        KeyRepositoryImpl(
+            keyFactory = get(),
+            keyPairGenerator = get(),
+            keyGenerator = get(),
+            certificateFactory = get()
+        )
     }
 
-    factoryOf(::KeyRepositoryImpl) {
-        bind<KeyRepository>()
+    factory<SignatureRepository> {
+        SignatureRepositoryImpl(
+            signature = get(),
+            jsonMapper = get(),
+            secureRandom = get()
+        )
     }
 
-    factoryOf(::SignatureRepositoryImpl) {
-        bind<SignatureRepository>()
+    factory<MessageDigestRepository> {
+        MessageDigestRepositoryImpl(
+            messageDigest = get(),
+            jsonMapper = get()
+        )
     }
 
-    factoryOf(::MessageDigestRepositoryImpl) {
-        bind<MessageDigestRepository>()
-    }
-
-    factoryOf(::ErrorRepositoryImpl) {
-        bind<ErrorRepository>()
+    factory<ErrorRepository> {
+        ErrorRepositoryImpl(
+            errorMapper = get(),
+        )
     }
 }

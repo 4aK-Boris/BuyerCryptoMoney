@@ -5,6 +5,7 @@ import java.security.Signature
 import org.koin.dsl.module
 
 val signatureModule = module {
+
     single<Signature> {
         Signature.getInstance(SIGNATURE_ALGORITHM)
     }
