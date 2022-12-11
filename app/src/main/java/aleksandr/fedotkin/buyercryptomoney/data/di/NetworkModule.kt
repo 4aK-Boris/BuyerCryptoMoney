@@ -7,8 +7,9 @@ import aleksandr.fedotkin.buyercryptomoney.data.network.plugins.configureDefault
 import aleksandr.fedotkin.buyercryptomoney.data.network.plugins.configureLogging
 import aleksandr.fedotkin.buyercryptomoney.data.network.plugins.configureJson
 import aleksandr.fedotkin.buyercryptomoney.data.network.plugins.configureTimeout
+import aleksandr.fedotkin.buyercryptomoney.data.network.plugins.configureWebsockets
 import io.ktor.client.HttpClient
-import io.ktor.client.engine.android.Android
+import io.ktor.client.engine.okhttp.OkHttp
 import org.koin.core.module.dsl.bind
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
@@ -16,11 +17,12 @@ import org.koin.dsl.module
 val networkModule = module {
 
     single {
-        HttpClient(Android) {
+        HttpClient(OkHttp) {
             configureJson()
             configureLogging()
             configureDefaultRequest()
             configureTimeout()
+            configureWebsockets()
         }
     }
 

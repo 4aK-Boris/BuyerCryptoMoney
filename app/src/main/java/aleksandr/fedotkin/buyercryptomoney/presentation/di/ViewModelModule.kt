@@ -27,6 +27,6 @@ val viewModelModule = module {
     }
 
     viewModel {
-        TestViewModel()
+        TestViewModel(certificateUseCase = get())
     }
 }

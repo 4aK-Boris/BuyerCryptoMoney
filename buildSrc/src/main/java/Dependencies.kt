@@ -38,28 +38,34 @@ object Dependencies {
 
     object Ktor {
 
-        private const val version = "2.1.3"
+        private const val version = "2.2.1"
 
-        const val client = "io.ktor:ktor-client-android:$version"
+        const val client = "io.ktor:ktor-client-okhttp:$version"
         const val negotiation = "io.ktor:ktor-client-content-negotiation:$version"
         const val json = "io.ktor:ktor-serialization-kotlinx-json:$version"
         const val logging = "io.ktor:ktor-client-logging:$version"
+        const val websockets = "io.ktor:ktor-client-websockets:$version"
     }
 
     object Kotlin {
 
         const val version = "1.7.20"
+        private const val date_time_version = "0.4.0"
 
         const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4"
         const val serialization = "org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.1"
+        const val datetime = "org.jetbrains.kotlinx:kotlinx-datetime:$date_time_version"
     }
 
     object Koin {
 
-        private const val version = "3.3.0"
+        private const val version = "3.2.2"
 
-        const val koin = "io.insert-koin:koin-android:$version"
+        const val koinAndroid = "io.insert-koin:koin-android:$version"
         const val compose = "io.insert-koin:koin-androidx-compose:$version"
+        const val koinCore = "io.insert-koin:koin-ktor:$version"
+        const val koinLogger = "io.insert-koin:koin-logger-slf4j:$version"
+        const val koinJUnit = "io.insert-koin:koin-test-junit4:$version"
     }
 
     object Coil {
