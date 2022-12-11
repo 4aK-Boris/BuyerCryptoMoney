@@ -3,16 +3,19 @@ package aleksandr.fedotkin.buyercryptomoney.domain.usecases.set
 import aleksandr.fedotkin.buyercryptomoney.domain.model.set.certificate.CardCInitReqModel
 import aleksandr.fedotkin.buyercryptomoney.domain.model.set.certificate.CardCInitResModel
 import aleksandr.fedotkin.buyercryptomoney.domain.model.set.general.MessageWrapperModel
-import aleksandr.fedotkin.buyercryptomoney.domain.repositories.set.certificate.CertificateRepository
 
 class CertificateUseCase(
-    private val certificateRepository: CertificateRepository,
     private val cardCInitReqUseCase: CardCInitReqUseCase,
-    private val cardCInitResUseCase: CardCInitResUseCase
+    private val cardCInitResUseCase: CardCInitResUseCase,
+    private val regFormReqUseCase: RegFormReqUseCase
 ) {
 
-    suspend fun getCertificate() {
-        certificateRepository.getCertificate("")
+    suspend fun getCertificate(number: String) {
+        val messageWrapperCardCInitResModel = cardCInit()
+        val response = createAndSendRegFormReq(
+            number = number,
+            messageWrapperModel = messageWrapperCardCInitResModel
+        )
     }
 
     private suspend fun sendCardCInitReq(): Pair<String, CardCInitReqModel> {
@@ -28,5 +31,15 @@ class CertificateUseCase(
                 thumbs = second.thumbs
             )
         }
+    }
+
+    suspend fun createAndSendRegFormReq(
+        number: String,
+        messageWrapperModel: MessageWrapperModel<CardCInitResModel>
+    ): String {
+        return regFormReqUseCase.createAndSendMessageWrapperJson(
+            messageWrapperModel = messageWrapperModel,
+            number = number
+        )
     }
 }
