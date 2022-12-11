@@ -3,7 +3,7 @@ package aleksandr.fedotkin.buyercryptomoney.domain.model.set.crypto
 import javax.crypto.SecretKey
 
 data class OAEP3Model<T>(
-    val key: SecretKey,
+    val secretKey: SecretKey,
     val hash: ByteArray,
     val p: T
 ) {
@@ -13,7 +13,7 @@ data class OAEP3Model<T>(
 
         other as OAEP3Model<*>
 
-        if (key != other.key) return false
+        if (secretKey != other.secretKey) return false
         if (!hash.contentEquals(other.hash)) return false
         if (p != other.p) return false
 
@@ -21,7 +21,7 @@ data class OAEP3Model<T>(
     }
 
     override fun hashCode(): Int {
-        var result = key.hashCode()
+        var result = secretKey.hashCode()
         result = 31 * result + hash.contentHashCode()
         result = 31 * result + (p?.hashCode() ?: 0)
         return result
