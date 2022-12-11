@@ -13,6 +13,7 @@ class CipherRepositoryImpl(
     private val symmetricCipher: Cipher,
     private val jsonMapper: JsonMapper
 ): CipherRepository {
+
     override suspend fun <T> asymmetricEncrypt(data: T, serializer: KSerializer<T>, publicKey: PublicKey): ByteArray {
         asymmetricCipher.init(Cipher.ENCRYPT_MODE, publicKey)
         val array = jsonMapper.objectToByteArray(data = data, serializer = serializer)
