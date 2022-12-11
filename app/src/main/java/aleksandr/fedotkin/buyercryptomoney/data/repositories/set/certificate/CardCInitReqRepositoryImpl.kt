@@ -18,18 +18,22 @@ class CardCInitReqRepositoryImpl(
     private val jsonMapper: JsonMapper
 ) : CardCInitReqRepository {
 
-    override suspend fun createCardCInitReqMessageWrapperJson(): String {
-        return jsonMapper.objectToString(
-            data = createCardCInitReqMessageWrapper(),
-            serializer = MessageWrapper.serializer(CardCInitReq.serializer())
-        )
+    override suspend fun createCardCInitReqMessageWrapperJson(): Pair<String, CardCInitReqModel> {
+        return createCardCInitReqMessageWrapper().run {
+            jsonMapper.objectToString(
+                data = first,
+                serializer = MessageWrapper.serializer(CardCInitReq.serializer())
+            ) to second
+        }
     }
 
-    override suspend fun createCardCInitReqMessageWrapper(): MessageWrapper<CardCInitReq> {
-        return messageWrapperRepository.convertToDTO(
-            messageWrapperModel = createCardCInitReqMessageWrapperModel(),
-            map = ::convertToDTO
-        )
+    override suspend fun createCardCInitReqMessageWrapper(): Pair<MessageWrapper<CardCInitReq>, CardCInitReqModel> {
+        return createCardCInitReqMessageWrapperModel().run {
+            messageWrapperRepository.convertToDTO(
+                messageWrapperModel = this,
+                map = ::convertToDTO
+            ) to this.messageModel
+        }
     }
 
     override fun convertToDTO(cardCInitReqModel: CardCInitReqModel): CardCInitReq {

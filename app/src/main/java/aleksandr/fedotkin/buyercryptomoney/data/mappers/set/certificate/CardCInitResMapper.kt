@@ -9,17 +9,17 @@ class CardCInitResMapper(
     private val cardCInitResTBSMapper: CardCInitResTBSMapper
 ) {
 
-    fun map(cardCInitRes: CardCInitRes): CardCInitResModel {
+    fun map(dto: CardCInitRes): CardCInitResModel {
         return CardCInitResModel(
-            ca = byteArrayMapper.map(string = cardCInitRes.ca),
-            cardCInitResTBS = cardCInitResTBSMapper.map(cardCInitResTBS = cardCInitRes.cardCInitResTBS)
+            ca = byteArrayMapper.map(string = dto.ca),
+            cardCInitResTBS = cardCInitResTBSMapper.map(dto = dto.cardCInitResTBS)
         )
     }
 
-    fun map(cardCInitResModel: CardCInitResModel): CardCInitRes {
+    fun map(model: CardCInitResModel): CardCInitRes {
         return CardCInitRes(
-            ca = byteArrayMapper.map(byteArray = cardCInitResModel.ca),
-            cardCInitResTBS = cardCInitResTBSMapper.map(cardCInitResTBSModel = cardCInitResModel.cardCInitResTBS)
+            ca = byteArrayMapper.map(byteArray = model.ca),
+            cardCInitResTBS = cardCInitResTBSMapper.map(model = model.cardCInitResTBS)
         )
     }
 }

@@ -3,8 +3,10 @@ package aleksandr.fedotkin.buyercryptomoney.data.repositories.set
 import aleksandr.fedotkin.buyercryptomoney.core.NUMBER_LENGTH
 import aleksandr.fedotkin.buyercryptomoney.data.dto.set.error.Error
 import aleksandr.fedotkin.buyercryptomoney.data.dto.set.error.ErrorCode
+import aleksandr.fedotkin.buyercryptomoney.data.dto.set.general.MessageHeader
 import aleksandr.fedotkin.buyercryptomoney.data.dto.set.general.MessageWrapper
 import aleksandr.fedotkin.buyercryptomoney.data.mappers.set.core.JsonMapper
+import aleksandr.fedotkin.buyercryptomoney.data.mappers.set.general.MessageHeaderMapper
 import aleksandr.fedotkin.buyercryptomoney.data.mappers.set.general.MessageWrapperMapper
 import aleksandr.fedotkin.buyercryptomoney.domain.model.set.error.ErrorModel
 import aleksandr.fedotkin.buyercryptomoney.domain.model.set.general.MessageHeaderModel
@@ -23,7 +25,8 @@ import kotlin.random.Random
 class MessageWrapperRepositoryImpl(
     private val errorRepository: ErrorRepository,
     private val jsonMapper: JsonMapper,
-    private val messageWrapperMapper: MessageWrapperMapper
+    private val messageWrapperMapper: MessageWrapperMapper,
+    private val messageHeaderMapper: MessageHeaderMapper
 ) : MessageWrapperRepository {
 
     override suspend fun <T> messageWrapperToJson(
@@ -47,6 +50,32 @@ class MessageWrapperRepositoryImpl(
     }
 
     override suspend fun <T, R> changeMessage(
+        message: R,
+        messageWrapper: MessageWrapper<T>
+    ): MessageWrapper<R> {
+        return MessageWrapper(
+            messageHeader = messageWrapper.messageHeader,
+            mWExtension = messageWrapper.mWExtension,
+            message = message
+        )
+    }
+
+    override suspend fun <T, R> changeMessage(
+        message: R,
+        messageWrapper: MessageWrapper<T>,
+        rrpid: BigInteger
+    ): MessageWrapper<R> {
+        return MessageWrapper(
+            messageHeader = changeMessageHeader(
+                rrpid = rrpid,
+                messageHeader = messageWrapper.messageHeader
+            ),
+            mWExtension = messageWrapper.mWExtension,
+            message = message
+        )
+    }
+
+    override suspend fun <T, R> changeMessageModel(
         messageModel: R,
         messageWrapperModel: MessageWrapperModel<T>
     ): MessageWrapperModel<R> {
@@ -57,17 +86,16 @@ class MessageWrapperRepositoryImpl(
         )
     }
 
-    override suspend fun <T, R> changeMessage(
+    override suspend fun <T, R> changeMessageModel(
         messageModel: R,
         messageWrapperModel: MessageWrapperModel<T>,
         rrpid: BigInteger
     ): MessageWrapperModel<R> {
-        val messageHeaderModel = changeMessageHeader(
-            messageHeaderModel = messageWrapperModel.messageHeaderModel,
-            rrpid = rrpid
-        )
         return MessageWrapperModel(
-            messageHeaderModel = messageHeaderModel,
+            messageHeaderModel = changeMessageHeaderModel(
+                messageHeaderModel = messageWrapperModel.messageHeaderModel,
+                rrpid = rrpid
+            ),
             mWExtension = messageWrapperModel.mWExtension,
             messageModel = messageModel
         )
@@ -169,7 +197,7 @@ class MessageWrapperRepositoryImpl(
         privateKey: PrivateKey
     ): MessageWrapperModel<ErrorModel<R>> {
         val messageWrapperModel = convertToModel(messageWrapper = messageWrapper, map = map)
-        return changeMessage(
+        return changeMessageModel(
             messageWrapperModel = messageWrapperModel,
             messageModel = errorRepository.createErrorModel(
                 messageModel = messageWrapperModel.messageModel,
@@ -197,11 +225,24 @@ class MessageWrapperRepositoryImpl(
         return messageWrapperMapper.map(model = messageWrapperModel, map = map)
     }
 
-    private fun changeMessageHeader(
+    private fun changeMessageHeaderModel(
         messageHeaderModel: MessageHeaderModel,
         rrpid: BigInteger
     ): MessageHeaderModel {
         return messageHeaderModel.copy(rrpId = rrpid, date = LocalDateTime.now())
+    }
+
+    private fun changeMessageHeader(
+        messageHeader: MessageHeader,
+        rrpid: BigInteger
+    ): MessageHeader {
+        return messageHeaderMapper.map(
+            model = changeMessageHeaderModel(
+                messageHeaderModel = messageHeaderMapper.map(
+                    dto = messageHeader
+                ), rrpid = rrpid
+            )
+        )
     }
 
     override fun generateNewNumber(): BigInteger {

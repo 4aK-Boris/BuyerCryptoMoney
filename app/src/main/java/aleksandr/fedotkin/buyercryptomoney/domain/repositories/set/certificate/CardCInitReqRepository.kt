@@ -10,7 +10,7 @@ interface CardCInitReqRepository {
 
     fun convertToModel(cardCInitReq: CardCInitReq): CardCInitReqModel
 
-    suspend fun createCardCInitReqMessageWrapper(): MessageWrapper<CardCInitReq>
+    suspend fun createCardCInitReqMessageWrapper(): Pair<MessageWrapper<CardCInitReq>, CardCInitReqModel>
 
-    suspend fun createCardCInitReqMessageWrapperJson(): String
+    suspend fun createCardCInitReqMessageWrapperJson(): Pair<String, CardCInitReqModel>
 }

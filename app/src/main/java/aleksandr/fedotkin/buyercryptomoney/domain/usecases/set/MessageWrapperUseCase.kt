@@ -51,4 +51,24 @@ class MessageWrapperUseCase(
             ), map = map
         )
     }
+
+    suspend fun <T, R> changeMessageModel(
+        messageModel: R,
+        messageWrapperModel: MessageWrapperModel<T>
+    ): MessageWrapperModel<R> {
+        return messageWrapperRepository.changeMessageModel(
+            messageModel = messageModel,
+            messageWrapperModel = messageWrapperModel
+        )
+    }
+
+    suspend fun <T, R> changeMessage(
+        message: R,
+        messageWrapper: MessageWrapper<T>
+    ): MessageWrapper<R> {
+        return messageWrapperRepository.changeMessage(
+            message = message,
+            messageWrapper = messageWrapper
+        )
+    }
 }

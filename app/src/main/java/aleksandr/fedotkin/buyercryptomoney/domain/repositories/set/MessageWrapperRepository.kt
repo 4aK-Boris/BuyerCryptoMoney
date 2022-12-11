@@ -24,11 +24,22 @@ interface MessageWrapperRepository {
     ): MessageWrapper<T>
 
     suspend fun <T, R> changeMessage(
+        message: R,
+        messageWrapper: MessageWrapper<T>
+    ): MessageWrapper<R>
+
+    suspend fun <T, R> changeMessage(
+        message: R,
+        messageWrapper: MessageWrapper<T>,
+        rrpid: BigInteger
+    ): MessageWrapper<R>
+
+    suspend fun <T, R> changeMessageModel(
         messageModel: R,
         messageWrapperModel: MessageWrapperModel<T>
     ): MessageWrapperModel<R>
 
-    suspend fun <T, R> changeMessage(
+    suspend fun <T, R> changeMessageModel(
         messageModel: R,
         messageWrapperModel: MessageWrapperModel<T>,
         rrpid: BigInteger
