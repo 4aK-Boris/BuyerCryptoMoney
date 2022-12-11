@@ -13,6 +13,16 @@ import kotlinx.serialization.KSerializer
 
 interface MessageWrapperRepository {
 
+    suspend fun <T> messageWrapperToJson(
+        messageWrapper: MessageWrapper<T>,
+        serializer: KSerializer<T>
+    ): String
+
+    suspend fun <T> jsonToMessageWrapper(
+        messageWrapperJson: String,
+        serializer: KSerializer<T>
+    ): MessageWrapper<T>
+
     suspend fun <T, R> changeMessage(
         messageModel: R,
         messageWrapperModel: MessageWrapperModel<T>

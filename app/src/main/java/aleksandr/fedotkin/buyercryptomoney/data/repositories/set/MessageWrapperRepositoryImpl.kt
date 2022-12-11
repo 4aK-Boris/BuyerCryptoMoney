@@ -4,6 +4,7 @@ import aleksandr.fedotkin.buyercryptomoney.core.NUMBER_LENGTH
 import aleksandr.fedotkin.buyercryptomoney.data.dto.set.error.Error
 import aleksandr.fedotkin.buyercryptomoney.data.dto.set.error.ErrorCode
 import aleksandr.fedotkin.buyercryptomoney.data.dto.set.general.MessageWrapper
+import aleksandr.fedotkin.buyercryptomoney.data.mappers.set.core.JsonMapper
 import aleksandr.fedotkin.buyercryptomoney.data.mappers.set.general.MessageWrapperMapper
 import aleksandr.fedotkin.buyercryptomoney.domain.model.set.error.ErrorModel
 import aleksandr.fedotkin.buyercryptomoney.domain.model.set.general.MessageHeaderModel
@@ -21,8 +22,29 @@ import kotlin.random.Random
 
 class MessageWrapperRepositoryImpl(
     private val errorRepository: ErrorRepository,
+    private val jsonMapper: JsonMapper,
     private val messageWrapperMapper: MessageWrapperMapper
 ) : MessageWrapperRepository {
+
+    override suspend fun <T> messageWrapperToJson(
+        messageWrapper: MessageWrapper<T>,
+        serializer: KSerializer<T>
+    ): String {
+        return jsonMapper.objectToString(
+            data = messageWrapper,
+            serializer = MessageWrapper.serializer(serializer)
+        )
+    }
+
+    override suspend fun <T> jsonToMessageWrapper(
+        messageWrapperJson: String,
+        serializer: KSerializer<T>
+    ): MessageWrapper<T> {
+        return jsonMapper.stringToObject(
+            data = messageWrapperJson,
+            deserializer = MessageWrapper.serializer(serializer)
+        )
+    }
 
     override suspend fun <T, R> changeMessage(
         messageModel: R,
