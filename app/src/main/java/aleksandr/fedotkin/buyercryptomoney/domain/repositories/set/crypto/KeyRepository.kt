@@ -9,6 +9,8 @@ interface KeyRepository {
 
     suspend fun decodePublicKey(array: ByteArray): PublicKey
 
+    fun decodeSecretKey(keyArray: ByteArray): SecretKey
+
     suspend fun generateSecretKey(): SecretKey
 
     suspend fun generatePairKey(): KeyPair

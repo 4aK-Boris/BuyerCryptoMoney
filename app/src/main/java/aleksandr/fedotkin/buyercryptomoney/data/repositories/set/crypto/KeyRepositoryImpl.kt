@@ -1,5 +1,7 @@
 package aleksandr.fedotkin.buyercryptomoney.data.repositories.set.crypto
 
+import aleksandr.fedotkin.buyercryptomoney.core.CIPHER_ALGORITHM
+import aleksandr.fedotkin.buyercryptomoney.core.SYMMETRIC_KEY_LENGTH
 import aleksandr.fedotkin.buyercryptomoney.domain.repositories.set.crypto.KeyRepository
 import java.io.ByteArrayInputStream
 import java.security.KeyFactory
@@ -11,6 +13,7 @@ import java.security.cert.X509Certificate
 import java.security.spec.X509EncodedKeySpec
 import javax.crypto.KeyGenerator
 import javax.crypto.SecretKey
+import javax.crypto.spec.SecretKeySpec
 
 class KeyRepositoryImpl(
     private val keyFactory: KeyFactory,
@@ -22,6 +25,10 @@ class KeyRepositoryImpl(
     override suspend fun decodePublicKey(array: ByteArray): PublicKey {
         val publicKeySpec = X509EncodedKeySpec(array)
         return keyFactory.generatePublic(publicKeySpec)
+    }
+
+    override fun decodeSecretKey(keyArray: ByteArray): SecretKey {
+        return SecretKeySpec(keyArray, 0, SYMMETRIC_KEY_LENGTH, CIPHER_ALGORITHM)
     }
 
     override suspend fun generateSecretKey(): SecretKey {
