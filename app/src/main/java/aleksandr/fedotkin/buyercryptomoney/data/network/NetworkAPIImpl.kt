@@ -40,7 +40,7 @@ class NetworkAPIImpl(private val ktorClient: KtorClient) : NetworkAPI {
         return ktorClient.post(url = ERROR_URL, body = messageWrapperJson)
     }
 
-    override suspend fun regForm(messageWrapperJson: String): String {
+    override suspend fun sendRegFormReq(messageWrapperJson: String): String {
         return ktorClient.post(url = REG_FORM, body = messageWrapperJson)
     }
 }

@@ -12,5 +12,5 @@ interface NetworkAPI {
     suspend fun buy(buyDTO: BuyDTO)
     suspend fun sendCardCInitReq(messageWrapperJson: String): String
     suspend fun sendError(messageWrapperJson: String): Boolean
-    suspend fun regForm(messageWrapperJson: String): String
+    suspend fun sendRegFormReq(messageWrapperJson: String): String
 }
