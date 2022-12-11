@@ -15,6 +15,15 @@ interface OAEPRepository {
         p: T
     ): OAEP3Model<T>
 
+    suspend fun <T, R> createAndEncryptOAEPModel(
+        secretKey: SecretKey,
+        hash: ByteArray,
+        p: T,
+        map: (T) -> R,
+        serializer: KSerializer<R>,
+        publicKey: PublicKey
+    ): ByteArray
+
     suspend fun <T, R> encryptOAEPModel(
         oaepModel: OAEP3Model<T>,
         map: (T) -> R,
