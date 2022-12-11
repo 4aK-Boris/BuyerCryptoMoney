@@ -2,24 +2,16 @@ package aleksandr.fedotkin.buyercryptomoney
 
 import aleksandr.fedotkin.buyercryptomoney.core.NUMBER_LENGTH
 import aleksandr.fedotkin.buyercryptomoney.core.di.appModule
-import aleksandr.fedotkin.buyercryptomoney.data.dto.set.certificate.CardCInitReq
-import aleksandr.fedotkin.buyercryptomoney.data.dto.set.general.MessageWrapper
 import aleksandr.fedotkin.buyercryptomoney.data.mappers.set.certificate.CardCInitReqMapper
 import aleksandr.fedotkin.buyercryptomoney.data.mappers.set.general.MessageWrapperMapper
-import aleksandr.fedotkin.buyercryptomoney.data.network.plugins.test.Box
-import aleksandr.fedotkin.buyercryptomoney.data.repositories.set.certificate.CertificateRepositoryImpl
 import aleksandr.fedotkin.buyercryptomoney.domain.model.set.certificate.CardCInitReqModel
 import aleksandr.fedotkin.buyercryptomoney.domain.model.set.general.MessageHeaderModel
 import aleksandr.fedotkin.buyercryptomoney.domain.model.set.general.MessageIDModel
 import aleksandr.fedotkin.buyercryptomoney.domain.model.set.general.MessageWrapperModel
 import java.math.BigInteger
-import kotlinx.serialization.encodeToString
-import kotlinx.serialization.json.Json
-import org.junit.Test
-
-import org.junit.Assert.*
+import org.junit.Assert.assertEquals
 import org.junit.Rule
-import org.koin.core.component.KoinComponent
+import org.junit.Test
 import org.koin.core.component.get
 import org.koin.test.KoinTest
 import org.koin.test.KoinTestRule

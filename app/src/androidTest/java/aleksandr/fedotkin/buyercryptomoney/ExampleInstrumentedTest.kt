@@ -1,16 +1,10 @@
 package aleksandr.fedotkin.buyercryptomoney
 
-import aleksandr.fedotkin.buyercryptomoney.data.network.plugins.test.Box
-import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import kotlinx.serialization.encodeToString
-import kotlinx.serialization.json.Json
-
+import androidx.test.platform.app.InstrumentationRegistry
+import org.junit.Assert.*
 import org.junit.Test
 import org.junit.runner.RunWith
-
-import org.junit.Assert.*
-import org.koin.core.Koin
 
 /**
  * Instrumented test, which will execute on an Android device.

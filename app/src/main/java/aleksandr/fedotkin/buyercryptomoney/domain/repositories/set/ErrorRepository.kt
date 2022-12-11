@@ -3,10 +3,8 @@ package aleksandr.fedotkin.buyercryptomoney.domain.repositories.set
 import aleksandr.fedotkin.buyercryptomoney.data.dto.set.error.Error
 import aleksandr.fedotkin.buyercryptomoney.data.dto.set.error.ErrorCode
 import aleksandr.fedotkin.buyercryptomoney.data.dto.set.error.ErrorTBS
-import aleksandr.fedotkin.buyercryptomoney.data.dto.set.general.MessageWrapper
 import aleksandr.fedotkin.buyercryptomoney.domain.model.set.error.ErrorModel
-import aleksandr.fedotkin.buyercryptomoney.domain.model.set.error.ErrorTBSModel
-import aleksandr.fedotkin.buyercryptomoney.domain.model.set.general.MessageWrapperModel
+import aleksandr.fedotkin.buyercryptomoney.domain.model.set.general.MessageHeaderModel
 import java.security.PrivateKey
 import java.security.PublicKey
 import java.security.cert.X509Certificate
@@ -18,10 +16,31 @@ interface ErrorRepository {
         error: Error<T>,
         map: (T) -> R,
         serializer: KSerializer<ErrorTBS<T>>
-    ): ErrorModel<R>
+    ): Boolean?
+
+    suspend fun <T, R> createError(
+        messageHeaderModel: MessageHeaderModel,
+        messageModel: T,
+        certificate: X509Certificate,
+        errorCode: ErrorCode,
+        map: (T) -> R,
+        serializer: KSerializer<R>,
+        privateKey: PrivateKey
+    ): Error<R>
+
+    suspend fun <T, R> createError(
+        messageHeaderModel: MessageHeaderModel,
+        messageModel: T,
+        publicKey: PublicKey,
+        errorCode: ErrorCode,
+        map: (T) -> R,
+        serializer: KSerializer<R>,
+        privateKey: PrivateKey
+    ): Error<R>
 
     suspend fun <T, R> createErrorModel(
-        messageWrapperModel: MessageWrapperModel<T>,
+        messageHeaderModel: MessageHeaderModel,
+        messageModel: T,
         errorCode: ErrorCode,
         certificate: X509Certificate,
         map: (T) -> R,
@@ -30,7 +49,8 @@ interface ErrorRepository {
     ): ErrorModel<T>
 
     suspend fun <T, R> createErrorModel(
-        messageWrapperModel: MessageWrapperModel<T>,
+        messageHeaderModel: MessageHeaderModel,
+        messageModel: T,
         errorCode: ErrorCode,
         publicKey: PublicKey,
         map: (T) -> R,
@@ -38,12 +58,7 @@ interface ErrorRepository {
         privateKey: PrivateKey
     ): ErrorModel<T>
 
-    suspend fun <T, R> createErrorMessageWrapper(
-        messageWrapperModel: MessageWrapperModel<T>,
-        errorCode: ErrorCode,
-        publicKey: PublicKey,
-        map: (T) -> R,
-        serializer: KSerializer<R>,
-        privateKey: PrivateKey
-    ): MessageWrapper<Error<R>>
+    suspend fun <T, R> convertToModel(error: Error<T>, map: (T) -> R): ErrorModel<R>
+
+    suspend fun <T, R> convertToDTO(errorModel: ErrorModel<T>, map: (T) -> R): Error<R>
 }
