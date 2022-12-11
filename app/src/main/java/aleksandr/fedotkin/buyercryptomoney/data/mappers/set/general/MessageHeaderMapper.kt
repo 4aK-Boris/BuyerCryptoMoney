@@ -11,25 +11,25 @@ class MessageHeaderMapper(
     private val dateTimeMapper: DateTimeMapper
 ) {
 
-    fun map(messageHeaderModel: MessageHeaderModel): MessageHeader {
+    fun map(model: MessageHeaderModel): MessageHeader {
         return MessageHeader(
-            version = messageHeaderModel.version,
-            revision = messageHeaderModel.revision,
-            messageID = messageIDMapper.map(messageIdModel = messageHeaderModel.messageIDModel),
-            rrpId = bigIntegerMapper.map(number = messageHeaderModel.rrpId),
-            sWIdent = messageHeaderModel.sWIdent,
-            date = dateTimeMapper.map(dateTime = messageHeaderModel.date)
+            version = model.version,
+            revision = model.revision,
+            messageID = messageIDMapper.map(model = model.messageIDModel),
+            rrpId = bigIntegerMapper.map(number = model.rrpId),
+            sWIdent = model.sWIdent,
+            date = dateTimeMapper.map(dateTime = model.date)
         )
     }
 
-    fun map(messageHeader: MessageHeader): MessageHeaderModel {
+    fun map(dto: MessageHeader): MessageHeaderModel {
         return MessageHeaderModel(
-            version = messageHeader.version,
-            revision = messageHeader.revision,
-            messageIDModel = messageIDMapper.map(messageId = messageHeader.messageID),
-            rrpId = bigIntegerMapper.map(string = messageHeader.rrpId),
-            sWIdent = messageHeader.sWIdent,
-            date = dateTimeMapper.map(dateTime = messageHeader.date)
+            version = dto.version,
+            revision = dto.revision,
+            messageIDModel = messageIDMapper.map(dto = dto.messageID),
+            rrpId = bigIntegerMapper.map(string = dto.rrpId),
+            sWIdent = dto.sWIdent,
+            date = dateTimeMapper.map(dateTime = dto.date)
         )
     }
 }

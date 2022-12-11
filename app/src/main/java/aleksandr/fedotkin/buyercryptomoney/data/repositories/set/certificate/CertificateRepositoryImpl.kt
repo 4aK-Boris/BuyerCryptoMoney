@@ -36,7 +36,6 @@ import aleksandr.fedotkin.buyercryptomoney.domain.repositories.set.certificate.C
 import aleksandr.fedotkin.buyercryptomoney.domain.repositories.set.crypto.EXHRepository
 import aleksandr.fedotkin.buyercryptomoney.domain.repositories.set.crypto.KeyRepository
 import java.math.BigInteger
-import java.security.KeyPairGenerator
 import kotlinx.serialization.KSerializer
 import kotlin.random.Random
 
@@ -69,7 +68,7 @@ class CertificateRepositoryImpl(
         val messageWrapperCardCInitRes =
             checkCardCInitRes(unknownMessageWrapperJson = unknownMessageWrapperJson)
         val messageWrapperModelCardCInitRes = messageWrapperMapper.map(
-            messageWrapper = messageWrapperCardCInitRes, map = cardCInitResMapper::map
+            dto = messageWrapperCardCInitRes, map = cardCInitResMapper::map
         )
         checkCardCInitRes(
             messageWrapperModel = messageWrapperModelCardCInitRes,

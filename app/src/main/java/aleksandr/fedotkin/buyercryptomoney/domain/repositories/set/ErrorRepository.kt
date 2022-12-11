@@ -58,7 +58,7 @@ interface ErrorRepository {
         privateKey: PrivateKey
     ): ErrorModel<T>
 
-    suspend fun <T, R> convertToModel(error: Error<T>, map: (T) -> R): ErrorModel<R>
+    fun <T, R> convertToModel(error: Error<T>, map: (T) -> R): ErrorModel<R>
 
-    suspend fun <T, R> convertToDTO(errorModel: ErrorModel<T>, map: (T) -> R): Error<R>
+    fun <T, R> convertToDTO(errorModel: ErrorModel<T>, map: (T) -> R): Error<R>
 }

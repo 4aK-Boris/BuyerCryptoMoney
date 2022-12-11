@@ -9,43 +9,43 @@ class MessageWrapperMapper(
     private val messageHeaderMapper: MessageHeaderMapper
 ) {
 
-    fun <T, R> map(messageWrapperModel: MessageWrapperModel<T>, map: (T) -> R): MessageWrapper<R> {
+    fun <T, R> map(model: MessageWrapperModel<T>, map: (T) -> R): MessageWrapper<R> {
         return MessageWrapper(
-            messageHeader = messageHeaderMapper.map(messageHeaderModel = messageWrapperModel.messageHeaderModel),
-            message = map(messageWrapperModel.messageModel),
-            mWExtension = messageWrapperModel.mWExtension
+            messageHeader = messageHeaderMapper.map(model = model.messageHeaderModel),
+            message = map(model.messageModel),
+            mWExtension = model.mWExtension
         )
     }
 
-    fun <T, R> map(messageWrapper: MessageWrapper<T>, map: (T) -> R): MessageWrapperModel<R> {
+    fun <T, R> map(dto: MessageWrapper<T>, map: (T) -> R): MessageWrapperModel<R> {
         return MessageWrapperModel(
-            messageHeaderModel = messageHeaderMapper.map(messageHeader = messageWrapper.messageHeader),
-            messageModel = map(messageWrapper.message),
-            mWExtension = messageWrapper.mWExtension
+            messageHeaderModel = messageHeaderMapper.map(dto = dto.messageHeader),
+            messageModel = map(dto.message),
+            mWExtension = dto.mWExtension
         )
     }
 
     fun <T, R> map(
-        messageWrapperModel: MessageWrapperModel<ErrorModel<T>>,
+        model: MessageWrapperModel<ErrorModel<T>>,
         errorMap: (ErrorModel<T>, (T) -> R) -> Error<R>,
         map: (T) -> R
     ): MessageWrapper<Error<R>> {
         return MessageWrapper(
-            messageHeader = messageHeaderMapper.map(messageHeaderModel = messageWrapperModel.messageHeaderModel),
-            message = errorMap(messageWrapperModel.messageModel, map),
-            mWExtension = messageWrapperModel.mWExtension
+            messageHeader = messageHeaderMapper.map(model = model.messageHeaderModel),
+            message = errorMap(model.messageModel, map),
+            mWExtension = model.mWExtension
         )
     }
 
     fun <T, R> map(
-        messageWrapper: MessageWrapper<Error<T>>,
+        dto: MessageWrapper<Error<T>>,
         errorMap: (Error<T>, (T) -> R) -> ErrorModel<R>,
         map: (T) -> R
     ): MessageWrapperModel<ErrorModel<R>> {
         return MessageWrapperModel(
-            messageHeaderModel = messageHeaderMapper.map(messageHeader = messageWrapper.messageHeader),
-            messageModel = errorMap(messageWrapper.message, map),
-            mWExtension = messageWrapper.mWExtension
+            messageHeaderModel = messageHeaderMapper.map(dto = dto.messageHeader),
+            messageModel = errorMap(dto.message, map),
+            mWExtension = dto.mWExtension
         )
     }
 }

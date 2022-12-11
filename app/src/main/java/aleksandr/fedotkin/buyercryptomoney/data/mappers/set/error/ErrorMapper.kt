@@ -8,17 +8,17 @@ class ErrorMapper(
     private val unsignedErrorMapper: UnsignedErrorMapper
 ) {
 
-    fun <T, R> map(error: Error<T>, map: (T) -> R): ErrorModel<R> {
+    fun <T, R> map(dto: Error<T>, map: (T) -> R): ErrorModel<R> {
         return ErrorModel(
-            signedErrorModel = signedErrorMapper.map(signedError = error.signedError),
-            unsignedErrorModel = unsignedErrorMapper.map(unsignedError = error.unsignedError, map = map)
+            signedErrorModel = signedErrorMapper.map(dto = dto.signedError),
+            unsignedErrorModel = unsignedErrorMapper.map(dto = dto.unsignedError, map = map)
         )
     }
 
-    fun <T, R> map(errorModel: ErrorModel<T>, map: (T) -> R): Error<R> {
+    fun <T, R> map(model: ErrorModel<T>, map: (T) -> R): Error<R> {
         return Error(
-            signedError = signedErrorMapper.map(signedErrorModel = errorModel.signedErrorModel),
-            unsignedError = unsignedErrorMapper.map(unsignedErrorModel = errorModel.unsignedErrorModel, map = map)
+            signedError = signedErrorMapper.map(model = model.signedErrorModel),
+            unsignedError = unsignedErrorMapper.map(model = model.unsignedErrorModel, map = map)
         )
     }
 }

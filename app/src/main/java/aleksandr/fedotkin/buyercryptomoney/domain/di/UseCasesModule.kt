@@ -4,6 +4,7 @@ import aleksandr.fedotkin.buyercryptomoney.domain.usecases.BuyUseCase
 import aleksandr.fedotkin.buyercryptomoney.domain.usecases.BuyerUseCase
 import aleksandr.fedotkin.buyercryptomoney.domain.usecases.ProductUseCase
 import aleksandr.fedotkin.buyercryptomoney.domain.usecases.set.CertificateUseCase
+import aleksandr.fedotkin.buyercryptomoney.domain.usecases.set.ErrorUseCase
 import org.koin.dsl.module
 
 val useCasesModule = module {
@@ -22,5 +23,9 @@ val useCasesModule = module {
 
     factory {
         CertificateUseCase(certificateRepository = get())
+    }
+
+    factory {
+        ErrorUseCase(errorRepository = get())
     }
 }

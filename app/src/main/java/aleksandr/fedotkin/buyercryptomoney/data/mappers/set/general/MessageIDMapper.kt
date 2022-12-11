@@ -8,8 +8,8 @@ class MessageIDMapper(
     private val bigIntegerMapper: BigIntegerMapper
 ) {
 
-    fun map(messageIdModel: MessageIDModel?): MessageID? {
-        return messageIdModel?.let {
+    fun map(model: MessageIDModel?): MessageID? {
+        return model?.let {
             return MessageID(
                 lIdC = bigIntegerMapper.map(number = it.lIdC),
                 lIdM = bigIntegerMapper.map(number = it.lIdM),
@@ -18,8 +18,8 @@ class MessageIDMapper(
         }
     }
 
-    fun map(messageId: MessageID?): MessageIDModel? {
-        return messageId?.let {
+    fun map(dto: MessageID?): MessageIDModel? {
+        return dto?.let {
             MessageIDModel(
                 lIdC = bigIntegerMapper.map(string = it.lIdC),
                 lIdM = bigIntegerMapper.map(string = it.lIdM),

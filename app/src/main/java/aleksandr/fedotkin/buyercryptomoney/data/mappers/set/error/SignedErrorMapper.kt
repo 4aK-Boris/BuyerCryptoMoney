@@ -8,11 +8,11 @@ class SignedErrorMapper(
     private val byteArrayMapper: ByteArrayMapper
 ) {
 
-    fun map(signedError: SignedError): SignedErrorModel {
-        return SignedErrorModel(signature = byteArrayMapper.map(string = signedError.signature))
+    fun map(dto: SignedError): SignedErrorModel {
+        return SignedErrorModel(signature = byteArrayMapper.map(string = dto.signature))
     }
 
-    fun map(signedErrorModel: SignedErrorModel): SignedError {
-        return SignedError(signature = byteArrayMapper.map(byteArray = signedErrorModel.signature))
+    fun map(model: SignedErrorModel): SignedError {
+        return SignedError(signature = byteArrayMapper.map(byteArray = model.signature))
     }
 }

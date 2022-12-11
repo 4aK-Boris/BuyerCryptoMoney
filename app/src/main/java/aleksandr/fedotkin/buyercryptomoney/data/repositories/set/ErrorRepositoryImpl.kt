@@ -138,12 +138,12 @@ class ErrorRepositoryImpl(
         )
     }
 
-    override suspend fun <T, R> convertToModel(error: Error<T>, map: (T) -> R): ErrorModel<R> {
-        return errorMapper.map(error = error, map = map)
+    override fun <T, R> convertToModel(error: Error<T>, map: (T) -> R): ErrorModel<R> {
+        return errorMapper.map(dto = error, map = map)
     }
 
-    override suspend fun <T, R> convertToDTO(errorModel: ErrorModel<T>, map: (T) -> R): Error<R> {
-        return errorMapper.map(errorModel = errorModel, map = map)
+    override fun <T, R> convertToDTO(errorModel: ErrorModel<T>, map: (T) -> R): Error<R> {
+        return errorMapper.map(model = errorModel, map = map)
     }
 
     private fun <T> createUnsignedErrorModel(
@@ -173,7 +173,7 @@ class ErrorRepositoryImpl(
         privateKey: PrivateKey
     ): SignedErrorModel {
         val signature = signatureRepository.createSignature(
-            data = errorTBSMapper.map(errorTBSModel = errorTBSModel, map = map),
+            data = errorTBSMapper.map(model = errorTBSModel, map = map),
             serializer = ErrorTBS.serializer(serializer),
             privateKey = privateKey
         )

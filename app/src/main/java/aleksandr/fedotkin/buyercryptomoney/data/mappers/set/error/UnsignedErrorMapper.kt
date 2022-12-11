@@ -7,11 +7,11 @@ class UnsignedErrorMapper(
     private val errorTBSMapper: ErrorTBSMapper
 ) {
 
-    fun <T, R> map(unsignedError: UnsignedError<T>, map: (T) -> R): UnsignedErrorModel<R> {
-        return UnsignedErrorModel(errorTBSModel = errorTBSMapper.map(errorTBS = unsignedError.errorTBS, map = map))
+    fun <T, R> map(dto: UnsignedError<T>, map: (T) -> R): UnsignedErrorModel<R> {
+        return UnsignedErrorModel(errorTBSModel = errorTBSMapper.map(dto = dto.errorTBS, map = map))
     }
 
-    fun <T, R> map(unsignedErrorModel: UnsignedErrorModel<T>, map: (T) -> R): UnsignedError<R> {
-        return UnsignedError(errorTBS = errorTBSMapper.map(errorTBSModel = unsignedErrorModel.errorTBSModel, map = map))
+    fun <T, R> map(model: UnsignedErrorModel<T>, map: (T) -> R): UnsignedError<R> {
+        return UnsignedError(errorTBS = errorTBSMapper.map(model = model.errorTBSModel, map = map))
     }
 }

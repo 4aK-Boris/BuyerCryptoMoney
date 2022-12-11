@@ -8,17 +8,17 @@ class ErrorMsgMapper(
     private val messageHeaderMapper: MessageHeaderMapper
 ) {
 
-    fun <T, R> map(errorMsg: ErrorMsg<T>, map: (T) -> R): ErrorMsgModel<R> {
+    fun <T, R> map(dto: ErrorMsg<T>, map: (T) -> R): ErrorMsgModel<R> {
         return ErrorMsgModel(
-            messageHeader = messageHeaderMapper.map(messageHeader = errorMsg.messageHeader),
-            badWrapper = map(errorMsg.badWrapper)
+            messageHeader = messageHeaderMapper.map(dto = dto.messageHeader),
+            badWrapper = map(dto.badWrapper)
         )
     }
 
-    fun <T, R> map(errorMsgModel: ErrorMsgModel<T>, map: (T) -> R): ErrorMsg<R> {
+    fun <T, R> map(model: ErrorMsgModel<T>, map: (T) -> R): ErrorMsg<R> {
         return ErrorMsg(
-            messageHeader = messageHeaderMapper.map(messageHeaderModel = errorMsgModel.messageHeader),
-            badWrapper = map(errorMsgModel.badWrapper)
+            messageHeader = messageHeaderMapper.map(model = model.messageHeader),
+            badWrapper = map(model.badWrapper)
         )
     }
 }
