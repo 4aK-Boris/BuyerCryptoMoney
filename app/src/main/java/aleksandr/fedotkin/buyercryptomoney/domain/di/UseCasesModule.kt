@@ -8,6 +8,7 @@ import aleksandr.fedotkin.buyercryptomoney.domain.usecases.set.CardCInitResUseCa
 import aleksandr.fedotkin.buyercryptomoney.domain.usecases.set.CertificateUseCase
 import aleksandr.fedotkin.buyercryptomoney.domain.usecases.set.ErrorUseCase
 import aleksandr.fedotkin.buyercryptomoney.domain.usecases.set.MessageWrapperUseCase
+import aleksandr.fedotkin.buyercryptomoney.domain.usecases.set.RegFormReqUseCase
 import org.koin.dsl.module
 
 val useCasesModule = module {
@@ -26,8 +27,9 @@ val useCasesModule = module {
 
     factory {
         CertificateUseCase(
-            certificateRepository = get(),
-            cardCInitReqUseCase = get()
+            cardCInitReqUseCase = get(),
+            cardCInitResUseCase = get(),
+            regFormReqUseCase = get()
         )
     }
 
@@ -61,5 +63,9 @@ val useCasesModule = module {
             errorUseCase = get(),
             keyRepository = get()
         )
+    }
+
+    factory {
+        RegFormReqUseCase(regFormReqRepository = get(), networkAPI = get())
     }
 }
