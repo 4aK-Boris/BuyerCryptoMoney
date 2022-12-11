@@ -1,6 +1,5 @@
 package aleksandr.fedotkin.buyercryptomoney.domain.model.set.certificate
 
-import aleksandr.fedotkin.buyercryptomoney.domain.model.set.general.MessageModel
 import java.math.BigInteger
 
 data class CardCInitReqModel(
