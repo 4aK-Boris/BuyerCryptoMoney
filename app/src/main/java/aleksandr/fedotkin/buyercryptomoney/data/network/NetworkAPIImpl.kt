@@ -12,12 +12,6 @@ import aleksandr.fedotkin.buyercryptomoney.data.dto.BuyDTO
 import aleksandr.fedotkin.buyercryptomoney.data.dto.BuyerDTO
 import aleksandr.fedotkin.buyercryptomoney.data.dto.ProductDTO
 import aleksandr.fedotkin.buyercryptomoney.data.dto.SellerDTO
-import aleksandr.fedotkin.buyercryptomoney.data.dto.set.certificate.CardCInitReq
-import aleksandr.fedotkin.buyercryptomoney.data.dto.set.error.Error
-import aleksandr.fedotkin.buyercryptomoney.data.dto.set.general.MessageWrapper
-import kotlinx.serialization.encodeToString
-import kotlinx.serialization.json.Json
-import kotlinx.serialization.json.encodeToJsonElement
 
 class NetworkAPIImpl(private val ktorClient: KtorClient) : NetworkAPI {
 
@@ -38,7 +32,7 @@ class NetworkAPIImpl(private val ktorClient: KtorClient) : NetworkAPI {
         return ktorClient.post(url = BUY_URL, body = buyDTO)
     }
 
-    override suspend fun cardCInit(messageWrapperJson: String): String {
+    override suspend fun sendCardCInitReq(messageWrapperJson: String): String {
         return ktorClient.post(url = CARD_C_INIT, body = messageWrapperJson)
     }
 

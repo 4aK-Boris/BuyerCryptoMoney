@@ -191,10 +191,10 @@ class MessageWrapperRepositoryImpl(
     }
 
     override suspend fun <T, R> convertToDTO(
-        messageWrapper: MessageWrapperModel<T>,
+        messageWrapperModel: MessageWrapperModel<T>,
         map: (T) -> R
     ): MessageWrapper<R> {
-        return messageWrapperMapper.map(model = messageWrapper, map = map)
+        return messageWrapperMapper.map(model = messageWrapperModel, map = map)
     }
 
     private fun changeMessageHeader(

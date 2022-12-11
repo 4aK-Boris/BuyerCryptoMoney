@@ -3,6 +3,7 @@ package aleksandr.fedotkin.buyercryptomoney.domain.di
 import aleksandr.fedotkin.buyercryptomoney.domain.usecases.BuyUseCase
 import aleksandr.fedotkin.buyercryptomoney.domain.usecases.BuyerUseCase
 import aleksandr.fedotkin.buyercryptomoney.domain.usecases.ProductUseCase
+import aleksandr.fedotkin.buyercryptomoney.domain.usecases.set.CardCInitReqUseCase
 import aleksandr.fedotkin.buyercryptomoney.domain.usecases.set.CertificateUseCase
 import aleksandr.fedotkin.buyercryptomoney.domain.usecases.set.ErrorUseCase
 import aleksandr.fedotkin.buyercryptomoney.domain.usecases.set.MessageWrapperUseCase
@@ -23,7 +24,10 @@ val useCasesModule = module {
     }
 
     factory {
-        CertificateUseCase(certificateRepository = get())
+        CertificateUseCase(
+            certificateRepository = get(),
+            cardCInitReqUseCase = get()
+        )
     }
 
     factory {
@@ -34,6 +38,13 @@ val useCasesModule = module {
         MessageWrapperUseCase(
             messageWrapperRepository = get(),
             errorUseCase = get()
+        )
+    }
+
+    factory {
+        CardCInitReqUseCase(
+            cardCInitReqRepository = get(),
+            networkAPI = get()
         )
     }
 }

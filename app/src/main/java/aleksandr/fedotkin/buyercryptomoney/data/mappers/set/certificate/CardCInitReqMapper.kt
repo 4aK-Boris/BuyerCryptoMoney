@@ -10,23 +10,23 @@ class CardCInitReqMapper(
     private val byteArrayMapper: ByteArrayMapper
 ) {
 
-    fun map(cardCInitReqModel: CardCInitReqModel): CardCInitReq {
+    fun map(model: CardCInitReqModel): CardCInitReq {
         return CardCInitReq(
-            rrpID = bigIntegerMapper.map(number = cardCInitReqModel.rrpID),
-            lidEE = bigIntegerMapper.map(number = cardCInitReqModel.lidEE),
-            challEE = bigIntegerMapper.map(number = cardCInitReqModel.challEE),
-            brandID = bigIntegerMapper.map(number = cardCInitReqModel.brandID),
-            thumbs = cardCInitReqModel.thumbs.map { byteArrayMapper.map(byteArray = it) }
+            rrpID = bigIntegerMapper.map(number = model.rrpID),
+            lidEE = bigIntegerMapper.map(number = model.lidEE),
+            challEE = bigIntegerMapper.map(number = model.challEE),
+            brandID = bigIntegerMapper.map(number = model.brandID),
+            thumbs = model.thumbs.map { byteArrayMapper.map(byteArray = it) }
         )
     }
 
-    fun map(cardCInitReq: CardCInitReq): CardCInitReqModel {
+    fun map(dto: CardCInitReq): CardCInitReqModel {
         return CardCInitReqModel(
-            rrpID = bigIntegerMapper.map(string = cardCInitReq.rrpID),
-            lidEE = bigIntegerMapper.map(string = cardCInitReq.lidEE),
-            challEE = bigIntegerMapper.map(string = cardCInitReq.challEE),
-            brandID = bigIntegerMapper.map(string = cardCInitReq.brandID),
-            thumbs = cardCInitReq.thumbs.map { byteArrayMapper.map(string = it) }
+            rrpID = bigIntegerMapper.map(string = dto.rrpID),
+            lidEE = bigIntegerMapper.map(string = dto.lidEE),
+            challEE = bigIntegerMapper.map(string = dto.challEE),
+            brandID = bigIntegerMapper.map(string = dto.brandID),
+            thumbs = dto.thumbs.map { byteArrayMapper.map(string = it) }
         )
     }
 }

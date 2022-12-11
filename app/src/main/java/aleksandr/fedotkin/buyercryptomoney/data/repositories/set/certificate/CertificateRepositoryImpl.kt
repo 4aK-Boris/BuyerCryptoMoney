@@ -64,7 +64,7 @@ class CertificateRepositoryImpl(
             serializer = MessageWrapper.serializer(CardCInitReq.serializer())
         )
         val unknownMessageWrapperJson =
-            networkAPI.cardCInit(messageWrapperJson = messageWrapperCardCInitReqJson)
+            networkAPI.sendCardCInitReq(messageWrapperJson = messageWrapperCardCInitReqJson)
         val messageWrapperCardCInitRes =
             checkCardCInitRes(unknownMessageWrapperJson = unknownMessageWrapperJson)
         val messageWrapperModelCardCInitRes = messageWrapperMapper.map(

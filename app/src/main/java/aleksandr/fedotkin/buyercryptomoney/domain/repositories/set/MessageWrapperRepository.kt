@@ -85,7 +85,7 @@ interface MessageWrapperRepository {
     ): MessageWrapperModel<R>
 
     suspend fun <T, R> convertToDTO(
-        messageWrapper: MessageWrapperModel<T>,
+        messageWrapperModel: MessageWrapperModel<T>,
         map: (T) -> R
     ): MessageWrapper<R>
 
