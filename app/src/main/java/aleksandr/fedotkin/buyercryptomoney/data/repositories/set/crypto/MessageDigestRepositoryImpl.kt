@@ -9,12 +9,25 @@ class MessageDigestRepositoryImpl(
     private val messageDigest: MessageDigest,
     private val jsonMapper: JsonMapper
 ) : MessageDigestRepository {
+
     override suspend fun <T> messageDigest(data: T, serializer: KSerializer<T>): ByteArray {
-        val byteArrayData = jsonMapper.objectToByteArray(serializer = serializer, data = data)
-        return messageDigest.digest(byteArrayData)
+        return messageDigest(
+            data = jsonMapper.objectToByteArray(
+                serializer = serializer,
+                data = data
+            )
+        )
     }
 
-    override suspend fun <T> verifyMessageDigest(data: T, serializer: KSerializer<T>, array: ByteArray): Boolean {
+    override suspend fun messageDigest(data: ByteArray): ByteArray {
+        return messageDigest.digest(data)
+    }
+
+    override suspend fun <T> verifyMessageDigest(
+        data: T,
+        serializer: KSerializer<T>,
+        array: ByteArray
+    ): Boolean {
         val byteArrayData = jsonMapper.objectToByteArray(serializer = serializer, data = data)
         return byteArrayData.contentEquals(array)
     }
