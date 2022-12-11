@@ -19,15 +19,29 @@ class RegFormReqDataRepositoryImpl(
     override suspend fun createRegFormReqDataModel(
         lidEE: BigInteger,
         lidCA: BigInteger
-    ): RegFormReqDataModel {
-        return RegFormReqDataModel(
-            rrpID = generateNewNumber(),
-            lidEE = lidEE,
-            challEE2 = generateNewNumber(),
-            lidCA = lidCA,
-            requestType = RequestType.SIGNATURE,
-            language = Language.RUSSIAN,
-            thumbs = emptyList()
+    ): Pair<RegFormReqDataModel, BigInteger> {
+        return generateNewNumber().run {
+            RegFormReqDataModel(
+                rrpID = this,
+                lidEE = lidEE,
+                challEE2 = generateNewNumber(),
+                lidCA = lidCA,
+                requestType = RequestType.SIGNATURE,
+                language = Language.RUSSIAN,
+                thumbs = emptyList()
+            ) to this
+        }
+    }
+
+    override suspend fun createAndConvertToByteArray(
+        lidEE: BigInteger,
+        lidCA: BigInteger
+    ): ByteArray {
+        return convertToByteArray(
+            regFormReqDataModel = createRegFormReqDataModel(
+                lidEE = lidEE,
+                lidCA = lidCA
+            ).first
         )
     }
 

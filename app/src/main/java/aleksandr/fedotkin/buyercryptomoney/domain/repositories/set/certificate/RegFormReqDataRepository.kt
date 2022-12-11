@@ -6,7 +6,9 @@ import java.math.BigInteger
 
 interface RegFormReqDataRepository {
 
-    suspend fun createRegFormReqDataModel(lidEE: BigInteger, lidCA: BigInteger): RegFormReqDataModel
+    suspend fun createRegFormReqDataModel(lidEE: BigInteger, lidCA: BigInteger): Pair<RegFormReqDataModel, BigInteger>
+
+    suspend fun createAndConvertToByteArray(lidEE: BigInteger, lidCA: BigInteger): ByteArray
 
     suspend fun convertToByteArray(regFormReqDataModel: RegFormReqDataModel): ByteArray
 
