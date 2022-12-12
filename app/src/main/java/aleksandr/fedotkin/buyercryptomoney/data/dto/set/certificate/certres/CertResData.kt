@@ -1,5 +1,6 @@
 package aleksandr.fedotkin.buyercryptomoney.data.dto.set.certificate.certres
 
+@kotlinx.serialization.Serializable
 data class CertResData(
     val rrpID: String,
     val lidEE: String,
