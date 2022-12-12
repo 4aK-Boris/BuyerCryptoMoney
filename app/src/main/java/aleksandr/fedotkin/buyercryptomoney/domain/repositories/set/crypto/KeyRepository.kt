@@ -7,7 +7,7 @@ import javax.crypto.SecretKey
 
 interface KeyRepository {
 
-    suspend fun decodePublicKey(array: ByteArray): PublicKey
+    fun decodePublicKey(array: ByteArray): PublicKey
 
     fun decodeSecretKey(keyArray: ByteArray): SecretKey
 

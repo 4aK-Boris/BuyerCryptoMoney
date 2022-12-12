@@ -22,7 +22,7 @@ class KeyRepositoryImpl(
     private val certificateFactory: CertificateFactory
 ): KeyRepository {
 
-    override suspend fun decodePublicKey(array: ByteArray): PublicKey {
+    override fun decodePublicKey(array: ByteArray): PublicKey {
         val publicKeySpec = X509EncodedKeySpec(array)
         return keyFactory.generatePublic(publicKeySpec)
     }

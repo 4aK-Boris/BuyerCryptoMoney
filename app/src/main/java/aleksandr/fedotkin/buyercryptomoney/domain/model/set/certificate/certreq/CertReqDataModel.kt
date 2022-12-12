@@ -14,7 +14,7 @@ data class CertReqDataModel(
     val requestDate: LocalDateTime,
     val idData: IDDataModel?,
     val regFormID: BigInteger,
-    val regForm: List<RegFormItems>,
+    val regForm: List<RegFormItemsModel>,
     val caBackKeyData: CABackKeyDataModel?,
     val publicKeySorE: PublicKeySorEModel,
     val eeThumb: ByteArray,
