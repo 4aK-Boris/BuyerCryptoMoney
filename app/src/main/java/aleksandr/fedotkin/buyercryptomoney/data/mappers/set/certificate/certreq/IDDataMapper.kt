@@ -8,21 +8,29 @@ class IDDataMapper(
     private val acquirerIDMapper: AcquirerIDMapper
 ) {
 
-    fun map(model: IDDataModel?): IDData? {
-        return model?.let {
-            IDData(
-                merchantAcquirerID = merchantAcquirerIDMapper.map(model = model.merchantAcquirerID),
-                acquirerID = acquirerIDMapper.map(model = model.acquirerID)
-            )
-        }
+    @JvmName("map_model_notnull")
+    fun map(model: IDDataModel): IDData {
+        return IDData(
+            merchantAcquirerID = merchantAcquirerIDMapper.map(model = model.merchantAcquirerID),
+            acquirerID = acquirerIDMapper.map(model = model.acquirerID)
+        )
     }
 
+    @JvmName("map_dto_notnull")
+    fun map(dto: IDData): IDDataModel {
+        return IDDataModel(
+            merchantAcquirerID = merchantAcquirerIDMapper.map(dto = dto.merchantAcquirerID),
+            acquirerID = acquirerIDMapper.map(dto = dto.acquirerID)
+        )
+    }
+
+    @JvmName("map_model_nullable")
+    fun map(model: IDDataModel?): IDData? {
+        return model?.let { map(model = it) }
+    }
+
+    @JvmName("map_dto_nullable")
     fun map(dto: IDData?): IDDataModel? {
-        return dto?.let {
-            IDDataModel(
-                merchantAcquirerID = merchantAcquirerIDMapper.map(dto = dto.merchantAcquirerID),
-                acquirerID = acquirerIDMapper.map(dto = dto.acquirerID)
-            )
-        }
+        return dto?.let { map(dto = it) }
     }
 }
