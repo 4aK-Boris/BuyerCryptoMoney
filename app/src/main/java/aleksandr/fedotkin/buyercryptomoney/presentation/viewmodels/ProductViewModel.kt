@@ -3,8 +3,8 @@ package aleksandr.fedotkin.buyercryptomoney.presentation.viewmodels
 import aleksandr.fedotkin.buyercryptomoney.core.BaseViewModel
 import aleksandr.fedotkin.buyercryptomoney.core.ErrorHandler
 import aleksandr.fedotkin.buyercryptomoney.core.runOnIO
-import aleksandr.fedotkin.buyercryptomoney.domain.model.BuyerModel
-import aleksandr.fedotkin.buyercryptomoney.domain.model.ProductModel
+import aleksandr.fedotkin.buyercryptomoney.domain.models.BuyerModel
+import aleksandr.fedotkin.buyercryptomoney.domain.models.ProductModel
 import aleksandr.fedotkin.buyercryptomoney.domain.usecases.BuyerUseCase
 import aleksandr.fedotkin.buyercryptomoney.domain.usecases.ProductUseCase
 import aleksandr.fedotkin.buyercryptomoney.presentation.ui.navigation.Screen

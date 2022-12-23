@@ -1,7 +1,7 @@
 package aleksandr.fedotkin.buyercryptomoney.data.mappers
 
 import aleksandr.fedotkin.buyercryptomoney.data.dto.PurchaseDTO
-import aleksandr.fedotkin.buyercryptomoney.domain.model.PurchaseModel
+import aleksandr.fedotkin.buyercryptomoney.domain.models.PurchaseModel
 
 class PurchaseMapper {
 

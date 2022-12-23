@@ -2,7 +2,7 @@ package aleksandr.fedotkin.buyercryptomoney.data.repositories
 
 import aleksandr.fedotkin.buyercryptomoney.data.mappers.SellerMapper
 import aleksandr.fedotkin.buyercryptomoney.data.network.NetworkAPI
-import aleksandr.fedotkin.buyercryptomoney.domain.model.SellerModel
+import aleksandr.fedotkin.buyercryptomoney.domain.models.SellerModel
 import aleksandr.fedotkin.buyercryptomoney.domain.repositories.SellerRepository
 
 class SellerRepositoryImpl(

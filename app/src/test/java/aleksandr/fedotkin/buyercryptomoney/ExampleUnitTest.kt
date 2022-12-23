@@ -2,12 +2,12 @@ package aleksandr.fedotkin.buyercryptomoney
 
 import aleksandr.fedotkin.buyercryptomoney.core.NUMBER_LENGTH
 import aleksandr.fedotkin.buyercryptomoney.core.di.appModule
-import aleksandr.fedotkin.buyercryptomoney.data.mappers.set.certificate.CardCInitReqMapper
-import aleksandr.fedotkin.buyercryptomoney.data.mappers.set.general.MessageWrapperMapper
-import aleksandr.fedotkin.buyercryptomoney.domain.model.set.certificate.CardCInitReqModel
-import aleksandr.fedotkin.buyercryptomoney.domain.model.set.general.MessageHeaderModel
-import aleksandr.fedotkin.buyercryptomoney.domain.model.set.general.MessageIDModel
-import aleksandr.fedotkin.buyercryptomoney.domain.model.set.general.MessageWrapperModel
+import aleksandr.fedotkin.set.protocol.data.mappers.certificate.card.c.init.req.CardCInitReqMapper
+import aleksandr.fedotkin.set.protocol.data.mappers.general.MessageWrapperMapper
+import aleksandr.fedotkin.buyercryptomoney.domain.models.set.certificate.card.c.init.req.CardCInitReqModel
+import aleksandr.fedotkin.buyercryptomoney.domain.models.set.general.MessageHeaderModel
+import aleksandr.fedotkin.buyercryptomoney.domain.models.set.general.MessageIDModel
+import aleksandr.fedotkin.buyercryptomoney.domain.models.set.general.MessageWrapperModel
 import java.math.BigInteger
 import org.junit.Assert.assertEquals
 import org.junit.Rule

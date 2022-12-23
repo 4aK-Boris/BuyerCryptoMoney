@@ -5,7 +5,7 @@ import aleksandr.fedotkin.buyercryptomoney.domain.common.InvalidFormatCvcExcepti
 import aleksandr.fedotkin.buyercryptomoney.domain.common.InvalidFormatMonthException
 import aleksandr.fedotkin.buyercryptomoney.domain.common.InvalidFormatNumberCardException
 import aleksandr.fedotkin.buyercryptomoney.domain.common.InvalidFormatYearException
-import aleksandr.fedotkin.buyercryptomoney.domain.model.CardModel
+import aleksandr.fedotkin.buyercryptomoney.domain.models.CardModel
 import androidx.core.text.isDigitsOnly
 
 class CardMapper {

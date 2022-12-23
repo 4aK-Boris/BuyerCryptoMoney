@@ -1,6 +1,6 @@
 package aleksandr.fedotkin.buyercryptomoney.domain.repositories
 
-import aleksandr.fedotkin.buyercryptomoney.domain.model.ProductModel
+import aleksandr.fedotkin.buyercryptomoney.domain.models.ProductModel
 
 interface ProductRepository {
 

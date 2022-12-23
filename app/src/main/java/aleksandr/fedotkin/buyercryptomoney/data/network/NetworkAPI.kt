@@ -10,7 +10,4 @@ interface NetworkAPI {
     suspend fun getSeller(sellerId: Int): SellerDTO
     suspend fun getSnippets(): List<ProductDTO>
     suspend fun buy(buyDTO: BuyDTO)
-    suspend fun sendCardCInitReq(messageWrapperJson: String): String
-    suspend fun sendError(messageWrapperJson: String): Boolean
-    suspend fun sendRegFormReq(messageWrapperJson: String): String
 }

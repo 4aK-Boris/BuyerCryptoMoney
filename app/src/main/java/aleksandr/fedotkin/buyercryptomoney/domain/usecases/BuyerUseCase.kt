@@ -1,7 +1,7 @@
 package aleksandr.fedotkin.buyercryptomoney.domain.usecases
 
 import aleksandr.fedotkin.buyercryptomoney.domain.common.BaseUseCase
-import aleksandr.fedotkin.buyercryptomoney.domain.model.BuyerModel
+import aleksandr.fedotkin.buyercryptomoney.domain.models.BuyerModel
 import aleksandr.fedotkin.buyercryptomoney.domain.repositories.BuyerRepository
 import aleksandr.fedotkin.buyercryptomoney.domain.common.Result
 

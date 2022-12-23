@@ -7,9 +7,9 @@ import aleksandr.fedotkin.buyercryptomoney.domain.common.INVALID_FORMAT_CVC_EXCE
 import aleksandr.fedotkin.buyercryptomoney.domain.common.INVALID_FORMAT_MONTH_EXCEPTION
 import aleksandr.fedotkin.buyercryptomoney.domain.common.INVALID_FORMAT_NUMBER_CARD_EXCEPTION
 import aleksandr.fedotkin.buyercryptomoney.domain.common.INVALID_FORMAT_YEAR_EXCEPTION
-import aleksandr.fedotkin.buyercryptomoney.domain.model.BuyModel
-import aleksandr.fedotkin.buyercryptomoney.domain.model.CardModel
-import aleksandr.fedotkin.buyercryptomoney.domain.model.PurchaseModel
+import aleksandr.fedotkin.buyercryptomoney.domain.models.BuyModel
+import aleksandr.fedotkin.buyercryptomoney.domain.models.CardModel
+import aleksandr.fedotkin.buyercryptomoney.domain.models.PurchaseModel
 import aleksandr.fedotkin.buyercryptomoney.domain.usecases.BuyUseCase
 import aleksandr.fedotkin.buyercryptomoney.presentation.ui.navigation.Screen
 import androidx.navigation.NavController
