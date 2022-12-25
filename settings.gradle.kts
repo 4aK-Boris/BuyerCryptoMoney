@@ -16,4 +16,5 @@ dependencyResolutionManagement {
 }
 rootProject.name = "BuyerCryptoMoney"
 include (":app")
-include(":set_protocol")
+include(":network")
+include(":SetProtocol")

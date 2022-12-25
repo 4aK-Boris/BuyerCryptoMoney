@@ -78,7 +78,8 @@ dependencies {
     implementation(Dependencies.Kotlin.coroutines)
     implementation(Dependencies.Kotlin.datetime)
 
-    implementation(project(":set_protocol"))
+    implementation(project(":SetProtocol"))
+    implementation(project(":network"))
 
     testImplementation(Dependencies.Koin.koinJUnit)
 
