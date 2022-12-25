@@ -1,7 +1,7 @@
 package aleksandr.fedotkin.set.protocol.domain.models.certificate.reg.form.req
 
 import aleksandr.fedotkin.set.protocol.data.dto.Language
-import aleksandr.fedotkin.set.protocol.data.dto.certificate.RequestType
+import aleksandr.fedotkin.set.protocol.data.dto.RequestType
 import aleksandr.fedotkin.set.protocol.domain.models.Model
 import java.math.BigInteger
 

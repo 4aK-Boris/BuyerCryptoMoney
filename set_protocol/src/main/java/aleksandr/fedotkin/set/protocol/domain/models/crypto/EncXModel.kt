@@ -3,8 +3,9 @@ package aleksandr.fedotkin.set.protocol.domain.models.crypto
 import aleksandr.fedotkin.set.protocol.domain.models.Model
 
 data class EncXModel(
-    val ee: ByteArray,
-    val ca: ByteArray
+    val signature: ByteArray,
+    val data: ByteArray,
+    val secretKeyAndData: ByteArray
 ): Model {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
@@ -12,15 +13,17 @@ data class EncXModel(
 
         other as EncXModel
 
-        if (!ee.contentEquals(other.ee)) return false
-        if (!ca.contentEquals(other.ca)) return false
+        if (!signature.contentEquals(other.signature)) return false
+        if (!data.contentEquals(other.data)) return false
+        if (!secretKeyAndData.contentEquals(other.secretKeyAndData)) return false
 
         return true
     }
 
     override fun hashCode(): Int {
-        var result = ee.contentHashCode()
-        result = 31 * result + ca.contentHashCode()
+        var result = signature.contentHashCode()
+        result = 31 * result + data.contentHashCode()
+        result = 31 * result + secretKeyAndData.contentHashCode()
         return result
     }
 }

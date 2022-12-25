@@ -1,6 +1,8 @@
 package aleksandr.fedotkin.set.protocol.data.repositories.crypto
 
+import aleksandr.fedotkin.set.protocol.data.dto.DTO
 import aleksandr.fedotkin.set.protocol.data.mappers.core.JsonMapper
+import aleksandr.fedotkin.set.protocol.domain.models.Model
 import aleksandr.fedotkin.set.protocol.domain.repositories.crypto.SignatureRepository
 import java.security.PrivateKey
 import java.security.PublicKey
@@ -12,30 +14,76 @@ class SignatureRepositoryImpl(
     private val signature: Signature,
     private val jsonMapper: JsonMapper,
     private val secureRandom: SecureRandom
-): SignatureRepository {
+) : SignatureRepository {
 
-    override suspend fun <T> verifySignature(
+    override suspend fun <T : Model, R : DTO> verifySignature(
+        model: T,
+        map: (T) -> R,
+        serializer: KSerializer<R>,
+        publicKey: PublicKey,
+        signatureArray: ByteArray
+    ): Boolean {
+        return verifySignature(
+            data = map(model),
+            serializer = serializer,
+            publicKey = publicKey,
+            signatureArray = signatureArray
+        )
+    }
+
+    override suspend fun <T : DTO> verifySignature(
         data: T,
         serializer: KSerializer<T>,
         publicKey: PublicKey,
         signatureArray: ByteArray
     ): Boolean {
+        return verifySignature(
+            data = jsonMapper.objectToByteArray(
+                data = data,
+                serializer = serializer
+            ), publicKey = publicKey, signatureArray = signatureArray
+        )
+    }
+
+    override suspend fun verifySignature(
+        data: ByteArray,
+        publicKey: PublicKey,
+        signatureArray: ByteArray
+    ): Boolean {
         return signature.run {
-           initVerify(publicKey)
-           update(jsonMapper.objectToByteArray(data = data, serializer = serializer))
-           verify(signatureArray)
+            initVerify(publicKey)
+            update(data)
+            verify(signatureArray)
         }
     }
 
-    override suspend fun <T> createSignature(
+    override suspend fun <T : Model, R : DTO> createSignature(
+        model: T,
+        map: (T) -> R,
+        serializer: KSerializer<R>,
+        privateKey: PrivateKey
+    ): ByteArray {
+        return createSignature(data = map(model), serializer = serializer, privateKey = privateKey)
+    }
+
+    override suspend fun <T : DTO> createSignature(
         data: T,
         serializer: KSerializer<T>,
         privateKey: PrivateKey
     ): ByteArray {
-        val array = jsonMapper.objectToByteArray(data = data, serializer = serializer)
+        return createSignature(
+            data = jsonMapper.objectToByteArray(data = data, serializer = serializer),
+            privateKey = privateKey
+        )
+    }
+
+    override suspend fun createSignature(
+        data: ByteArray,
+        privateKey: PrivateKey
+    ): ByteArray {
         return signature.run {
             initSign(privateKey, secureRandom)
-            update(array)
+            update(data)
             sign()
         }
     }

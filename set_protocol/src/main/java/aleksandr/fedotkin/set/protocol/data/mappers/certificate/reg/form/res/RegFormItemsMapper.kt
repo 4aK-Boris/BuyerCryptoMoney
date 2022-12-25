@@ -1,4 +1,4 @@
-package aleksandr.fedotkin.set.protocol.data.mappers.certificate.cert.req
+package aleksandr.fedotkin.set.protocol.data.mappers.certificate.reg.form.res
 
 import aleksandr.fedotkin.set.protocol.data.dto.certificate.cert.req.RegFormItems
 import aleksandr.fedotkin.set.protocol.domain.models.certificate.cert.req.RegFormItemsModel

@@ -4,5 +4,5 @@ import aleksandr.fedotkin.set.protocol.data.di.mapper.certificate.certificateMap
 import org.koin.dsl.module
 
 val mappersModule = module {
-    includes(certificateMapperModule, coreMapperModule, errorMapperModule, generalMapperModule)
+    includes(certificateMapperModule, coreMapperModule, errorMapperModule, generalMapperModule, cryptoMapperModule)
 }

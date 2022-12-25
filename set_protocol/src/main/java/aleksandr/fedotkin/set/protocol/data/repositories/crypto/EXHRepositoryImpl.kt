@@ -6,7 +6,8 @@ import aleksandr.fedotkin.set.protocol.domain.repositories.crypto.CipherReposito
 import aleksandr.fedotkin.set.protocol.domain.repositories.crypto.EXHRepository
 import aleksandr.fedotkin.set.protocol.domain.repositories.crypto.KeyRepository
 import aleksandr.fedotkin.set.protocol.domain.repositories.crypto.MessageDigestRepository
-import aleksandr.fedotkin.set.protocol.domain.repositories.crypto.OAEPRepository
+import aleksandr.fedotkin.set.protocol.domain.repositories.crypto.OAEP2Repository
+import aleksandr.fedotkin.set.protocol.domain.repositories.crypto.OAEP3Repository
 import java.security.PrivateKey
 import java.security.PublicKey
 import javax.crypto.SecretKey
@@ -17,8 +18,10 @@ class EXHRepositoryImpl(
     private val cipherRepository: CipherRepository,
     private val keyRepository: KeyRepository,
     private val messageDigestRepository: MessageDigestRepository,
-    private val oaepRepository: OAEPRepository
+    private val oaepRepository: OAEP3Repository
 ) : EXHRepository {
+
+
 
     override suspend fun <T, R, S, K> encrypt(
         publicKey: PublicKey,

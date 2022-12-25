@@ -7,4 +7,6 @@ interface NetworkAPI {
     suspend fun sendError(messageWrapperJson: String): Boolean
 
     suspend fun sendRegFormReq(messageWrapperJson: String): String
+
+    suspend fun sendCerReq(messageWrapperJson: String): String
 }

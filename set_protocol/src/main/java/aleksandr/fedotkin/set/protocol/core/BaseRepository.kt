@@ -6,7 +6,11 @@ import kotlin.random.Random
 abstract class BaseRepository {
 
     fun generateNewNumber(): BigInteger {
-        return BigInteger(rnd.nextBytes(aleksandr.fedotkin.buyercryptomoney.core.NUMBER_LENGTH))
+        return BigInteger(rnd.nextBytes(NUMBER_LENGTH))
+    }
+
+    fun generateNewNumber(data: String): BigInteger {
+        return BigInteger(data)
     }
 
     companion object {

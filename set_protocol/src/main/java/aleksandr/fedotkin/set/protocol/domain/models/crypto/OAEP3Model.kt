@@ -3,7 +3,7 @@ package aleksandr.fedotkin.set.protocol.domain.models.crypto
 import aleksandr.fedotkin.set.protocol.domain.models.Model
 import javax.crypto.SecretKey
 
-data class OAEP3Model<T>(
+data class OAEP3Model<T: Model>(
     val secretKey: SecretKey,
     val hash: ByteArray,
     val p: T
@@ -24,7 +24,7 @@ data class OAEP3Model<T>(
     override fun hashCode(): Int {
         var result = secretKey.hashCode()
         result = 31 * result + hash.contentHashCode()
-        result = 31 * result + (p?.hashCode() ?: 0)
+        result = 31 * result + p.hashCode()
         return result
     }
 }

@@ -2,13 +2,15 @@ package aleksandr.fedotkin.set.protocol.domain.repositories.certificate.reg.form
 
 import aleksandr.fedotkin.set.protocol.data.dto.certificate.reg.form.res.RegFormRes
 import aleksandr.fedotkin.set.protocol.domain.models.certificate.reg.form.res.RegFormResModel
-import aleksandr.fedotkin.set.protocol.domain.models.general.MessageWrapperModel
+import kotlinx.serialization.KSerializer
 
 interface RegFormResRepository {
+
+    val serializer: KSerializer<RegFormRes>
 
     val convertToModel: (RegFormRes) -> RegFormResModel
 
     val convertToDTO: (RegFormResModel) -> RegFormRes
 
-    suspend fun checkRegFormResModel(messageWrapperRegFormResModel: MessageWrapperModel<RegFormResModel>)
+    suspend fun checkSignature(regFormResModel: RegFormResModel): Boolean
 }

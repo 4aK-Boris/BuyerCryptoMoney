@@ -1,7 +1,7 @@
 package aleksandr.fedotkin.set.protocol.data.di.repository
 
-import aleksandr.fedotkin.buyercryptomoney.core.CIPHER_ALGORITHM
-import aleksandr.fedotkin.buyercryptomoney.core.RSA
+import aleksandr.fedotkin.set.protocol.core.CIPHER_ALGORITHM
+import aleksandr.fedotkin.set.protocol.core.RSA
 import aleksandr.fedotkin.set.protocol.data.repositories.ErrorRepositoryImpl
 import aleksandr.fedotkin.set.protocol.data.repositories.MessageWrapperRepositoryImpl
 import aleksandr.fedotkin.set.protocol.data.repositories.certificate.card.c.init.req.CardCInitReqRepositoryImpl
@@ -13,7 +13,7 @@ import aleksandr.fedotkin.set.protocol.data.repositories.crypto.CryptoDataReposi
 import aleksandr.fedotkin.set.protocol.data.repositories.crypto.EXHRepositoryImpl
 import aleksandr.fedotkin.set.protocol.data.repositories.crypto.KeyRepositoryImpl
 import aleksandr.fedotkin.set.protocol.data.repositories.crypto.MessageDigestRepositoryImpl
-import aleksandr.fedotkin.set.protocol.data.repositories.crypto.OAEPRepositoryImpl
+import aleksandr.fedotkin.set.protocol.data.repositories.crypto.OAEP3RepositoryImpl
 import aleksandr.fedotkin.set.protocol.data.repositories.crypto.SignatureRepositoryImpl
 import aleksandr.fedotkin.set.protocol.domain.repositories.ErrorRepository
 import aleksandr.fedotkin.set.protocol.domain.repositories.MessageWrapperRepository
@@ -26,7 +26,7 @@ import aleksandr.fedotkin.set.protocol.domain.repositories.crypto.CryptoDataRepo
 import aleksandr.fedotkin.set.protocol.domain.repositories.crypto.EXHRepository
 import aleksandr.fedotkin.set.protocol.domain.repositories.crypto.KeyRepository
 import aleksandr.fedotkin.set.protocol.domain.repositories.crypto.MessageDigestRepository
-import aleksandr.fedotkin.set.protocol.domain.repositories.crypto.OAEPRepository
+import aleksandr.fedotkin.set.protocol.domain.repositories.crypto.OAEP3Repository
 import aleksandr.fedotkin.set.protocol.domain.repositories.crypto.SignatureRepository
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
@@ -83,29 +83,20 @@ val repositoriesModule = module {
     }
 
     factory<CardCInitReqRepository> {
-        CardCInitReqRepositoryImpl(
-            messageWrapperRepository = get(),
-            jsonMapper = get(),
-            cardCInitReqMapper = get()
-        )
+        CardCInitReqRepositoryImpl(cardCInitReqMapper = get())
     }
 
     factory<CardCInitResRepository> {
         CardCInitResRepositoryImpl(
-            cardCInitResMapper = get()
+            cardCInitResMapper = get(),
+            keyRepository = get(),
+            signatureRepository = get()
         )
     }
 
     factory<PANOnlyRepository> {
         PANOnlyRepositoryImpl(
             panOnlyMapper = get(),
-            jsonMapper = get()
-        )
-    }
-
-    factory<RegFormReqDataRepository> {
-        RegFormReqDataRepositoryImpl(
-            regFormReqDataMapper = get(),
             jsonMapper = get()
         )
     }
@@ -117,17 +108,14 @@ val repositoriesModule = module {
     factory<RegFormReqRepository> {
         RegFormReqRepositoryImpl(
             panOnlyRepository = get(),
-            regFormReqDataRepository = get(),
             exhRepository = get(),
             keyRepository = get(),
-            messageWrapperRepository = get(),
-            cryptoDataRepository = get(),
-            messageWrapperUseCase = get()
+            regFormReqDataMapper = get()
         )
     }
 
-    factory<OAEPRepository> {
-        OAEPRepositoryImpl(
+    factory<OAEP3Repository> {
+        OAEP3RepositoryImpl(
             oaepMapper = get(),
             cipherRepository = get()
         )
@@ -143,10 +131,7 @@ val repositoriesModule = module {
         )
     }
 
-    factory<ResponseRepository> {
-        ResponseRepositoryImpl(
-            messageWrapperRepository = get(),
-            errorRepository = get()
-        )
+    factory<CryptoDataRepository> {
+        CryptoDataRepositoryImpl(cryptoDataMapper = get())
     }
 }

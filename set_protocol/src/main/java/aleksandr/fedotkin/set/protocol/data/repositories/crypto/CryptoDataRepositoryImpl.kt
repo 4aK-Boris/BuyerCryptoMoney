@@ -9,11 +9,9 @@ class CryptoDataRepositoryImpl(
     private val cryptoDataMapper: CryptoDataMapper
 ): CryptoDataRepository {
 
-    override fun convertToModel(cryptoData: CryptoData): CryptoDataModel {
-        return cryptoDataMapper.map(dto = cryptoData)
-    }
+    override val serializer = CryptoData.serializer()
 
-    override fun convertToDTO(cryptoDataModel: CryptoDataModel): CryptoData {
-        return cryptoDataMapper.map(model = cryptoDataModel)
-    }
+    override val convertToModel: (CryptoData) -> CryptoDataModel = cryptoDataMapper::map
+
+    override val convertToDTO: (CryptoDataModel) -> CryptoData = cryptoDataMapper::map
 }

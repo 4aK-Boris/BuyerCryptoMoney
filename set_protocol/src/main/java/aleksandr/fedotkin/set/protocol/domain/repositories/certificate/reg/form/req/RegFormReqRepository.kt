@@ -4,7 +4,6 @@ import aleksandr.fedotkin.set.protocol.data.dto.certificate.reg.form.req.RegForm
 import aleksandr.fedotkin.set.protocol.domain.models.certificate.reg.form.req.RegFormReqDataModel
 import aleksandr.fedotkin.set.protocol.domain.models.crypto.CryptoDataModel
 import java.math.BigInteger
-import java.security.cert.X509Certificate
 import kotlinx.serialization.KSerializer
 
 interface RegFormReqRepository {
@@ -20,6 +19,6 @@ interface RegFormReqRepository {
         number: String,
         lidEE: BigInteger,
         lidCA: BigInteger,
-        certificate: X509Certificate
+        caeThumb: ByteArray
     ): Pair<CryptoDataModel, BigInteger>
 }

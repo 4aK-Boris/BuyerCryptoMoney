@@ -12,3 +12,4 @@ const val CIPHER_ALGORITHM = "GOST28147"
 const val X509 = "X.509"
 const val REG_FORM = "/regForm"
 const val SYMMETRIC_KEY_LENGTH = 256
+const val CERT_REQ = "certReq"

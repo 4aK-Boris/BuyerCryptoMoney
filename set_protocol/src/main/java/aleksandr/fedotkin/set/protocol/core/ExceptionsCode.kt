@@ -14,3 +14,4 @@ const val SET_ERROR = 506
 const val UNKNOWN_RRPID = 507
 const val THUMBS_MISMATCH = 508
 const val CHALLENGE_MISMATCH = 509
+const val SIGNATURE_FAILURE = 510

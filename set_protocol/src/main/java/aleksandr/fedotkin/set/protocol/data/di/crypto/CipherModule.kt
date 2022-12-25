@@ -1,7 +1,7 @@
 package aleksandr.fedotkin.set.protocol.data.di.crypto
 
-import aleksandr.fedotkin.buyercryptomoney.core.CIPHER_ALGORITHM
-import aleksandr.fedotkin.buyercryptomoney.core.RSA
+import aleksandr.fedotkin.set.protocol.core.CIPHER_ALGORITHM
+import aleksandr.fedotkin.set.protocol.core.RSA
 import javax.crypto.Cipher
 import org.koin.core.qualifier.qualifier
 import org.koin.dsl.module

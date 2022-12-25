@@ -5,11 +5,10 @@ import aleksandr.fedotkin.set.protocol.domain.models.certificate.card.c.init.res
 import aleksandr.fedotkin.set.protocol.domain.models.certificate.reg.form.req.RegFormReqDataModel
 import aleksandr.fedotkin.set.protocol.domain.models.general.MessageWrapperModel
 import aleksandr.fedotkin.set.protocol.domain.repositories.certificate.reg.form.req.RegFormReqRepository
-import aleksandr.fedotkin.set.protocol.domain.repositories.crypto.KeyRepository
 
 class RegFormReqUseCase(
     private val regFormReqRepository: RegFormReqRepository,
-    private val keyRepository: KeyRepository
+    private val cryptoDataUseCase: CryptoDataUseCase
 ) : RequestUseCase<RegFormReqDataModel, RegFormReqData>() {
 
     override val serializer = RegFormReqData.serializer()
@@ -22,15 +21,15 @@ class RegFormReqUseCase(
         messageWrapperModel: MessageWrapperModel<CardCInitResModel>,
         number: String
     ): String {
-        with(messageWrapperModel.messageModel.cardCInitResTBS) {
+        return with(messageWrapperModel.messageModel.cardCInitResTBS) {
             regFormReqRepository.createCryptoDataModel(
                 number = number,
                 lidEE = lidEE,
                 lidCA = lidCA,
-                certificate = keyRepository.decodeCertificate(caeThumb)
+                caeThumb = caeThumb
             ).let { (cryptoDataModel, rrpid) ->
-                return messageWrapperToJson(
-                    messageWrapper = convertToDTO(
+                networkAPI.sendRegFormReq(
+                    messageWrapperJson = cryptoDataUseCase.cryptoDataModelToJson(
                         messageWrapperModel = changeMessageModel(
                             messageModel = cryptoDataModel,
                             messageWrapperModel = messageWrapperModel,
@@ -40,12 +39,5 @@ class RegFormReqUseCase(
                 )
             }
         }
-//        return networkAPI.sendRegFormReq(
-//            messageWrapperJson = createMessageWrapperJson(
-//                messageWrapperModel = messageWrapperModel,
-//                number = number
-//            )
-//        )
-
     }
 }

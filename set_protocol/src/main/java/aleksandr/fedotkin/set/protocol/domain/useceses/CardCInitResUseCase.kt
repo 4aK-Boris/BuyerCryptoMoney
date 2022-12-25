@@ -1,6 +1,7 @@
 package aleksandr.fedotkin.set.protocol.domain.useceses
 
 import aleksandr.fedotkin.set.protocol.core.ChallengeMismatch
+import aleksandr.fedotkin.set.protocol.core.SignatureFailure
 import aleksandr.fedotkin.set.protocol.core.ThumbsMismatch
 import aleksandr.fedotkin.set.protocol.data.dto.certificate.card.c.init.res.CardCInitRes
 import aleksandr.fedotkin.set.protocol.data.dto.error.ErrorCode
@@ -10,7 +11,7 @@ import aleksandr.fedotkin.set.protocol.domain.repositories.certificate.card.c.in
 import java.math.BigInteger
 
 class CardCInitResUseCase(
-    cardCInitResRepository: CardCInitResRepository,
+    private val cardCInitResRepository: CardCInitResRepository,
 ) : ResponseUseCase<CardCInitResModel, CardCInitRes>() {
 
     override val serializer = cardCInitResRepository.serializer
@@ -39,6 +40,7 @@ class CardCInitResUseCase(
                 messageWrapperModel = messageWrapperModel,
                 thumbs = thumbs
             )
+            checkSignature(messageWrapperModel = messageWrapperModel)
         }
     }
 
@@ -65,6 +67,18 @@ class CardCInitResUseCase(
                 errorCode = ErrorCode.ThumbsMismatch,
             )
             throw ThumbsMismatch()
+        }
+    }
+
+    private suspend fun checkSignature(
+        messageWrapperModel: MessageWrapperModel<CardCInitResModel>,
+    ) {
+        if (!cardCInitResRepository.checkSignature(cardCInitResModel = messageWrapperModel.messageModel)) {
+            sendError(
+                messageWrapperModel = messageWrapperModel,
+                errorCode = ErrorCode.SignatureFailure,
+            )
+            throw SignatureFailure()
         }
     }
 }

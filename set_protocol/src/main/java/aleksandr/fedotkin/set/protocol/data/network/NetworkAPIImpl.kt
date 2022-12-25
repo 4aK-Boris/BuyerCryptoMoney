@@ -1,6 +1,7 @@
 package aleksandr.fedotkin.set.protocol.data.network
 
 import aleksandr.fedotkin.set.protocol.core.CARD_C_INIT
+import aleksandr.fedotkin.set.protocol.core.CERT_REQ
 import aleksandr.fedotkin.set.protocol.core.ERROR_URL
 import aleksandr.fedotkin.set.protocol.core.REG_FORM
 
@@ -16,5 +17,9 @@ class NetworkAPIImpl(private val ktorClient: KtorClient): NetworkAPI {
 
     override suspend fun sendRegFormReq(messageWrapperJson: String): String {
         return ktorClient.post(url = REG_FORM, body = messageWrapperJson)
+    }
+
+    override suspend fun sendCerReq(messageWrapperJson: String): String {
+        return ktorClient.post(url = CERT_REQ, body = messageWrapperJson)
     }
 }

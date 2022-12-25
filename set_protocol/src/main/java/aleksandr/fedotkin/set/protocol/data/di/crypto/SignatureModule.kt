@@ -1,6 +1,6 @@
 package aleksandr.fedotkin.set.protocol.data.di.crypto
 
-import aleksandr.fedotkin.buyercryptomoney.core.SIGNATURE_ALGORITHM
+import aleksandr.fedotkin.set.protocol.core.SIGNATURE_ALGORITHM
 import java.security.Signature
 import org.koin.dsl.module
 

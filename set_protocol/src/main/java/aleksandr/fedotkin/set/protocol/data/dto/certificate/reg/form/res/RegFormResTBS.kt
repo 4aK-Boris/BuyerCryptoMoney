@@ -1,7 +1,7 @@
 package aleksandr.fedotkin.set.protocol.data.dto.certificate.reg.form.res
 
 import aleksandr.fedotkin.set.protocol.data.dto.DTO
-import aleksandr.fedotkin.set.protocol.data.dto.certificate.RequestType
+import aleksandr.fedotkin.set.protocol.data.dto.RequestType
 
 @kotlinx.serialization.Serializable
 data class RegFormResTBS(

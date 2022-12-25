@@ -4,11 +4,12 @@ import aleksandr.fedotkin.set.protocol.data.mappers.certificate.cert.req.AcctDat
 import aleksandr.fedotkin.set.protocol.data.mappers.certificate.cert.req.AcquirerIDMapper
 import aleksandr.fedotkin.set.protocol.data.mappers.certificate.cert.req.CABackKeyDataMapper
 import aleksandr.fedotkin.set.protocol.data.mappers.certificate.cert.req.CertReqDataMapper
+import aleksandr.fedotkin.set.protocol.data.mappers.certificate.cert.req.CertReqMapper
 import aleksandr.fedotkin.set.protocol.data.mappers.certificate.cert.req.IDDataMapper
 import aleksandr.fedotkin.set.protocol.data.mappers.certificate.cert.req.MerchantAcquirerIDMapper
 import aleksandr.fedotkin.set.protocol.data.mappers.certificate.cert.req.PANData0Mapper
 import aleksandr.fedotkin.set.protocol.data.mappers.certificate.cert.req.PublicKeySorEMapper
-import aleksandr.fedotkin.set.protocol.data.mappers.certificate.cert.req.RegFormItemsMapper
+import aleksandr.fedotkin.set.protocol.data.mappers.certificate.reg.form.res.RegFormItemsMapper
 import org.koin.dsl.module
 
 val certReqMapperModule = module {
@@ -67,5 +68,12 @@ val certReqMapperModule = module {
 
     factory {
         RegFormItemsMapper()
+    }
+
+    factory {
+        CertReqMapper(
+            encMapper = get(),
+            encXMapper = get()
+        )
     }
 }

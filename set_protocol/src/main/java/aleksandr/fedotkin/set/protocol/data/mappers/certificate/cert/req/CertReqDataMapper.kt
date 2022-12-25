@@ -4,6 +4,7 @@ import aleksandr.fedotkin.set.protocol.data.mappers.core.BigIntegerMapper
 import aleksandr.fedotkin.set.protocol.data.mappers.core.ByteArrayMapper
 import aleksandr.fedotkin.set.protocol.data.mappers.core.DateTimeMapper
 import aleksandr.fedotkin.set.protocol.data.dto.certificate.cert.req.CertReqData
+import aleksandr.fedotkin.set.protocol.data.mappers.certificate.reg.form.res.RegFormItemsMapper
 import aleksandr.fedotkin.set.protocol.domain.models.certificate.cert.req.CertReqDataModel
 
 class CertReqDataMapper(

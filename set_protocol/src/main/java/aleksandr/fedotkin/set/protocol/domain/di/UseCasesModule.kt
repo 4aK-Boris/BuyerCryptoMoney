@@ -3,9 +3,9 @@ package aleksandr.fedotkin.set.protocol.domain.di
 import aleksandr.fedotkin.set.protocol.domain.useceses.CardCInitReqUseCase
 import aleksandr.fedotkin.set.protocol.domain.useceses.CardCInitResUseCase
 import aleksandr.fedotkin.set.protocol.domain.useceses.CertificateUseCase
-import aleksandr.fedotkin.set.protocol.domain.useceses.ErrorUseCase
-import aleksandr.fedotkin.set.protocol.domain.useceses.MessageWrapperUseCase
+import aleksandr.fedotkin.set.protocol.domain.useceses.CryptoDataUseCase
 import aleksandr.fedotkin.set.protocol.domain.useceses.RegFormReqUseCase
+import aleksandr.fedotkin.set.protocol.domain.useceses.RegFormResUseCase
 import org.koin.dsl.module
 
 val useCasesModule = module {
@@ -18,36 +18,22 @@ val useCasesModule = module {
         )
     }
 
-    factory {
-        ErrorUseCase(
-            errorRepository = get(),
-            networkAPI = get(),
-            messageWrapperRepository = get(),
-            messageWrapperUseCase = get()
-        )
+    factory { CardCInitReqUseCase(cardCInitReqRepository = get())
     }
 
     factory {
-        MessageWrapperUseCase(messageWrapperRepository = get())
+        CardCInitResUseCase(cardCInitResRepository = get(),)
     }
 
     factory {
-        CardCInitReqUseCase(
-            cardCInitReqRepository = get(),
-            networkAPI = get()
-        )
+        CryptoDataUseCase(cryptoDataRepository = get())
     }
 
     factory {
-        CardCInitResUseCase(
-            messageWrapperUseCase = get(),
-            cardCInitResRepository = get(),
-            errorUseCase = get(),
-            keyRepository = get()
-        )
+        RegFormReqUseCase(regFormReqRepository = get(), cryptoDataUseCase = get())
     }
 
     factory {
-        RegFormReqUseCase(regFormReqRepository = get(), networkAPI = get())
+        RegFormResUseCase(regFormResRepository = get())
     }
 }

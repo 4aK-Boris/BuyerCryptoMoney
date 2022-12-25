@@ -14,7 +14,7 @@ class CardCInitReqUseCase(
 
     override val convertToModel = cardCInitReqRepository.convertToModel
 
-    suspend fun sendCardCInitReq(): Pair<String, CardCInitReqModel> {
+    suspend fun createAndSendMessageWrapper(): Pair<String, CardCInitReqModel> {
         return cardCInitReqRepository.createCardCInitReqModel()
             .let { messageModel ->
                 networkAPI.sendCardCInitReq(

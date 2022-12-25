@@ -19,7 +19,7 @@ class CertificateUseCase(
     }
 
     private suspend fun sendCardCInitReq(): Pair<String, CardCInitReqModel> {
-        return cardCInitReqUseCase.sendCardCInitReq()
+        return cardCInitReqUseCase.createAndSendMessageWrapper()
     }
 
     suspend fun cardCInit(): MessageWrapperModel<CardCInitResModel> {

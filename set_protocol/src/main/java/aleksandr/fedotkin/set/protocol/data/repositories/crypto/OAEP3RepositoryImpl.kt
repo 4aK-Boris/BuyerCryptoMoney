@@ -4,16 +4,16 @@ import aleksandr.fedotkin.set.protocol.data.dto.crypto.OAEP3
 import aleksandr.fedotkin.set.protocol.data.mappers.crypto.OAEPMapper
 import aleksandr.fedotkin.set.protocol.domain.models.crypto.OAEP3Model
 import aleksandr.fedotkin.set.protocol.domain.repositories.crypto.CipherRepository
-import aleksandr.fedotkin.set.protocol.domain.repositories.crypto.OAEPRepository
+import aleksandr.fedotkin.set.protocol.domain.repositories.crypto.OAEP3Repository
 import java.security.PrivateKey
 import java.security.PublicKey
 import javax.crypto.SecretKey
 import kotlinx.serialization.KSerializer
 
-class OAEPRepositoryImpl(
+open class OAEP3RepositoryImpl(
     private val oaepMapper: OAEPMapper,
     private val cipherRepository: CipherRepository
-) : OAEPRepository {
+) : OAEP3Repository {
 
     override suspend fun <T> createOAEPModel(
         secretKey: SecretKey,
