@@ -1,7 +1,17 @@
 object Dependencies {
 
     object Application {
-        const val namespace = "aleksandr.fedotkin.buyercryptomoney"
+        const val appModuleNameSpace = "aleksandr.fedotkin.buyercryptomoney"
+        const val coreModuleNameSpace = "aleksandr.fedotkin.core"
+    }
+
+    object Modules {
+
+        const val network = ":Network"
+        const val app = ":app"
+        const val core = ":Core"
+        const val exceptions = ":Exceptions"
+        const val setProtocol = ":SetProtocol"
     }
 
     object Android {
@@ -89,6 +99,7 @@ object Dependencies {
         const val library = "com.android.library"
         const val kotlin = "org.jetbrains.kotlin.android"
         const val serialization = "plugin.serialization"
+        const val jvm = "org.jetbrains.kotlin.jvm"
     }
 
 }

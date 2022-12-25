@@ -5,11 +5,11 @@ plugins {
 }
 
 android {
-    namespace = Dependencies.Application.namespace
+    namespace = Dependencies.Application.appModuleNameSpace
     compileSdk = 33
 
     defaultConfig {
-        applicationId = Dependencies.Application.namespace
+        applicationId = Dependencies.Application.appModuleNameSpace
         minSdk = 28
         targetSdk = 33
         versionCode = 1
@@ -78,8 +78,10 @@ dependencies {
     implementation(Dependencies.Kotlin.coroutines)
     implementation(Dependencies.Kotlin.datetime)
 
-    implementation(project(":SetProtocol"))
-    implementation(project(":network"))
+    implementation(project(Dependencies.Modules.network))
+    implementation(project(Dependencies.Modules.setProtocol))
+    implementation(project(Dependencies.Modules.core))
+    implementation(project(mapOf("path" to ":Core")))
 
     testImplementation(Dependencies.Koin.koinJUnit)
 

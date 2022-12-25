@@ -17,8 +17,7 @@ dependencies {
     implementation(Dependencies.Ktor.json)
     implementation(Dependencies.Ktor.logging)
     implementation(Dependencies.Ktor.websockets)
-
-    implementation(project(":network"))
+    implementation(project(":Network"))
 
     testImplementation(Dependencies.Koin.koinJUnit)
 
