@@ -1,8 +1,8 @@
-package aleksandr.fedotkin.set.protocol.data.repositories.crypto
+package aleksandr.fedotkin.set.protocol.data.repositories.core
 
 import aleksandr.fedotkin.set.protocol.core.CIPHER_ALGORITHM
-import aleksandr.fedotkin.set.protocol.core.SYMMETRIC_KEY_LENGTH
-import aleksandr.fedotkin.set.protocol.domain.repositories.crypto.KeyRepository
+import aleksandr.fedotkin.set.protocol.core.repository.RepositoryFunction
+import aleksandr.fedotkin.set.protocol.domain.repositories.core.KeyRepository
 import java.io.ByteArrayInputStream
 import java.security.KeyFactory
 import java.security.KeyPair
@@ -22,25 +22,32 @@ class KeyRepositoryImpl(
     private val certificateFactory: CertificateFactory
 ): KeyRepository {
 
+    @RepositoryFunction
     override fun decodePublicKey(array: ByteArray): PublicKey {
-        val publicKeySpec = X509EncodedKeySpec(array)
-        return keyFactory.generatePublic(publicKeySpec)
+        return keyFactory.generatePublic(X509EncodedKeySpec(array))
     }
 
+    @RepositoryFunction
     override fun decodeSecretKey(keyArray: ByteArray): SecretKey {
-        return SecretKeySpec(keyArray, 0, SYMMETRIC_KEY_LENGTH, CIPHER_ALGORITHM)
+        return SecretKeySpec(keyArray, 0, KEY_LENGTH, CIPHER_ALGORITHM)
     }
 
-    override suspend fun generateSecretKey(): SecretKey {
+    @RepositoryFunction
+    override fun generateSecretKey(): SecretKey {
         return keyGenerator.generateKey()
     }
 
-    override suspend fun generatePairKey(): KeyPair {
+    @RepositoryFunction
+    override fun generatePairKey(): KeyPair {
         return keyPairGenerator.generateKeyPair()
     }
 
-    override suspend fun decodeCertificate(certificate: ByteArray): X509Certificate {
-        val inputStream = ByteArrayInputStream(certificate)
-        return certificateFactory.generateCertificate(inputStream) as X509Certificate
+    @RepositoryFunction
+    override fun decodeCertificate(certificate: ByteArray): X509Certificate {
+        return certificateFactory.generateCertificate(ByteArrayInputStream(certificate)) as X509Certificate
+    }
+
+    companion object {
+        private const val KEY_LENGTH = 32
     }
 }
