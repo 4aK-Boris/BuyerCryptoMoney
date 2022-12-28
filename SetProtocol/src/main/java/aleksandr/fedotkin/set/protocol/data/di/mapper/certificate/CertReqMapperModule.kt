@@ -9,7 +9,7 @@ import aleksandr.fedotkin.set.protocol.data.mappers.certificate.cert.req.IDDataM
 import aleksandr.fedotkin.set.protocol.data.mappers.certificate.cert.req.MerchantAcquirerIDMapper
 import aleksandr.fedotkin.set.protocol.data.mappers.certificate.cert.req.PANData0Mapper
 import aleksandr.fedotkin.set.protocol.data.mappers.certificate.cert.req.PublicKeySorEMapper
-import aleksandr.fedotkin.set.protocol.data.mappers.certificate.reg.form.res.RegFormItemsMapper
+import aleksandr.fedotkin.set.protocol.data.mappers.certificate.cert.req.RegFormItemsMapper
 import org.koin.dsl.module
 
 val certReqMapperModule = module {

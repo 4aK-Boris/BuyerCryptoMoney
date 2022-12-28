@@ -8,14 +8,14 @@ val cardCInitResMapperModule = module {
 
     factory {
         CardCInitResMapper(
-            byteArrayMapper = get(),
+            base64Mapper = get(),
             cardCInitResTBSMapper = get()
         )
     }
 
     factory {
         CardCInitResTBSMapper(
-            byteArrayMapper = get(),
+            base64Mapper = get(),
             bigIntegerMapper = get()
         )
     }

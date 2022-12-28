@@ -35,7 +35,7 @@ val regFormResMapperModule = module {
 
     factory {
         RegFormResMapper(
-            byteArrayMapper = get(),
+            base64Mapper = get(),
             regFormResTBSMapper = get()
         )
     }
@@ -43,7 +43,7 @@ val regFormResMapperModule = module {
     factory {
         RegFormResTBSMapper(
             bigIntegerMapper = get(),
-            byteArrayMapper = get(),
+            base64Mapper  = get(),
             regFormOrReferralMapper = get()
         )
     }

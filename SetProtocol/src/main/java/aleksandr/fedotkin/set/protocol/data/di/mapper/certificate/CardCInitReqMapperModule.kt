@@ -8,7 +8,7 @@ val cardCInitReqMapperModule = module {
     factory {
         CardCInitReqMapper(
             bigIntegerMapper = get(),
-            byteArrayMapper = get()
+            base64Mapper = get()
         )
     }
 }
