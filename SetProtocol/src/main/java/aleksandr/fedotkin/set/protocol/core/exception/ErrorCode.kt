@@ -1,4 +1,4 @@
-package aleksandr.fedotkin.set.protocol.data.dto.error
+package aleksandr.fedotkin.set.protocol.core.exception
 
 import kotlinx.serialization.Serializable
 
@@ -24,4 +24,7 @@ enum class ErrorCode {
     DecodingFailure,
     MessageNotSupported,
     UnspecifiedFailure;
+
+    val setExternalException = SetExternalException(errorCode = this)
+    val setInternalException = SetInternalException(errorCode = this)
 }
