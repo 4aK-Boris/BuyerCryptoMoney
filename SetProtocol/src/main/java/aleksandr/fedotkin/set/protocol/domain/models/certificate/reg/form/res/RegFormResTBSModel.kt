@@ -1,7 +1,8 @@
 package aleksandr.fedotkin.set.protocol.domain.models.certificate.reg.form.res
 
+import aleksandr.fedotkin.set.protocol.core.Model
+import aleksandr.fedotkin.set.protocol.core.contentEquals
 import aleksandr.fedotkin.set.protocol.data.dto.RequestType
-import aleksandr.fedotkin.set.protocol.domain.models.Model
 import java.math.BigInteger
 
 data class RegFormResTBSModel(
@@ -30,8 +31,8 @@ data class RegFormResTBSModel(
         if (!caeThumb.contentEquals(other.caeThumb)) return false
         if (requestType != other.requestType) return false
         if (regFormOrReferral != other.regFormOrReferral) return false
-        if (brandCRLIdentifier != other.brandCRLIdentifier) return false
-        if (thumbs != other.thumbs) return false
+        if (!brandCRLIdentifier.contentEquals(other.brandCRLIdentifier)) return false
+        if (!thumbs.contentEquals(other.thumbs)) return false
 
         return true
     }
