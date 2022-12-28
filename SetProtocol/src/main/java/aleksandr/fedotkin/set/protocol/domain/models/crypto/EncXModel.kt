@@ -1,6 +1,6 @@
 package aleksandr.fedotkin.set.protocol.domain.models.crypto
 
-import aleksandr.fedotkin.set.protocol.domain.models.Model
+import aleksandr.fedotkin.set.protocol.core.Model
 
 data class EncXModel(
     val signature: ByteArray,
