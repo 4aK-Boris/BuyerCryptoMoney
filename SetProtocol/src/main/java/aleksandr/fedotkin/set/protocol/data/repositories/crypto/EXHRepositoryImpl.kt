@@ -1,27 +1,14 @@
 package aleksandr.fedotkin.set.protocol.data.repositories.crypto
 
-import aleksandr.fedotkin.set.protocol.data.mappers.core.JsonMapper
-import aleksandr.fedotkin.set.protocol.domain.models.crypto.CryptoDataModel
-import aleksandr.fedotkin.set.protocol.domain.repositories.crypto.CipherRepository
-import aleksandr.fedotkin.set.protocol.domain.repositories.crypto.EXHRepository
-import aleksandr.fedotkin.set.protocol.domain.repositories.crypto.KeyRepository
-import aleksandr.fedotkin.set.protocol.domain.repositories.crypto.MessageDigestRepository
-import aleksandr.fedotkin.set.protocol.domain.repositories.crypto.OAEP2Repository
-import aleksandr.fedotkin.set.protocol.domain.repositories.crypto.OAEP3Repository
-import java.security.PrivateKey
-import java.security.PublicKey
-import javax.crypto.SecretKey
-import kotlinx.serialization.KSerializer
-
-class EXHRepositoryImpl(
-    private val jsonMapper: JsonMapper,
-    private val cipherRepository: CipherRepository,
-    private val keyRepository: KeyRepository,
-    private val messageDigestRepository: MessageDigestRepository,
-    private val oaepRepository: OAEP3Repository
-) : EXHRepository {
-
-//    override suspend fun <T, R, S, K> encrypt(
+//class EXHRepositoryImpl(
+//    private val jsonMapper: JsonMapper,
+//    private val cipherRepository: CipherRepository,
+//    private val keyRepository: KeyRepository,
+//    private val messageDigestRepository: MessageDigestRepository,
+//    private val oaepRepository: OAEP3Repository
+//) : EXHRepository {
+//
+//    override suspend fun <T : Model, S : Model, R : DTO, K : DTO> encrypt(
 //        publicKey: PublicKey,
 //        data: T,
 //        secondaryData: S,
@@ -29,17 +16,20 @@ class EXHRepositoryImpl(
 //        secondaryMap: (S) -> K,
 //        serializer: KSerializer<R>,
 //        secondarySerializer: KSerializer<K>
-//    ): CryptoDataModel {
+//    ): EXHModel {
 //        val dataArray = dataModelToByteArray(data = data, map = map, serializer = serializer)
 //        val secondaryDataArray = dataModelToByteArray(
 //            data = secondaryData,
 //            map = secondaryMap,
 //            serializer = secondarySerializer
 //        )
-//        val (cipherSharedData, secretKey) = encryptSharedData(
-//            data = dataArray,
-//            secondaryData = secondaryDataArray
-//        )
+//        val secretKey = generateSecretKey()
+//        val cipherSharedData =
+//            encryptSharedData(
+//                data = dataArray,
+//                secondaryData = secondaryDataArray,
+//                secretKey = secretKey
+//            )
 //        val cipherOAEP = oaepRepository.createAndEncryptOAEPModel(
 //            secretKey = secretKey,
 //            hash = messageDigestRepository.messageDigest(data = dataArray),
@@ -48,20 +38,20 @@ class EXHRepositoryImpl(
 //            serializer = secondarySerializer,
 //            publicKey = publicKey
 //        )
-//        return CryptoDataModel(cipherData = cipherSharedData, oaep = cipherOAEP)
+//        return EXHModel(data = cipherSharedData, secretKey = cipherOAEP)
 //    }
 //
-//    override suspend fun <T, R, S, K> decrypt(
+//    override suspend fun <T : Model, S : Model, R : DTO, K : DTO> decrypt(
 //        privateKey: PrivateKey,
-//        cryptoDataModel: CryptoDataModel,
-//        map: (T) -> R,
-//        secondaryMap: (S) -> K,
-//        reverseSecondaryMap: (K) -> S,
-//        serializer: KSerializer<T>,
-//        secondarySerializer: KSerializer<S>
-//    ): Pair<R, K> {
+//        model: EXHModel,
+//        map: (R) -> T,
+//        secondaryMap: (K) -> S,
+//        reverseSecondaryMap: (S) -> K,
+//        serializer: KSerializer<R>,
+//        secondarySerializer: KSerializer<K>
+//    ): Pair<T, S> {
 //        val oaepModel = oaepRepository.decryptOAEPModel(
-//            cipherOAEP = cryptoDataModel.oaep,
+//            cipherOAEP = model.secretKey,
 //            privateKey = privateKey,
 //            serializer = secondarySerializer,
 //            map = secondaryMap
@@ -72,8 +62,8 @@ class EXHRepositoryImpl(
 //            serializer = secondarySerializer
 //        )
 //        val clearSharedData = cipherRepository.symmetricDecrypt(
-//            data = cryptoDataModel.cipherData,
-//            key = oaepModel.secretKey
+//            data = model.data,
+//            secretKey = oaepModel.secretKey
 //        )
 //        val dataModel = byteArrayToDataModel(
 //            byteArray = clearSharedData.take(clearSharedData.size - secondaryData.size)
@@ -84,33 +74,29 @@ class EXHRepositoryImpl(
 //
 //    private suspend fun encryptSharedData(
 //        data: ByteArray,
-//        secondaryData: ByteArray
-//    ): Pair<ByteArray, SecretKey> {
-//        return generateSecretKey().run {
-//            cipherRepository.symmetricEncrypt(
-//                data = data + secondaryData,
-//                key = this
-//            ) to this
-//        }
+//        secondaryData: ByteArray,
+//        secretKey: SecretKey
+//    ): ByteArray {
+//        return cipherRepository.symmetricEncrypt(data = data + secondaryData, secretKey = secretKey)
 //    }
 //
 //    private suspend fun generateSecretKey(): SecretKey {
 //        return keyRepository.generateSecretKey()
 //    }
 //
-//    private fun <T, R> dataModelToByteArray(
+//    private fun <T : Model, R : DTO> dataModelToByteArray(
 //        data: T,
 //        map: (T) -> R,
 //        serializer: KSerializer<R>
 //    ): ByteArray {
-//        return jsonMapper.objectToByteArray(data = map(data), serializer = serializer)
+//        return jsonMapper.dtoToByteArray(data = map(data), serializer = serializer)
 //    }
 //
-//    private fun <T, R> byteArrayToDataModel(
+//    private fun <T : Model, R : DTO> byteArrayToDataModel(
 //        byteArray: ByteArray,
-//        map: (T) -> R,
-//        serializer: KSerializer<T>
-//    ): R {
-//        return map(jsonMapper.byteArrayToObject(data = byteArray, deserializer = serializer))
+//        map: (R) -> T,
+//        serializer: KSerializer<R>
+//    ): T {
+//        return map(jsonMapper.byteArrayToDTO(data = byteArray, serializer = serializer))
 //    }
-}
+//}
