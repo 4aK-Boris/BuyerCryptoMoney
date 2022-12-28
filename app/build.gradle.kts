@@ -81,7 +81,6 @@ dependencies {
     implementation(project(Dependencies.Modules.network))
     implementation(project(Dependencies.Modules.setProtocol))
     implementation(project(Dependencies.Modules.core))
-    implementation(project(mapOf("path" to ":Core")))
 
     testImplementation(Dependencies.Koin.koinJUnit)
 

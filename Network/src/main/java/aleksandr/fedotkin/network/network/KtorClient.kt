@@ -55,8 +55,8 @@ class KtorClient(private val client: HttpClient) {
         postRequest(url = url, body = body)
     }
 
-    suspend inline fun <reified T : Any> postSet(url: String, body: Any): T = call {
-        postSetRequest(url = url, body = body)
+    suspend inline fun <reified T : Any> postSet(url: String, json: String): T = call {
+        postSetRequest(url = url, body = json)
     }
 
     suspend inline fun <reified T : Any> get(url: String, parameters: Map<String, Any> = emptyMap()): T = call {

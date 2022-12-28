@@ -1,6 +1,7 @@
 package aleksandr.fedotkin.buyercryptomoney
 
 import aleksandr.fedotkin.buyercryptomoney.core.di.appModule
+import aleksandr.fedotkin.set.protocol.domain.repositories.crypto.EXHRepository
 import org.junit.Rule
 import org.junit.Test
 import org.koin.test.KoinTest
@@ -14,7 +15,7 @@ import org.koin.test.inject
  */
 class ExampleUnitTest: KoinTest {
 
-    private val networkApi by inject<SetNetworkAPI>()
+    private val module by inject<EXHRepository>()
 
     @get:Rule
     val koinTestRule = KoinTestRule.create {
@@ -23,6 +24,6 @@ class ExampleUnitTest: KoinTest {
 
     @Test
     fun test() {
-        println(networkApi)
+        println(module)
     }
 }

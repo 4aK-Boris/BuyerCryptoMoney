@@ -1,6 +1,6 @@
 package aleksandr.fedotkin.buyercryptomoney.core.application
 
-import aleksandr.fedotkin.buyercryptomoney.presentation.ui.screens.main.MainScreen
+import aleksandr.fedotkin.buyercryptomoney.presentation.ui.screens.TestScreen
 import aleksandr.fedotkin.core.BaseActivity
 import aleksandr.fedotkin.core.BaseViewModel
 import android.os.Build
@@ -16,7 +16,7 @@ class MainActivity : BaseActivity() {
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     @Composable
     override fun Content() {
-        MainScreen()
-        //TestScreen()
+        //MainScreen()
+        TestScreen()
     }
 }
