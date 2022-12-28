@@ -1,18 +1,20 @@
-package aleksandr.fedotkin.set.protocol.core
+package aleksandr.fedotkin.set.protocol.core.repository
 
 import java.math.BigInteger
 import kotlin.random.Random
 
-abstract class BaseRepository {
-
+interface BaseRepository {
     fun generateNewNumber(): BigInteger {
-        return BigInteger(rnd.nextBytes(NUMBER_LENGTH))
+        return BigInteger(rnd.nextBytes(20))
     }
 
     fun generateNewNumber(data: String): BigInteger {
         return BigInteger(data)
     }
 
+    fun generateByteArray(size: Int): ByteArray {
+        return rnd.nextBytes(size = size)
+    }
     companion object {
         private val rnd = Random
     }
