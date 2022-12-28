@@ -1,10 +1,10 @@
 package aleksandr.fedotkin.set.protocol.data.dto.crypto
 
-import aleksandr.fedotkin.set.protocol.data.dto.DTO
+import aleksandr.fedotkin.set.protocol.core.DTO
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class OAEP2(
-    val secretKey: String,
-    val p: String
+data class EXH(
+    val data: String,
+    val secretKey: String
 ): DTO
