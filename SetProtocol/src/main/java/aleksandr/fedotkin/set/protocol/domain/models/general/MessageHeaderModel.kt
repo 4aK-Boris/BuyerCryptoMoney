@@ -1,7 +1,7 @@
 package aleksandr.fedotkin.set.protocol.domain.models.general
 
 import aleksandr.fedotkin.set.protocol.core.Settings
-import aleksandr.fedotkin.set.protocol.domain.models.Model
+import aleksandr.fedotkin.set.protocol.core.Model
 import java.math.BigInteger
 import java.time.LocalDateTime
 
