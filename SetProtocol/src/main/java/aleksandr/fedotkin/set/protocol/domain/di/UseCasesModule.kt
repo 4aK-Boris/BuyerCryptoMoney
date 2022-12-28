@@ -1,38 +1,79 @@
 package aleksandr.fedotkin.set.protocol.domain.di
 
-import aleksandr.fedotkin.set.protocol.domain.useceses.CardCInitReqUseCase
-import aleksandr.fedotkin.set.protocol.domain.useceses.CardCInitResUseCase
-import aleksandr.fedotkin.set.protocol.domain.useceses.CertificateUseCase
-import aleksandr.fedotkin.set.protocol.domain.useceses.CryptoDataUseCase
-import aleksandr.fedotkin.set.protocol.domain.useceses.RegFormResUseCase
+import aleksandr.fedotkin.set.protocol.core.di.certificate.CertificateQualifiers
+import aleksandr.fedotkin.set.protocol.data.mappers.certificate.card.c.init.req.CardCInitReqMapper
+import aleksandr.fedotkin.set.protocol.data.mappers.certificate.card.c.init.res.CardCInitResMapper
+import aleksandr.fedotkin.set.protocol.domain.useceses.BuyerCertificateUSeCase
+import aleksandr.fedotkin.set.protocol.domain.useceses.client.CardCInitReqClientUseCase
+import aleksandr.fedotkin.set.protocol.domain.useceses.client.CardCInitResClientUseCase
+import aleksandr.fedotkin.set.protocol.domain.useceses.server.CardCInitReqServerUseCase
+import aleksandr.fedotkin.set.protocol.domain.useceses.server.CardCInitResServerUseCase
+import org.koin.core.parameter.parametersOf
+import org.koin.core.qualifier.named
 import org.koin.dsl.module
 
 val useCasesModule = module {
 
     factory {
-        CertificateUseCase(
+        BuyerCertificateUSeCase(
             cardCInitReqUseCase = get(),
-            cardCInitResUseCase = get(),
-            //regFormReqUseCase = get()
+            cardCInitResUseCase = get()
         )
     }
 
-    factory { CardCInitReqUseCase(cardCInitReqRepository = get())
+    factory {
+        CardCInitReqClientUseCase(
+            repository = get(),
+            privateKey = get(),
+            publicKey = get(),
+            messageWrapperRepository = get {
+                parametersOf(get<CardCInitReqMapper>())
+            })
     }
 
     factory {
-        CardCInitResUseCase(cardCInitResRepository = get(),)
+        CardCInitReqServerUseCase(
+            cardCInitReqRepository = get(),
+            privateKey = get(
+                qualifier = named(
+                    CertificateQualifiers.CCA
+                )
+            ), publicKey = get(
+                qualifier = named(
+                    CertificateQualifiers.CCA
+                )
+            ),
+            messageWrapperRepository = get {
+                parametersOf(get<CardCInitReqMapper>())
+            }
+        )
     }
 
     factory {
-        CryptoDataUseCase(cryptoDataRepository = get())
+        CardCInitResClientUseCase(
+            repository = get(),
+            publicKey = get(),
+            privateKey = get(),
+            messageWrapperRepository = get {
+                parametersOf(get<CardCInitResMapper>())
+            })
     }
 
-//    factory {
-//        RegFormReqUseCase(regFormReqRepository = get(), cryptoDataUseCase = get())
-//    }
-
     factory {
-        RegFormResUseCase(regFormResRepository = get())
+        CardCInitResServerUseCase(
+            repository = get(),
+            privateKey = get(
+                qualifier = named(
+                    CertificateQualifiers.CCA
+                )
+            ), publicKey = get(
+                qualifier = named(
+                    CertificateQualifiers.CCA
+                )
+            ),
+            messageWrapperRepository = get {
+                parametersOf(get<CardCInitResMapper>())
+            }
+        )
     }
 }
