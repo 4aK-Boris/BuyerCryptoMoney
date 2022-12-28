@@ -5,8 +5,6 @@ import aleksandr.fedotkin.set.protocol.core.TestModel
 import aleksandr.fedotkin.set.protocol.core.repository.BaseTestRepository
 import aleksandr.fedotkin.set.protocol.domain.repositories.core.KeyRepository
 import aleksandr.fedotkin.set.protocol.domain.repositories.core.SignatureRepository
-import java.security.PrivateKey
-import java.security.PublicKey
 import kotlinx.coroutines.runBlocking
 import org.koin.core.parameter.parametersOf
 import org.koin.test.inject
@@ -26,7 +24,7 @@ class SignatureRepositoryTest : BaseTestRepository() {
     @org.junit.Test
     fun testModel() = runBlocking {
         val model = generateTestModel()
-        val (publicKey, privateKey) = generateKeyPair()
+        val (publicKey, privateKey) = keyRepository.generatePairKey()
         val signature = repository.create(data = model, privateKey = privateKey)
         val verify =
             repository.verify(data = model, publicKey = publicKey, signatureArray = signature)
@@ -36,7 +34,7 @@ class SignatureRepositoryTest : BaseTestRepository() {
     @org.junit.Test
     fun testDTO() = runBlocking {
         val dto = generateTestDTO()
-        val (publicKey, privateKey) = generateKeyPair()
+        val (publicKey, privateKey) = keyRepository.generatePairKey()
         val signature = repository.create(data = dto, privateKey = privateKey)
         val verify =
             repository.verify(data = dto, publicKey = publicKey, signatureArray = signature)
@@ -46,14 +44,10 @@ class SignatureRepositoryTest : BaseTestRepository() {
     @org.junit.Test
     fun testByteArray() = runBlocking {
         val array = generateByteArray(size = 1024)
-        val (publicKey, privateKey) = generateKeyPair()
+        val (publicKey, privateKey) = keyRepository.generatePairKey()
         val signature = repository.create(data = array, privateKey = privateKey)
         val verify =
             repository.verify(data = array, publicKey = publicKey, signatureArray = signature)
         assertTrue(actual = verify)
-    }
-
-    private fun generateKeyPair(): Pair<PublicKey, PrivateKey> {
-        return keyRepository.generatePairKey().let { it.public to it.private }
     }
 }

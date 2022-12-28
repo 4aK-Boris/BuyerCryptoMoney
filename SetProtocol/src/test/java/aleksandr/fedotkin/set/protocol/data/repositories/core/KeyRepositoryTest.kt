@@ -30,7 +30,7 @@ class KeyRepositoryTest: BaseTestRepository() {
 
     @DefaultValue(name = "decodePublicKey")
     fun generatePublicKey(): PublicKey {
-        return repository.generatePairKey().public
+        return repository.generatePairKey().first
     }
 
     @TestFunction(name = "decodePublicKey")
@@ -66,7 +66,7 @@ class KeyRepositoryTest: BaseTestRepository() {
 
     @Test
     fun testKeyPairLength() {
-        val (publicKey, privateKey) = repository.generatePairKey().let { it.public to it.private }
+        val (publicKey, privateKey) = repository.generatePairKey()
         assertEquals(expected = publicKey.algorithm, actual = RSA)
         assertEquals(expected = privateKey.algorithm, actual = RSA)
     }
