@@ -5,8 +5,8 @@ import aleksandr.fedotkin.set.protocol.core.repository.RepositoryFunction
 import aleksandr.fedotkin.set.protocol.domain.repositories.core.KeyRepository
 import java.io.ByteArrayInputStream
 import java.security.KeyFactory
-import java.security.KeyPair
 import java.security.KeyPairGenerator
+import java.security.PrivateKey
 import java.security.PublicKey
 import java.security.cert.CertificateFactory
 import java.security.cert.X509Certificate
@@ -38,8 +38,8 @@ class KeyRepositoryImpl(
     }
 
     @RepositoryFunction
-    override fun generatePairKey(): KeyPair {
-        return keyPairGenerator.generateKeyPair()
+    override fun generatePairKey(): Pair<PublicKey, PrivateKey> {
+        return keyPairGenerator.generateKeyPair().let { it.public to it.private }
     }
 
     @RepositoryFunction
