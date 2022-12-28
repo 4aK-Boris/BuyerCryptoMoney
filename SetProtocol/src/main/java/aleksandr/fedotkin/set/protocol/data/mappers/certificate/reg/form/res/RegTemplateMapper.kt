@@ -1,41 +1,34 @@
 package aleksandr.fedotkin.set.protocol.data.mappers.certificate.reg.form.res
 
-import aleksandr.fedotkin.set.protocol.data.mappers.core.BigIntegerMapper
+import aleksandr.fedotkin.set.protocol.core.mapper.SetMapper
 import aleksandr.fedotkin.set.protocol.data.dto.certificate.reg.form.res.RegTemplate
+import aleksandr.fedotkin.set.protocol.data.mappers.core.BigIntegerMapper
 import aleksandr.fedotkin.set.protocol.domain.models.certificate.reg.form.res.RegTemplateModel
+import kotlinx.serialization.KSerializer
 
 class RegTemplateMapper(
     private val bigIntegerMapper: BigIntegerMapper,
     private val regFieldMapper: RegFieldMapper
-) {
+) : SetMapper<RegTemplateModel, RegTemplate> {
 
-    @JvmName("map_model_notnull")
-    fun map(model: RegTemplateModel): RegTemplate {
+    override val serializer: KSerializer<RegTemplate>
+        get() = RegTemplate.serializer()
+
+    override fun map(value: RegTemplateModel): RegTemplate {
         return RegTemplate(
-            regFormID = bigIntegerMapper.map(number = model.regFormID),
-            brandLogoURL = model.brandLogoURL,
-            cardLogoURL = model.cardLogoURL,
-            regFieldSeq = model.regFieldSeq.map { regFieldMapper.map(model = it) }
+            regFormID = bigIntegerMapper.map(value = value.regFormID),
+            brandLogoURL = value.brandLogoURL,
+            cardLogoURL = value.cardLogoURL,
+            regFieldSeq = value.regFieldSeq.map { regFieldMapper.map(value = it) }
         )
     }
 
-    @JvmName("map_dto_notnull")
-    fun map(dto: RegTemplate): RegTemplateModel {
+    override fun reverseMap(value: RegTemplate): RegTemplateModel {
         return RegTemplateModel(
-            regFormID = bigIntegerMapper.map(string = dto.regFormID),
-            brandLogoURL = dto.brandLogoURL,
-            cardLogoURL = dto.cardLogoURL,
-            regFieldSeq = dto.regFieldSeq.map { regFieldMapper.map(dto = it) }
+            regFormID = bigIntegerMapper.reverseMap(value = value.regFormID),
+            brandLogoURL = value.brandLogoURL,
+            cardLogoURL = value.cardLogoURL,
+            regFieldSeq = value.regFieldSeq.map { regFieldMapper.reverseMap(value = it) }
         )
-    }
-
-    @JvmName("map_model_nullable")
-    fun map(model: RegTemplateModel?): RegTemplate? {
-        return model?.let { map(model = it) }
-    }
-
-    @JvmName("map_dto_nullable")
-    fun map(dto: RegTemplate?): RegTemplateModel? {
-        return dto?.let { map(dto = it) }
     }
 }

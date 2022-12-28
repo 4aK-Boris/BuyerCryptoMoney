@@ -1,25 +1,30 @@
 package aleksandr.fedotkin.set.protocol.data.mappers.certificate.reg.form.res
 
-import aleksandr.fedotkin.set.protocol.data.mappers.core.ByteArrayMapper
+import aleksandr.fedotkin.set.protocol.core.mapper.SetMapper
 import aleksandr.fedotkin.set.protocol.data.dto.certificate.reg.form.res.RegFormRes
+import aleksandr.fedotkin.set.protocol.data.mappers.core.Base64Mapper
 import aleksandr.fedotkin.set.protocol.domain.models.certificate.reg.form.res.RegFormResModel
+import kotlinx.serialization.KSerializer
 
 class RegFormResMapper(
-    private val byteArrayMapper: ByteArrayMapper,
+    private val base64Mapper: Base64Mapper,
     private val regFormResTBSMapper: RegFormResTBSMapper
-) {
+) : SetMapper<RegFormResModel, RegFormRes> {
 
-    fun map(model: RegFormResModel): RegFormRes {
+    override val serializer: KSerializer<RegFormRes>
+        get() = RegFormRes.serializer()
+
+    override fun map(value: RegFormResModel): RegFormRes {
         return RegFormRes(
-            ca = byteArrayMapper.map(byteArray = model.ca),
-            regFormResTBS = regFormResTBSMapper.map(model = model.regFormResTBS)
+            signature = base64Mapper.map(value = value.signature),
+            regFormResTBS = regFormResTBSMapper.map(value = value.regFormResTBS)
         )
     }
 
-    fun map(dto: RegFormRes): RegFormResModel {
+    override fun reverseMap(value: RegFormRes): RegFormResModel {
         return RegFormResModel(
-            ca = byteArrayMapper.map(string = dto.ca),
-            regFormResTBS = regFormResTBSMapper.map(model = dto.regFormResTBS)
+            signature = base64Mapper.reverseMap(value = value.signature),
+            regFormResTBS = regFormResTBSMapper.reverseMap(value = value.regFormResTBS)
         )
     }
 }
