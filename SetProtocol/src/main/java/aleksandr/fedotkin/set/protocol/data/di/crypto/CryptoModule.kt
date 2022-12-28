@@ -5,7 +5,7 @@ import org.koin.dsl.module
 
 val cryptoModule = module {
 
-    includes(certificateModule, keyModule, signatureModule, cipherModule)
+    includes(certificateModule, keyModule, signatureModule, cipherModule, messageDigestModule)
 
     single {
         SecureRandom()

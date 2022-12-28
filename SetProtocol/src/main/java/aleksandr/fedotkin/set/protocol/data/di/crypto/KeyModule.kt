@@ -2,6 +2,7 @@ package aleksandr.fedotkin.set.protocol.data.di.crypto
 
 import aleksandr.fedotkin.set.protocol.core.CIPHER_ALGORITHM
 import aleksandr.fedotkin.set.protocol.core.RSA
+import aleksandr.fedotkin.set.protocol.core.SYMMETRIC_KEY_LENGTH
 import java.security.KeyFactory
 import java.security.KeyPair
 import java.security.KeyPairGenerator
@@ -17,11 +18,15 @@ val keyModule = module {
     }
 
     single<KeyGenerator> {
-        KeyGenerator.getInstance(CIPHER_ALGORITHM)
+        KeyGenerator.getInstance(CIPHER_ALGORITHM).apply {
+            init(SYMMETRIC_KEY_LENGTH, get())
+        }
     }
 
     single<KeyPairGenerator> {
-        KeyPairGenerator.getInstance(RSA)
+        KeyPairGenerator.getInstance(RSA).apply {
+            initialize(2048, get())
+        }
     }
 
     single<KeyPair> {
