@@ -1,17 +1,25 @@
 package aleksandr.fedotkin.set.protocol.data.mappers.error
 
+import aleksandr.fedotkin.set.protocol.core.DTO
+import aleksandr.fedotkin.set.protocol.core.Model
+import aleksandr.fedotkin.set.protocol.core.mapper.SetMapper
 import aleksandr.fedotkin.set.protocol.data.dto.error.UnsignedError
 import aleksandr.fedotkin.set.protocol.domain.models.error.UnsignedErrorModel
+import kotlinx.serialization.KSerializer
 
-class UnsignedErrorMapper(
-    private val errorTBSMapper: ErrorTBSMapper
-) {
+class UnsignedErrorMapper<T: Model, R: DTO>(
+    private val errorTBSMapper: ErrorTBSMapper<T, R>,
+    private val mapper: SetMapper<T, R>
+): SetMapper<UnsignedErrorModel<T>, UnsignedError<R>> {
 
-    fun <T, R> map(dto: UnsignedError<T>, map: (T) -> R): UnsignedErrorModel<R> {
-        return UnsignedErrorModel(errorTBSModel = errorTBSMapper.map(dto = dto.errorTBS, map = map))
+    override val serializer: KSerializer<UnsignedError<R>>
+        get() = UnsignedError.serializer(mapper.serializer)
+
+
+    override fun map(value: UnsignedErrorModel<T>): UnsignedError<R> {
+        return UnsignedError(errorTBS = errorTBSMapper.map(value = value.errorTBS))
     }
-
-    fun <T, R> map(model: UnsignedErrorModel<T>, map: (T) -> R): UnsignedError<R> {
-        return UnsignedError(errorTBS = errorTBSMapper.map(model = model.errorTBSModel, map = map))
+    override fun reverseMap(value: UnsignedError<R>): UnsignedErrorModel<T> {
+        return UnsignedErrorModel(errorTBS = errorTBSMapper.reverseMap(value = value.errorTBS))
     }
 }
