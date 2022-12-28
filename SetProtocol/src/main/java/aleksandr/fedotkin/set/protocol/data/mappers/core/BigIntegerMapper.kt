@@ -1,26 +1,15 @@
 package aleksandr.fedotkin.set.protocol.data.mappers.core
 
+import aleksandr.fedotkin.set.protocol.core.mapper.CoreMapper
 import java.math.BigInteger
 
-class BigIntegerMapper {
+class BigIntegerMapper: CoreMapper<BigInteger, String> {
 
-    @JvmName("map_notnull_number")
-    fun map(number: BigInteger): String {
-        return number.toString()
+    override fun map(value: BigInteger): String {
+        return value.toString()
     }
 
-    @JvmName("map_nullable_number")
-    fun map(number: BigInteger?): String? {
-        return number?.toString()
-    }
-
-    @JvmName("map_notnull_string")
-    fun map(string: String): BigInteger {
-        return string.toBigInteger()
-    }
-
-    @JvmName("map_nullable_string")
-    fun map(string: String?): BigInteger? {
-        return string?.toBigInteger()
+    override fun reverseMap(value: String): BigInteger {
+        return value.toBigInteger()
     }
 }

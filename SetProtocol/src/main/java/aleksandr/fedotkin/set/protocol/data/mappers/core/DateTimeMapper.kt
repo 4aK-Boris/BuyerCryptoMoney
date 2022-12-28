@@ -1,27 +1,16 @@
 package aleksandr.fedotkin.set.protocol.data.mappers.core
 
-import java.time.LocalDate
+import aleksandr.fedotkin.set.protocol.core.mapper.CoreMapper
 import java.time.LocalDateTime
-import kotlinx.datetime.toJavaLocalDate
 import kotlinx.datetime.toJavaLocalDateTime
-import kotlinx.datetime.toKotlinLocalDate
 import kotlinx.datetime.toKotlinLocalDateTime
 
-class DateTimeMapper {
-
-    fun map(dateTime: LocalDateTime): kotlinx.datetime.LocalDateTime {
-        return dateTime.toKotlinLocalDateTime()
+class DateTimeMapper: CoreMapper<LocalDateTime, kotlinx.datetime.LocalDateTime> {
+    override fun map(value: LocalDateTime): kotlinx.datetime.LocalDateTime {
+        return value.toKotlinLocalDateTime()
     }
 
-    fun map(dateTime: kotlinx.datetime.LocalDateTime): LocalDateTime {
-        return dateTime.toJavaLocalDateTime()
-    }
-
-    fun map(date: LocalDate): kotlinx.datetime.LocalDate {
-        return date.toKotlinLocalDate()
-    }
-
-    fun map(date: kotlinx.datetime.LocalDate): LocalDate {
-        return date.toJavaLocalDate()
+    override fun reverseMap(value: kotlinx.datetime.LocalDateTime): LocalDateTime {
+        return value.toJavaLocalDateTime()
     }
 }

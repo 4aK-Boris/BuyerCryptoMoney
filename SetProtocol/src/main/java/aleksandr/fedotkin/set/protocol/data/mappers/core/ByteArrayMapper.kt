@@ -1,27 +1,13 @@
 package aleksandr.fedotkin.set.protocol.data.mappers.core
 
-import io.ktor.util.decodeBase64Bytes
-import io.ktor.util.encodeBase64
+import aleksandr.fedotkin.set.protocol.core.mapper.CoreMapper
 
-class ByteArrayMapper {
-
-    @JvmName("map_notnull_bytearray")
-    fun map(byteArray: ByteArray): String {
-        return byteArray.encodeBase64()
+class ByteArrayMapper: CoreMapper<String, ByteArray> {
+    override fun map(value: String): ByteArray {
+        return value.encodeToByteArray()
     }
 
-    @JvmName("map_notnull_string")
-    fun map(string: String): ByteArray {
-        return string.decodeBase64Bytes()
-    }
-
-    @JvmName("map_nullable_bytearray")
-    fun map(byteArray: ByteArray?): String? {
-        return byteArray?.encodeBase64()
-    }
-
-    @JvmName("map_nullable_string")
-    fun map(string: String?): ByteArray? {
-        return string?.decodeBase64Bytes()
+    override fun reverseMap(value: ByteArray): String {
+        return value.decodeToString()
     }
 }
