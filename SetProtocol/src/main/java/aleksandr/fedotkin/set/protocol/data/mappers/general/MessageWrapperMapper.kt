@@ -1,27 +1,33 @@
 package aleksandr.fedotkin.set.protocol.data.mappers.general
 
-import aleksandr.fedotkin.set.protocol.data.dto.DTO
+import aleksandr.fedotkin.set.protocol.core.DTO
+import aleksandr.fedotkin.set.protocol.core.Model
+import aleksandr.fedotkin.set.protocol.core.mapper.SetMapper
 import aleksandr.fedotkin.set.protocol.data.dto.general.MessageWrapper
-import aleksandr.fedotkin.set.protocol.domain.models.Model
 import aleksandr.fedotkin.set.protocol.domain.models.general.MessageWrapperModel
+import kotlinx.serialization.KSerializer
 
-class MessageWrapperMapper(
-    private val messageHeaderMapper: MessageHeaderMapper
-) {
+class MessageWrapperMapper<T: Model, R: DTO>(
+    private val messageHeaderMapper: MessageHeaderMapper,
+    private val mapper: SetMapper<T, R>
+): SetMapper<MessageWrapperModel<T>, MessageWrapper<R>> {
 
-    fun <T: Model, R: DTO> map(model: MessageWrapperModel<T>, map: (T) -> R): MessageWrapper<R> {
+    override val serializer: KSerializer<MessageWrapper<R>>
+        get() = MessageWrapper.serializer(mapper.serializer)
+
+    override fun map(value: MessageWrapperModel<T>): MessageWrapper<R> {
         return MessageWrapper(
-            messageHeader = messageHeaderMapper.map(model = model.messageHeaderModel),
-            message = map(model.messageModel),
-            mWExtension = model.mWExtension
+            messageHeader = messageHeaderMapper.map(value = value.messageHeaderModel),
+            message = mapper.map(value = value.messageModel),
+            mWExtension = value.mWExtension
         )
     }
 
-    fun <T: Model, R: DTO> map(dto: MessageWrapper<R>, map: (R) -> T): MessageWrapperModel<T> {
+    override fun reverseMap(value: MessageWrapper<R>): MessageWrapperModel<T> {
         return MessageWrapperModel(
-            messageHeaderModel = messageHeaderMapper.map(dto = dto.messageHeader),
-            messageModel = map(dto.message),
-            mWExtension = dto.mWExtension
+            messageHeaderModel = messageHeaderMapper.reverseMap(value = value.messageHeader),
+            messageModel = mapper.reverseMap(value = value.message),
+            mWExtension = value.mWExtension
         )
     }
 }

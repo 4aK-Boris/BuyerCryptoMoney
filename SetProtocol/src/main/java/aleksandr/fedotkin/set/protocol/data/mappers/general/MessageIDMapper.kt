@@ -1,30 +1,31 @@
 package aleksandr.fedotkin.set.protocol.data.mappers.general
 
+import aleksandr.fedotkin.set.protocol.core.mapper.SetMapper
 import aleksandr.fedotkin.set.protocol.data.dto.general.MessageID
 import aleksandr.fedotkin.set.protocol.data.mappers.core.BigIntegerMapper
 import aleksandr.fedotkin.set.protocol.domain.models.general.MessageIDModel
+import kotlinx.serialization.KSerializer
 
 class MessageIDMapper(
     private val bigIntegerMapper: BigIntegerMapper
-) {
+) : SetMapper<MessageIDModel, MessageID> {
 
-    fun map(model: MessageIDModel?): MessageID? {
-        return model?.let {
-            return MessageID(
-                lIdC = bigIntegerMapper.map(number = it.lIdC),
-                lIdM = bigIntegerMapper.map(number = it.lIdM),
-                xId = bigIntegerMapper.map(number = it.xId)
-            )
-        }
+    override val serializer: KSerializer<MessageID>
+        get() = MessageID.serializer()
+
+    override fun map(value: MessageIDModel): MessageID {
+        return MessageID(
+            lIdC = value.lIdC?.let { bigIntegerMapper.map(value = it) },
+            lIdM = value.lIdM?.let { bigIntegerMapper.map(value = it) },
+            xId = value.xId?.let { bigIntegerMapper.map(value = it) }
+        )
     }
 
-    fun map(dto: MessageID?): MessageIDModel? {
-        return dto?.let {
-            MessageIDModel(
-                lIdC = bigIntegerMapper.map(string = it.lIdC),
-                lIdM = bigIntegerMapper.map(string = it.lIdM),
-                xId = bigIntegerMapper.map(string = it.xId)
-            )
-        }
+    override fun reverseMap(value: MessageID): MessageIDModel {
+        return MessageIDModel(
+            lIdC = value.lIdC?.let { bigIntegerMapper.reverseMap(value = it) },
+            lIdM = value.lIdM?.let { bigIntegerMapper.reverseMap(value = it) },
+            xId = value.xId?.let { bigIntegerMapper.reverseMap(value = it) }
+        )
     }
 }
