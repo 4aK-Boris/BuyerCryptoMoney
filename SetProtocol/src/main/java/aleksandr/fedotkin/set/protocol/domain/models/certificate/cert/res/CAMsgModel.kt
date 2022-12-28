@@ -1,7 +1,7 @@
 package aleksandr.fedotkin.set.protocol.domain.models.certificate.cert.res
 
 import aleksandr.fedotkin.set.protocol.data.dto.certificate.cert.res.CardCurrency
-import aleksandr.fedotkin.set.protocol.domain.models.Model
+import aleksandr.fedotkin.set.protocol.core.Model
 
 data class CAMsgModel(
     val cardLogoURL: String?,
