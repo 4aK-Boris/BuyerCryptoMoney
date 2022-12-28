@@ -1,25 +1,24 @@
+val koinVersion = "3.2.2"
+val bouncyCastleVersion = "1.72"
+
 plugins {
-    id("org.jetbrains.kotlin.jvm")
-    kotlin(Dependencies.Plugins.serialization) version Dependencies.Kotlin.version
+    kotlin("jvm") version "1.7.20"
+    kotlin("plugin.serialization") version "1.7.20"
 }
 
 dependencies {
 
-    implementation(Dependencies.Koin.koinCore)
-    implementation(Dependencies.Koin.koinLogger)
+    implementation("io.insert-koin:koin-ktor:$koinVersion")
+    implementation("io.insert-koin:koin-logger-slf4j:$koinVersion")
 
-    implementation(Dependencies.Kotlin.serialization)
-    implementation(Dependencies.Kotlin.coroutines)
-    implementation(Dependencies.Kotlin.datetime)
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.1")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
+    implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.4.0")
 
-    implementation(Dependencies.Ktor.client)
-    implementation(Dependencies.Ktor.negotiation)
-    implementation(Dependencies.Ktor.json)
-    implementation(Dependencies.Ktor.logging)
-    implementation(Dependencies.Ktor.websockets)
-    implementation(project(":Network"))
+    implementation("org.bouncycastle:bcprov-jdk18on:$bouncyCastleVersion")
+    implementation("org.bouncycastle:bcpkix-jdk18on:$bouncyCastleVersion")
+    implementation("org.bouncycastle:bcutil-jdk18on:$bouncyCastleVersion")
 
-    testImplementation(Dependencies.Koin.koinJUnit)
-
-    testImplementation(Dependencies.JUnit.jUnit)
+    testImplementation("io.insert-koin:koin-test-junit4:$koinVersion")
+    testImplementation("junit:junit:4.13.2")
 }
