@@ -1,6 +1,6 @@
 package aleksandr.fedotkin.set.protocol.domain.models.certificate.cert.req
 
-import aleksandr.fedotkin.set.protocol.domain.models.Model
+import aleksandr.fedotkin.set.protocol.core.Model
 
 data class IDDataModel(
     val merchantAcquirerID: MerchantAcquirerIDModel,
