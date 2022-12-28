@@ -1,6 +1,6 @@
 package aleksandr.fedotkin.set.protocol.domain.models.error
 
-import aleksandr.fedotkin.set.protocol.domain.models.Model
+import aleksandr.fedotkin.set.protocol.core.Model
 
 data class SignedErrorModel(val signature: ByteArray): Model {
     override fun equals(other: Any?): Boolean {
