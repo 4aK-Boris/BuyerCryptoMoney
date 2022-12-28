@@ -1,5 +1,8 @@
 package aleksandr.fedotkin.set.protocol.data.di.mapper
 
+import aleksandr.fedotkin.set.protocol.core.DTO
+import aleksandr.fedotkin.set.protocol.core.Model
+import aleksandr.fedotkin.set.protocol.core.mapper.SetMapper
 import aleksandr.fedotkin.set.protocol.data.mappers.general.MessageHeaderMapper
 import aleksandr.fedotkin.set.protocol.data.mappers.general.MessageIDMapper
 import aleksandr.fedotkin.set.protocol.data.mappers.general.MessageWrapperMapper
@@ -13,9 +16,10 @@ val generalMapperModule = module {
         )
     }
 
-    factory {
+    factory { (mapper: SetMapper<Model, DTO>) ->
         MessageWrapperMapper(
-            messageHeaderMapper = get()
+            messageHeaderMapper = get(),
+            mapper = mapper
         )
     }
 
