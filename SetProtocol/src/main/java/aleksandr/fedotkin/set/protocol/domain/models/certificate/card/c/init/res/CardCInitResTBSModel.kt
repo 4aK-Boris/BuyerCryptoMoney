@@ -1,6 +1,7 @@
 package aleksandr.fedotkin.set.protocol.domain.models.certificate.card.c.init.res
 
-import aleksandr.fedotkin.set.protocol.domain.models.Model
+import aleksandr.fedotkin.set.protocol.core.Model
+import aleksandr.fedotkin.set.protocol.core.contentEquals
 import java.math.BigInteger
 
 data class CardCInitResTBSModel(
@@ -23,8 +24,8 @@ data class CardCInitResTBSModel(
         if (challEE != other.challEE) return false
         if (lidCA != other.lidCA) return false
         if (!caeThumb.contentEquals(other.caeThumb)) return false
-        if (brandCRLIdentifier != other.brandCRLIdentifier) return false
-        if (thumbs != other.thumbs) return false
+        if (!brandCRLIdentifier.contentEquals(other.brandCRLIdentifier)) return false
+        if (!thumbs.contentEquals(other.thumbs)) return false
 
         return true
     }
