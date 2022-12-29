@@ -6,6 +6,8 @@ import aleksandr.fedotkin.buyercryptomoney.core.exception.InvalidFormatMonthExce
 import aleksandr.fedotkin.buyercryptomoney.core.exception.InvalidFormatNumberCardException
 import aleksandr.fedotkin.buyercryptomoney.core.exception.InvalidFormatYearException
 import aleksandr.fedotkin.buyercryptomoney.domain.model.CardModel
+import aleksandr.fedotkin.core.core.BaseUseCase
+import aleksandr.fedotkin.core.core.Result
 import androidx.core.text.isDigitsOnly
 
 class AccuracyUseCase : BaseUseCase() {

@@ -4,7 +4,6 @@ import aleksandr.fedotkin.buyercryptomoney.data.di.mapperModule
 import aleksandr.fedotkin.buyercryptomoney.data.di.repositoriesModule
 import aleksandr.fedotkin.buyercryptomoney.data.network.NetworkAPI
 import aleksandr.fedotkin.buyercryptomoney.data.network.NetworkAPIImpl
-import aleksandr.fedotkin.buyercryptomoney.domain.di.errorModule
 import aleksandr.fedotkin.buyercryptomoney.domain.di.useCasesModule
 import aleksandr.fedotkin.buyercryptomoney.presentation.di.mockModule
 import aleksandr.fedotkin.buyercryptomoney.presentation.di.viewModelModule
@@ -20,13 +19,10 @@ val appModule = module {
         repositoriesModule,
         mapperModule,
         mockModule,
-        errorModule,
         coreModule
     )
 
-    single {
-        single<NetworkAPI> {
-            NetworkAPIImpl(ktorClient = get())
-        }
+    single<NetworkAPI> {
+        NetworkAPIImpl(ktorClient = get())
     }
 }
