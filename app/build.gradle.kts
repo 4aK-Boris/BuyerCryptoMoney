@@ -76,6 +76,8 @@ dependencies {
 
     implementation(project(Dependencies.Modules.core))
     implementation(project(Dependencies.Modules.network))
+    implementation(project(Dependencies.Modules.setProtocol))
+
 
     testImplementation(Dependencies.JUnit.jUnit)
 

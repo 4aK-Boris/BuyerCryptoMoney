@@ -34,7 +34,6 @@ val certReqMapperModule = module {
             byteArrayMapper = get(),
             dateTimeMapper = get(),
             idDataMapper = get(),
-            regFormItemsMapper = get(),
             publicKeySorEMapper = get(),
             caBackKeyDataMapper = get()
         )
@@ -61,7 +60,6 @@ val certReqMapperModule = module {
     factory {
         PublicKeySorEMapper(
             byteArrayMapper = get(),
-            keyRepository = get()
         )
     }
 

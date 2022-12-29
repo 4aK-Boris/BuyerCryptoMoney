@@ -1,8 +1,8 @@
 package aleksandr.fedotkin.set.protocol.domain.repositories.crypto
 
-import aleksandr.fedotkin.set.protocol.data.dto.DTO
+import aleksandr.fedotkin.set.protocol.core.DTO
+import aleksandr.fedotkin.set.protocol.core.Model
 import aleksandr.fedotkin.set.protocol.data.dto.crypto.EncX
-import aleksandr.fedotkin.set.protocol.domain.models.Model
 import aleksandr.fedotkin.set.protocol.domain.models.crypto.EncXModel
 import java.security.PrivateKey
 import java.security.cert.X509Certificate
