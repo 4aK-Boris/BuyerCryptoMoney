@@ -74,6 +74,8 @@ dependencies {
     implementation(Dependencies.Kotlin.serialization)
     implementation(Dependencies.Kotlin.coroutines)
 
+    implementation(project(Dependencies.Modules.core))
+
     testImplementation(Dependencies.JUnit.jUnit)
 
     androidTestImplementation(Dependencies.JUnit.extJUnit)

@@ -1,7 +1,7 @@
 package aleksandr.fedotkin.buyercryptomoney.presentation.ui.screens.card
 
 import aleksandr.fedotkin.buyercryptomoney.R
-import aleksandr.fedotkin.buyercryptomoney.presentation.ui.theme.Yellow
+import aleksandr.fedotkin.core.theme.Yellow
 import aleksandr.fedotkin.buyercryptomoney.presentation.ui.visual.transformation.BankCardCVCVisualTransformation
 import aleksandr.fedotkin.buyercryptomoney.presentation.ui.visual.transformation.BankCardMonthAndYearVisualTransformation
 import aleksandr.fedotkin.buyercryptomoney.presentation.ui.visual.transformation.BankCardNumberVisualTransformation

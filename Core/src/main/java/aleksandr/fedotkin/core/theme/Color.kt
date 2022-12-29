@@ -1,4 +1,4 @@
-package aleksandr.fedotkin.buyercryptomoney.presentation.ui.theme
+package aleksandr.fedotkin.core.theme
 
 import androidx.compose.ui.graphics.Color
 

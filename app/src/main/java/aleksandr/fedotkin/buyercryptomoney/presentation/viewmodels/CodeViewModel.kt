@@ -1,9 +1,7 @@
 package aleksandr.fedotkin.buyercryptomoney.presentation.viewmodels
 
-import aleksandr.fedotkin.buyercryptomoney.core.BaseViewModel
-import aleksandr.fedotkin.buyercryptomoney.core.ErrorHandler
 import aleksandr.fedotkin.buyercryptomoney.core.runOnIO
-import aleksandr.fedotkin.buyercryptomoney.domain.common.INVALID_CODE
+import aleksandr.fedotkin.buyercryptomoney.core.exception.INVALID_CODE
 import aleksandr.fedotkin.buyercryptomoney.domain.model.BuyModel
 import aleksandr.fedotkin.buyercryptomoney.domain.model.ProductModel
 import aleksandr.fedotkin.buyercryptomoney.domain.usecases.AccuracyUseCase

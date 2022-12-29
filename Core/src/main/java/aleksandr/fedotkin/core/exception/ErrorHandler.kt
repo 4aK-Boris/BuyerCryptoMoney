@@ -1,8 +1,5 @@
-package aleksandr.fedotkin.buyercryptomoney.core
+package aleksandr.fedotkin.core.exception
 
-import aleksandr.fedotkin.buyercryptomoney.domain.common.BAD_REQUEST
-import aleksandr.fedotkin.buyercryptomoney.domain.common.INTERNAL_SERVER_ERROR
-import aleksandr.fedotkin.buyercryptomoney.domain.common.NO_INTERNET
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 

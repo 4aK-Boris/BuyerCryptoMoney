@@ -1,12 +1,10 @@
 package aleksandr.fedotkin.buyercryptomoney.domain.usecases
 
-import aleksandr.fedotkin.buyercryptomoney.domain.common.BaseUseCase
-import aleksandr.fedotkin.buyercryptomoney.domain.common.InvalidCode
-import aleksandr.fedotkin.buyercryptomoney.domain.common.InvalidFormatCvcException
-import aleksandr.fedotkin.buyercryptomoney.domain.common.InvalidFormatMonthException
-import aleksandr.fedotkin.buyercryptomoney.domain.common.InvalidFormatNumberCardException
-import aleksandr.fedotkin.buyercryptomoney.domain.common.InvalidFormatYearException
-import aleksandr.fedotkin.buyercryptomoney.domain.common.Result
+import aleksandr.fedotkin.buyercryptomoney.core.exception.InvalidCode
+import aleksandr.fedotkin.buyercryptomoney.core.exception.InvalidFormatCvcException
+import aleksandr.fedotkin.buyercryptomoney.core.exception.InvalidFormatMonthException
+import aleksandr.fedotkin.buyercryptomoney.core.exception.InvalidFormatNumberCardException
+import aleksandr.fedotkin.buyercryptomoney.core.exception.InvalidFormatYearException
 import aleksandr.fedotkin.buyercryptomoney.domain.model.CardModel
 import androidx.core.text.isDigitsOnly
 
