@@ -1,4 +1,4 @@
-package aleksandr.fedotkin.buyercryptomoney.data.network.plugins
+package aleksandr.fedotkin.network.plugins
 
 import io.ktor.client.HttpClientConfig
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
