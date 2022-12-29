@@ -13,6 +13,6 @@ class TestRepositoryImpl(
     }
 
     override suspend fun createModel(): TestModel {
-        return TestModel(number = generateNewNumber(), array = generateByteArray(size = 128))
+        return TestModel(number = generateNewNumber(), array = generateByteArray(size = 32))
     }
 }
