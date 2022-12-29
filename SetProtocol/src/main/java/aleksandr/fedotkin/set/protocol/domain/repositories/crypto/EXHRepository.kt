@@ -11,5 +11,5 @@ interface EXHRepository<T : Model, S : Model>: BaseSetRepository<EXHModel, EXH> 
 
     suspend fun encrypt(publicKey: PublicKey, data: T, secondaryData: S): EXHModel
 
-    suspend fun decrypt(privateKey: PrivateKey, model: EXHModel, ): Pair<T, S>
+    suspend fun decrypt(privateKey: PrivateKey, model: EXHModel): Pair<T, S>
 }
