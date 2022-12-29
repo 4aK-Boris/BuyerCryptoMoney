@@ -75,6 +75,7 @@ dependencies {
     implementation(Dependencies.Kotlin.coroutines)
 
     implementation(project(Dependencies.Modules.core))
+    implementation(project(Dependencies.Modules.network))
 
     testImplementation(Dependencies.JUnit.jUnit)
 

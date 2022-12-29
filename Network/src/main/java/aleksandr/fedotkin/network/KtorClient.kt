@@ -1,10 +1,9 @@
-package aleksandr.fedotkin.buyercryptomoney.data.network
+package aleksandr.fedotkin.network
 
-import aleksandr.fedotkin.buyercryptomoney.domain.common.BadRequest
-import aleksandr.fedotkin.buyercryptomoney.domain.common.InternalServerError
-import aleksandr.fedotkin.buyercryptomoney.domain.common.NoInternet
-import aleksandr.fedotkin.buyercryptomoney.domain.common.UnknownNetworkException
-import android.util.Log
+import aleksandr.fedotkin.network.core.exception.BadRequest
+import aleksandr.fedotkin.network.core.exception.InternalServerError
+import aleksandr.fedotkin.network.core.exception.NoInternet
+import aleksandr.fedotkin.network.core.exception.UnknownNetworkException
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.request.get
@@ -29,7 +28,6 @@ class KtorClient(private val client: HttpClient) {
     } catch (e: UnknownNetworkException) {
         throw NoInternet()
     } catch (e: Exception) {
-        Log.d("LOG_TAG", e.toString())
         throw NoInternet()
     }
 

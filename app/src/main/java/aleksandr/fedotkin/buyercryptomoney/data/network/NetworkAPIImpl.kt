@@ -13,6 +13,7 @@ import aleksandr.fedotkin.buyercryptomoney.data.dto.BuyDTO
 import aleksandr.fedotkin.buyercryptomoney.data.dto.BuyerDTO
 import aleksandr.fedotkin.buyercryptomoney.data.dto.ProductDTO
 import aleksandr.fedotkin.buyercryptomoney.data.dto.SellerDTO
+import aleksandr.fedotkin.network.KtorClient
 
 class NetworkAPIImpl(private val ktorClient: KtorClient): NetworkAPI {
 
