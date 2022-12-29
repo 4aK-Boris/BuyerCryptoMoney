@@ -11,6 +11,8 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/Core" />
+            <option value="$PROJECT_DIR$/Network" />
+            <option value="$PROJECT_DIR$/SetProtocol" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/buildSrc" />
           </set>

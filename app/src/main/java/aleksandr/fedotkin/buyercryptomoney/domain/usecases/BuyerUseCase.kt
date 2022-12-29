@@ -2,6 +2,8 @@ package aleksandr.fedotkin.buyercryptomoney.domain.usecases
 
 import aleksandr.fedotkin.buyercryptomoney.domain.model.BuyerModel
 import aleksandr.fedotkin.buyercryptomoney.domain.repositories.BuyerRepository
+import aleksandr.fedotkin.core.core.BaseUseCase
+import aleksandr.fedotkin.core.core.Result
 
 class BuyerUseCase(
     private val buyerRepository: BuyerRepository

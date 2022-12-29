@@ -2,7 +2,7 @@ val koinVersion = "3.2.2"
 val bouncyCastleVersion = "1.72"
 
 plugins {
-    kotlin("jvm") version "1.7.20"
+    id("org.jetbrains.kotlin.jvm")
     kotlin("plugin.serialization") version "1.7.20"
 }
 

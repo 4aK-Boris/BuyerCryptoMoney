@@ -22,6 +22,7 @@ class CardCInitResRepositoryImpl(
         checkSignature(cardCInitResModel = cardCInitResModel)
         checkRRPID(rrpid, cardCInitReqModel, cardCInitResModel)
         checkChallEE(cardCInitReqModel, cardCInitResModel)
+        checkLIDEE(cardCInitReqModel, cardCInitResModel)
         checkThumbs(cardCInitReqModel, cardCInitResModel)
     }
 
@@ -65,7 +66,20 @@ class CardCInitResRepositoryImpl(
                 secondChallEE = cardCInitResModel.cardCInitResTBS.challEE
             )
         ) {
-            throw SetExternalException(errorCode = ErrorCode.UnknownXID)
+            throw SetExternalException(errorCode = ErrorCode.ChallengeMismatch)
+        }
+    }
+
+    private suspend fun checkLIDEE(
+        cardCInitReqModel: CardCInitReqModel,
+        cardCInitResModel: CardCInitResModel
+    ) {
+        if (!cardCInitResTBSRepository.checkLIDEE(
+                lidEE = cardCInitReqModel.lidEE,
+                secondLIDEE = cardCInitResModel.cardCInitResTBS.lidEE
+            )
+        ) {
+            throw SetExternalException(errorCode = ErrorCode.ChallengeMismatch)
         }
     }
 
@@ -78,7 +92,7 @@ class CardCInitResRepositoryImpl(
                 secondThumbs = cardCInitResModel.cardCInitResTBS.thumbs
             )
         ) {
-            throw SetExternalException(errorCode = ErrorCode.UnknownXID)
+            throw SetExternalException(errorCode = ErrorCode.ThumbsMismatch)
         }
     }
 }

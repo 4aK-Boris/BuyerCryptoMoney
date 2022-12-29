@@ -1,81 +1,30 @@
 package aleksandr.fedotkin.set.protocol.data.repositories.crypto
 
-//open class OAEP3RepositoryImpl(
-//    private val oaepMapper: OAEPMapper,
-//    private val cipherRepository: CipherRepository
-//) : OAEP3Repository {
-//
-//    override suspend fun <T : Model> createOAEPModel(
-//        secretKey: SecretKey,
-//        hash: ByteArray,
-//        p: T
-//    ): OAEP3Model<T> {
-//        return OAEP3Model(
-//            secretKey = secretKey,
-//            hash = hash,
-//            p = p
-//        )
-//    }
-//
-//    override suspend fun <T : Model, R : DTO> createAndEncryptOAEPModel(
-//        secretKey: SecretKey,
-//        hash: ByteArray,
-//        p: T,
-//        map: (T) -> R,
-//        serializer: KSerializer<R>,
-//        publicKey: PublicKey
-//    ): ByteArray {
-//        return encryptOAEPModel(
-//            oaepModel = createOAEPModel(secretKey = secretKey, hash = hash, p = p),
-//            map = map,
-//            serializer = serializer,
-//            publicKey = publicKey
-//        )
-//    }
-//
-//    override suspend fun <T : Model, R : DTO> encryptOAEPModel(
-//        oaepModel: OAEP3Model<T>,
-//        map: (T) -> R,
-//        serializer: KSerializer<R>,
-//        publicKey: PublicKey
-//    ): ByteArray {
-//        return cipherRepository.asymmetricEncrypt(
-//            data = convertToDTO(
-//                oaepModel = oaepModel,
-//                map = map,
-//                serializer = serializer
-//            ), publicKey = publicKey, serializer = OAEP3.serializer(serializer)
-//        )
-//    }
-//
-//    override suspend fun <T : Model, R : DTO> decryptOAEPModel(
-//        cipherOAEP: ByteArray,
-//        privateKey: PrivateKey,
-//        serializer: KSerializer<R>,
-//        map: (R) -> T
-//    ): OAEP3Model<T> {
-//        return convertToModel(
-//            oaep = cipherRepository.asymmetricDecrypt(
-//                data = cipherOAEP,
-//                privateKey = privateKey,
-//                deserializer = OAEP3.serializer(serializer)
-//            ), map = map, serializer = serializer
-//        )
-//    }
-//
-//    override fun <T : Model, R : DTO> convertToModel(
-//        oaep: OAEP3<R>,
-//        map: (R) -> T,
-//        serializer: KSerializer<R>
-//    ): OAEP3Model<T> {
-//        return oaepMapper.map(dto = oaep, map = map)
-//    }
-//
-//    override fun <T : Model, R : DTO> convertToDTO(
-//        oaepModel: OAEP3Model<T>,
-//        map: (T) -> R,
-//        serializer: KSerializer<R>
-//    ): OAEP3<R> {
-//        return oaepMapper.map(model = oaepModel, map = map)
-//    }
-//}
+import aleksandr.fedotkin.set.protocol.core.DTO
+import aleksandr.fedotkin.set.protocol.core.Model
+import aleksandr.fedotkin.set.protocol.data.dto.crypto.oaep.OAEP3
+import aleksandr.fedotkin.set.protocol.data.mappers.crypto.oaep.OAEP3Mapper
+import aleksandr.fedotkin.set.protocol.domain.models.crypto.oaep.OAEP3Model
+import aleksandr.fedotkin.set.protocol.domain.repositories.core.AsymmetricCipherRepository
+import aleksandr.fedotkin.set.protocol.domain.repositories.crypto.OAEP3Repository
+import java.security.PrivateKey
+import java.security.PublicKey
+import javax.crypto.SecretKey
+
+class OAEP3RepositoryImpl<T: Model, R: DTO>(
+    override val mapper: OAEP3Mapper<T, R>,
+    private val cipherRepository: AsymmetricCipherRepository<OAEP3Model<T>, OAEP3<R>>
+): OAEP3Repository<T, R> {
+
+    override suspend fun create(secretKey: SecretKey, data: T): OAEP3Model<T> {
+        return OAEP3Model(secretKey = secretKey, data = data)
+    }
+
+    override suspend fun encrypt(model: OAEP3Model<T>, publicKey: PublicKey): ByteArray {
+        return cipherRepository.encrypt(data = model, publicKey = publicKey)
+    }
+
+    override suspend fun decrypt(data: ByteArray, privateKey: PrivateKey): OAEP3Model<T> {
+        return cipherRepository.decryptModel(data = data, privateKey = privateKey)
+    }
+}

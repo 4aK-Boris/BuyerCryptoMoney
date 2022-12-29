@@ -3,6 +3,8 @@ package aleksandr.fedotkin.buyercryptomoney.domain.usecases
 import aleksandr.fedotkin.buyercryptomoney.core.exception.InvalidCode
 import aleksandr.fedotkin.buyercryptomoney.domain.model.BuyModel
 import aleksandr.fedotkin.buyercryptomoney.domain.repositories.BuyRepository
+import aleksandr.fedotkin.core.core.BaseUseCase
+import aleksandr.fedotkin.core.core.Result
 
 class BuyUseCase(
     private val buyRepository: BuyRepository

@@ -52,6 +52,10 @@ class CardCInitResTBSRepositoryImpl(
         return challEE == secondChallEE
     }
 
+    override suspend fun checkLIDEE(lidEE: BigInteger, secondLIDEE: BigInteger): Boolean {
+        return lidEE == secondLIDEE
+    }
+
     override suspend fun checkThumbs(thumbs: List<ByteArray>, secondThumbs: List<ByteArray>): Boolean {
         return thumbs.contentEquals(other = secondThumbs)
     }

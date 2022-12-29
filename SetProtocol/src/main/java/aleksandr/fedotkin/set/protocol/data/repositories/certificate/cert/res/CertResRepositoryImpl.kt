@@ -11,37 +11,37 @@ import aleksandr.fedotkin.set.protocol.domain.repositories.crypto.EncKRepository
 import java.security.cert.X509Certificate
 import javax.crypto.SecretKey
 
-class CertResRepositoryImpl(
-    private val certResMapper: CertResMapper,
-    private val encKRepository: EncKRepository,
-    private val certResDataRepository: CertResDataRepository
-) : CertResRepository {
-
-    override val serializer = CertRes.serializer()
-
-    override val convertToDTO: (CertResModel) -> CertRes = certResMapper::map
-
-    override val convertToModel: (CertRes) -> CertResModel = certResMapper::map
-
-    override suspend fun checkSignature(
-        signature: ByteArray,
-        model: CertResDataModel,
-        certificate: X509Certificate
-    ) {
-        certResDataRepository.checkSignature(signature, model, certificate)
-    }
-
-    override suspend fun decryptData(
-        encKModel: EncKModel,
-        certificate: X509Certificate,
-        secretKey: SecretKey
-    ): CertResDataModel {
-        return encKRepository.decrypt(
-            model = encKModel,
-            secretKey = secretKey,
-            certificate = certificate,
-            serializer = certResDataRepository.serializer,
-            map = certResDataRepository.convertToModel
-        )
-    }
-}
+//class CertResRepositoryImpl(
+//    private val certResMapper: CertResMapper,
+//    private val encKRepository: EncKRepository,
+//    private val certResDataRepository: CertResDataRepository
+//) : CertResRepository {
+//
+//    override val serializer = CertRes.serializer()
+//
+//    override val convertToDTO: (CertResModel) -> CertRes = certResMapper::map
+//
+//    override val convertToModel: (CertRes) -> CertResModel = certResMapper::map
+//
+//    override suspend fun checkSignature(
+//        signature: ByteArray,
+//        model: CertResDataModel,
+//        certificate: X509Certificate
+//    ) {
+//        certResDataRepository.checkSignature(signature, model, certificate)
+//    }
+//
+//    override suspend fun decryptData(
+//        encKModel: EncKModel,
+//        certificate: X509Certificate,
+//        secretKey: SecretKey
+//    ): CertResDataModel {
+//        return encKRepository.decrypt(
+//            model = encKModel,
+//            secretKey = secretKey,
+//            certificate = certificate,
+//            serializer = certResDataRepository.serializer,
+//            map = certResDataRepository.convertToModel
+//        )
+//    }
+//}

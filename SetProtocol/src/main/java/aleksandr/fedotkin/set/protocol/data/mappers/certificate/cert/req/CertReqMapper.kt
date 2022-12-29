@@ -10,17 +10,17 @@ class CertReqMapper(
     private val encXMapper: EncXMapper
 ) {
 
-    fun map(model: CertReqModel): CertReq {
-        return CertReq(
-            enc = encMapper.map(model = model.enc),
-            encX = encXMapper.map(model = model.encX)
-        )
-    }
-
-    fun map(dto: CertReq): CertReqModel {
-        return CertReqModel(
-            enc = encMapper.map(dto = dto.enc),
-            encX = encXMapper.map(dto = dto.encX)
-        )
-    }
+//    fun map(model: CertReqModel): CertReq {
+//        return CertReq(
+//            enc = encMapper.map(model = model.enc),
+//            encX = encXMapper.map(model = model.encX)
+//        )
+//    }
+//
+//    fun map(dto: CertReq): CertReqModel {
+//        return CertReqModel(
+//            enc = encMapper.map(dto = dto.enc),
+//            encX = encXMapper.map(dto = dto.encX)
+//        )
+//    }
 }
