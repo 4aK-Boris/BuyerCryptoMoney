@@ -15,7 +15,7 @@ import org.koin.dsl.module
 
 val repositoriesModule = module {
 
-    includes(coreRepositoriesModule, errorRepositoriesModule, messageWrapperRepositoryModule)
+    includes(coreRepositoriesModule, errorRepositoriesModule, messageWrapperRepositoryModule, cryptoRepositoriesModule)
 
     factory<CardCInitReqRepository> { CardCInitReqRepositoryImpl(mapper = get()) }
 
