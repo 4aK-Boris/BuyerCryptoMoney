@@ -5,11 +5,11 @@ plugins {
 }
 
 android {
-    namespace = Dependencies.Application.namespace
+    namespace = Dependencies.Application.appModuleNameSpace
     compileSdk = 33
 
     defaultConfig {
-        applicationId = Dependencies.Application.namespace
+        applicationId = Dependencies.Application.appModuleNameSpace
         minSdk = 28
         targetSdk = 33
         versionCode = 1
@@ -68,7 +68,7 @@ dependencies {
 
     implementation(Dependencies.OneSignal.oneSignal)
 
-    implementation(Dependencies.Koin.koin)
+    implementation(Dependencies.Koin.koinAndroid)
     implementation(Dependencies.Koin.compose)
 
     implementation(Dependencies.Kotlin.serialization)
