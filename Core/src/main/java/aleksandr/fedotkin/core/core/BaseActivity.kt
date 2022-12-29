@@ -1,6 +1,6 @@
-package aleksandr.fedotkin.buyercryptomoney.core
+package aleksandr.fedotkin.core.core
 
-import aleksandr.fedotkin.buyercryptomoney.presentation.ui.theme.BuyerCryptoMoneyTheme
+import aleksandr.fedotkin.core.theme.BuyerCryptoMoneyTheme
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -21,7 +21,7 @@ abstract class BaseActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            BuyerCryptoMoneyTheme() {
+            BuyerCryptoMoneyTheme {
                 Content()
                 val errorMessage by baseViewModel.errorMessage.collectAsState()
                 val errorState by baseViewModel.errorState.collectAsState()

@@ -1,7 +1,7 @@
 package aleksandr.fedotkin.buyercryptomoney.presentation.ui.screens.products
 
 import aleksandr.fedotkin.buyercryptomoney.domain.model.ProductModel
-import aleksandr.fedotkin.buyercryptomoney.presentation.ui.theme.Yellow
+import aleksandr.fedotkin.core.theme.Yellow
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape

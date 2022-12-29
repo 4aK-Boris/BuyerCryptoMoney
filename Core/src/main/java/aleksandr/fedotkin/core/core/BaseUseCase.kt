@@ -1,5 +1,7 @@
-package aleksandr.fedotkin.buyercryptomoney.domain.common
+package aleksandr.fedotkin.core.core
 
+import aleksandr.fedotkin.core.exception.BaseException
+import aleksandr.fedotkin.core.exception.SAFE_CALL_FAIL
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.coroutineScope
 

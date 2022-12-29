@@ -1,4 +1,4 @@
-package aleksandr.fedotkin.buyercryptomoney.presentation.ui.theme
+package aleksandr.fedotkin.core.theme
 
 import android.app.Activity
 import android.os.Build

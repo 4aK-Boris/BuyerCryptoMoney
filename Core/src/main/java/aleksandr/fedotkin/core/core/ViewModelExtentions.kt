@@ -1,4 +1,4 @@
-package aleksandr.fedotkin.buyercryptomoney.core
+package aleksandr.fedotkin.core.core
 
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers

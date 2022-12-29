@@ -1,8 +1,6 @@
 package aleksandr.fedotkin.buyercryptomoney.domain.usecases
 
-import aleksandr.fedotkin.buyercryptomoney.domain.common.BaseUseCase
-import aleksandr.fedotkin.buyercryptomoney.domain.common.InvalidCode
-import aleksandr.fedotkin.buyercryptomoney.domain.common.Result
+import aleksandr.fedotkin.buyercryptomoney.core.exception.InvalidCode
 import aleksandr.fedotkin.buyercryptomoney.domain.model.BuyModel
 import aleksandr.fedotkin.buyercryptomoney.domain.repositories.BuyRepository
 

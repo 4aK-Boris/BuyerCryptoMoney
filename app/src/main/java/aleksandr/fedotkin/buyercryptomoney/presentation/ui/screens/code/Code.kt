@@ -2,7 +2,7 @@ package aleksandr.fedotkin.buyercryptomoney.presentation.ui.screens.code
 
 import aleksandr.fedotkin.buyercryptomoney.domain.model.BuyModel
 import aleksandr.fedotkin.buyercryptomoney.domain.model.ProductModel
-import aleksandr.fedotkin.buyercryptomoney.presentation.ui.theme.Yellow
+import aleksandr.fedotkin.core.theme.Yellow
 import aleksandr.fedotkin.buyercryptomoney.presentation.ui.visual.transformation.CodeVisualTransformation
 import aleksandr.fedotkin.buyercryptomoney.presentation.viewmodels.CodeViewModel
 import androidx.compose.foundation.border

@@ -1,7 +1,8 @@
 package aleksandr.fedotkin.buyercryptomoney.core
 
 import aleksandr.fedotkin.buyercryptomoney.presentation.ui.screens.main.MainScreen
-import aleksandr.fedotkin.buyercryptomoney.presentation.viewmodels.MainViewModel
+import aleksandr.fedotkin.core.core.BaseActivity
+import aleksandr.fedotkin.core.core.BaseViewModel
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.runtime.Composable
