@@ -18,5 +18,7 @@ interface CardCInitResTBSRepository: BaseSetRepository<CardCInitResTBSModel, Car
 
     suspend fun checkChallEE(challEE: BigInteger, secondChallEE: BigInteger): Boolean
 
+    suspend fun checkLIDEE(lidEE: BigInteger, secondLIDEE: BigInteger): Boolean
+
     suspend fun checkThumbs(thumbs: List<ByteArray>, secondThumbs: List<ByteArray>): Boolean
 }
