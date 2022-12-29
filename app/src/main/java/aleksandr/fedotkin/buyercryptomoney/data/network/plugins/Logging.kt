@@ -1,4 +1,4 @@
-package aleksandr.fedotkin.network.plugins
+package aleksandr.fedotkin.buyercryptomoney.data.network.plugins
 
 import io.ktor.client.HttpClientConfig
 import io.ktor.client.plugins.logging.LogLevel

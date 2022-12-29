@@ -1,7 +1,7 @@
 package aleksandr.fedotkin.buyercryptomoney.data.mappers
 
 import aleksandr.fedotkin.buyercryptomoney.data.dto.BuyDTO
-import aleksandr.fedotkin.buyercryptomoney.domain.models.BuyModel
+import aleksandr.fedotkin.buyercryptomoney.domain.model.BuyModel
 
 class BuyMapper(
     private val purchaseMapper: PurchaseMapper,

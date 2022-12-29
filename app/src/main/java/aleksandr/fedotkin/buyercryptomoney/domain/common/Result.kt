@@ -1,4 +1,4 @@
-package aleksandr.fedotkin.core
+package aleksandr.fedotkin.buyercryptomoney.domain.common
 
 sealed class Result<out R> {
 

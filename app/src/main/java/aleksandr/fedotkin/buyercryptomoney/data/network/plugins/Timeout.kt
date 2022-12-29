@@ -1,9 +1,10 @@
-package aleksandr.fedotkin.network.plugins
+package aleksandr.fedotkin.buyercryptomoney.data.network.plugins
 
-
-import aleksandr.fedotkin.network.core.TIMEOUT
+import aleksandr.fedotkin.buyercryptomoney.core.TIMEOUT
 import io.ktor.client.HttpClientConfig
 import io.ktor.client.plugins.HttpTimeout
+
+
 
 fun HttpClientConfig<*>.configureTimeout() {
     install(HttpTimeout) {

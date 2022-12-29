@@ -7,7 +7,16 @@ import aleksandr.fedotkin.buyercryptomoney.data.dto.SellerDTO
 
 interface NetworkAPI {
     suspend fun getBuyers(): List<BuyerDTO>
+
     suspend fun getSeller(sellerId: Int): SellerDTO
-    suspend fun getSnippets(): List<ProductDTO>
+
+    suspend fun getProducts(): List<ProductDTO>
+
+    suspend fun getProduct(productId: Int): ProductDTO
+
     suspend fun buy(buyDTO: BuyDTO)
+
+    suspend fun getCode(): Boolean
+
+    suspend fun checkCode(code: Int): Boolean
 }

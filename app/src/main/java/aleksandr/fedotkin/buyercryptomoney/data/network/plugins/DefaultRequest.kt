@@ -1,6 +1,6 @@
-package aleksandr.fedotkin.network.plugins
+package aleksandr.fedotkin.buyercryptomoney.data.network.plugins
 
-import aleksandr.fedotkin.network.core.BASE_URL
+import aleksandr.fedotkin.buyercryptomoney.core.BASE_URL
 import io.ktor.client.HttpClientConfig
 import io.ktor.client.plugins.defaultRequest
 import io.ktor.http.ContentType

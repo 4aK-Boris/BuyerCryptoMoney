@@ -1,8 +1,8 @@
 package aleksandr.fedotkin.buyercryptomoney.data.mappers
 
 import aleksandr.fedotkin.buyercryptomoney.data.dto.ProductDTO
-import aleksandr.fedotkin.buyercryptomoney.domain.models.ProductModel
-import aleksandr.fedotkin.buyercryptomoney.domain.models.SellerModel
+import aleksandr.fedotkin.buyercryptomoney.domain.model.ProductModel
+import aleksandr.fedotkin.buyercryptomoney.domain.model.SellerModel
 
 class ProductMapper {
 

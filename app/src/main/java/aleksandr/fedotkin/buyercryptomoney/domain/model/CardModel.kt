@@ -1,5 +1,8 @@
-package aleksandr.fedotkin.buyercryptomoney.domain.models
+package aleksandr.fedotkin.buyercryptomoney.domain.model
 
+import kotlinx.serialization.Serializable
+
+@Serializable
 data class CardModel(
     val number: String,
     val month: String,

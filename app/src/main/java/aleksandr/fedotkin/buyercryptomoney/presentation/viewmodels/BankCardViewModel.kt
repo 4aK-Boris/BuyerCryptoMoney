@@ -1,17 +1,18 @@
 package aleksandr.fedotkin.buyercryptomoney.presentation.viewmodels
 
-import aleksandr.fedotkin.buyercryptomoney.core.exception.INVALID_FORMAT_CVC_EXCEPTION
-import aleksandr.fedotkin.buyercryptomoney.core.exception.INVALID_FORMAT_MONTH_EXCEPTION
-import aleksandr.fedotkin.buyercryptomoney.core.exception.INVALID_FORMAT_NUMBER_CARD_EXCEPTION
-import aleksandr.fedotkin.buyercryptomoney.core.exception.INVALID_FORMAT_YEAR_EXCEPTION
-import aleksandr.fedotkin.buyercryptomoney.domain.models.BuyModel
-import aleksandr.fedotkin.buyercryptomoney.domain.models.CardModel
-import aleksandr.fedotkin.buyercryptomoney.domain.models.PurchaseModel
+import aleksandr.fedotkin.buyercryptomoney.core.BaseViewModel
+import aleksandr.fedotkin.buyercryptomoney.core.ErrorHandler
+import aleksandr.fedotkin.buyercryptomoney.core.runOnIO
+import aleksandr.fedotkin.buyercryptomoney.domain.common.INVALID_FORMAT_CVC_EXCEPTION
+import aleksandr.fedotkin.buyercryptomoney.domain.common.INVALID_FORMAT_MONTH_EXCEPTION
+import aleksandr.fedotkin.buyercryptomoney.domain.common.INVALID_FORMAT_NUMBER_CARD_EXCEPTION
+import aleksandr.fedotkin.buyercryptomoney.domain.common.INVALID_FORMAT_YEAR_EXCEPTION
+import aleksandr.fedotkin.buyercryptomoney.domain.model.BuyModel
+import aleksandr.fedotkin.buyercryptomoney.domain.model.CardModel
+import aleksandr.fedotkin.buyercryptomoney.domain.model.PurchaseModel
+import aleksandr.fedotkin.buyercryptomoney.domain.usecases.AccuracyUseCase
 import aleksandr.fedotkin.buyercryptomoney.domain.usecases.BuyUseCase
 import aleksandr.fedotkin.buyercryptomoney.presentation.ui.navigation.Screen
-import aleksandr.fedotkin.core.BaseViewModel
-import aleksandr.fedotkin.core.ErrorHandler
-import aleksandr.fedotkin.core.runOnIO
 import androidx.navigation.NavController
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -19,14 +20,15 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.withContext
 
 class BankCardViewModel(
+    private val accuracyUseCase: AccuracyUseCase,
     private val buyUseCase: BuyUseCase,
     errorHandler: ErrorHandler
 ) : BaseViewModel(errorHandler = errorHandler) {
 
-    private val _number: MutableStateFlow<String> = MutableStateFlow(value = "")
-    private val _month: MutableStateFlow<String> = MutableStateFlow(value = "")
-    private val _year: MutableStateFlow<String> = MutableStateFlow(value = "")
-    private val _cvc: MutableStateFlow<String> = MutableStateFlow(value = "")
+    private val _number: MutableStateFlow<String> = MutableStateFlow(value = "1111222233334444")
+    private val _month: MutableStateFlow<String> = MutableStateFlow(value = "12")
+    private val _year: MutableStateFlow<String> = MutableStateFlow(value = "25")
+    private val _cvc: MutableStateFlow<String> = MutableStateFlow(value = "111")
     private val _count: MutableStateFlow<Int> = MutableStateFlow(value = 1)
 
     val number: StateFlow<String> = _number
@@ -55,7 +57,7 @@ class BankCardViewModel(
         _count.value = count
     }
 
-    fun buy(buyerId: Int, sellerId: Int, productId: Int, navController: NavController) = runOnIO {
+    fun getCode(buyerId: Int, sellerId: Int, productId: Int, navController: NavController) = runOnIO {
         val purchaseModel = PurchaseModel(
             buyerId = buyerId,
             sellerId = sellerId,
@@ -72,9 +74,11 @@ class BankCardViewModel(
             purchase = purchaseModel,
             card = cardModel
         )
-        buyUseCase.buy(buyModel = buyModel).resultDefaultHandle {
-            withContext(Dispatchers.Main) {
-                navController.navigate(route = Screen.Products.route)
+        accuracyUseCase.checkCardData(cardModel = cardModel).resultDefaultHandle {
+            buyUseCase.getCode().resultDefaultHandle {
+                withContext(context = Dispatchers.Main) {
+                    navController.navigate(route = Screen.Code.createRoute(data = buyModel))
+                }
             }
         }
     }

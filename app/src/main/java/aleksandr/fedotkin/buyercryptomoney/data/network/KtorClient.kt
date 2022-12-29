@@ -1,9 +1,10 @@
-package aleksandr.fedotkin.network.network
+package aleksandr.fedotkin.buyercryptomoney.data.network
 
-import aleksandr.fedotkin.network.core.exception.BadRequest
-import aleksandr.fedotkin.network.core.exception.InternalServerError
-import aleksandr.fedotkin.network.core.exception.NoInternet
-import aleksandr.fedotkin.network.core.exception.UnknownNetworkException
+import aleksandr.fedotkin.buyercryptomoney.domain.common.BadRequest
+import aleksandr.fedotkin.buyercryptomoney.domain.common.InternalServerError
+import aleksandr.fedotkin.buyercryptomoney.domain.common.NoInternet
+import aleksandr.fedotkin.buyercryptomoney.domain.common.UnknownNetworkException
+import android.util.Log
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.request.get
@@ -11,9 +12,7 @@ import io.ktor.client.request.parameter
 import io.ktor.client.request.post
 import io.ktor.client.request.setBody
 import io.ktor.client.statement.HttpResponse
-import io.ktor.http.ContentType
 import io.ktor.http.HttpStatusCode
-import io.ktor.http.contentType
 import io.ktor.http.isSuccess
 import java.nio.channels.UnresolvedAddressException
 
@@ -30,18 +29,13 @@ class KtorClient(private val client: HttpClient) {
     } catch (e: UnknownNetworkException) {
         throw NoInternet()
     } catch (e: Exception) {
+        Log.d("LOG_TAG", e.toString())
         throw NoInternet()
     }
 
     suspend fun postRequest(url: String, body: Any): HttpResponse =
         client.post(urlString = url) {
             setBody(body)
-        }
-
-    suspend fun postSetRequest(url: String, body: Any): HttpResponse =
-        client.post(urlString = url) {
-            setBody(body)
-            contentType(type = ContentType.Text.Any)
         }
 
     suspend fun getRequest(url: String, parameters: Map<String, Any>): HttpResponse =
@@ -53,10 +47,6 @@ class KtorClient(private val client: HttpClient) {
 
     suspend inline fun <reified T : Any> post(url: String, body: Any): T = call {
         postRequest(url = url, body = body)
-    }
-
-    suspend inline fun <reified T : Any> postSet(url: String, json: String): T = call {
-        postSetRequest(url = url, body = json)
     }
 
     suspend inline fun <reified T : Any> get(url: String, parameters: Map<String, Any> = emptyMap()): T = call {

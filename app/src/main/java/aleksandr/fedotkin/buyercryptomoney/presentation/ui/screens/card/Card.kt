@@ -2,10 +2,10 @@ package aleksandr.fedotkin.buyercryptomoney.presentation.ui.screens.card
 
 import aleksandr.fedotkin.buyercryptomoney.R
 import aleksandr.fedotkin.buyercryptomoney.presentation.ui.theme.Yellow
-import aleksandr.fedotkin.buyercryptomoney.presentation.viewmodels.BankCardViewModel
 import aleksandr.fedotkin.buyercryptomoney.presentation.ui.visual.transformation.BankCardCVCVisualTransformation
 import aleksandr.fedotkin.buyercryptomoney.presentation.ui.visual.transformation.BankCardMonthAndYearVisualTransformation
 import aleksandr.fedotkin.buyercryptomoney.presentation.ui.visual.transformation.BankCardNumberVisualTransformation
+import aleksandr.fedotkin.buyercryptomoney.presentation.viewmodels.BankCardViewModel
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -158,7 +158,7 @@ fun Card(
             })
 
         Button(onClick = {
-            viewModel.buy(
+            viewModel.getCode(
                 buyerId = buyerId,
                 sellerId = sellerId,
                 productId = productId,

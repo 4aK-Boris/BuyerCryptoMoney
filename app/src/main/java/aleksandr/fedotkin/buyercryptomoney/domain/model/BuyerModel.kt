@@ -1,4 +1,4 @@
-package aleksandr.fedotkin.buyercryptomoney.domain.models
+package aleksandr.fedotkin.buyercryptomoney.domain.model
 
 data class BuyerModel(
     val id: Int,

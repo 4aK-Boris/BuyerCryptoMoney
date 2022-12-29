@@ -1,5 +1,6 @@
 package aleksandr.fedotkin.buyercryptomoney.domain.di
 
+import aleksandr.fedotkin.buyercryptomoney.domain.usecases.AccuracyUseCase
 import aleksandr.fedotkin.buyercryptomoney.domain.usecases.BuyUseCase
 import aleksandr.fedotkin.buyercryptomoney.domain.usecases.BuyerUseCase
 import aleksandr.fedotkin.buyercryptomoney.domain.usecases.ProductUseCase
@@ -17,5 +18,9 @@ val useCasesModule = module {
 
     factory {
         BuyerUseCase(buyerRepository = get())
+    }
+
+    factory {
+        AccuracyUseCase()
     }
 }

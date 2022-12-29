@@ -1,6 +1,6 @@
-package aleksandr.fedotkin.core
+package aleksandr.fedotkin.buyercryptomoney.core
 
-
+import aleksandr.fedotkin.buyercryptomoney.domain.common.Result
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.StateFlow
 

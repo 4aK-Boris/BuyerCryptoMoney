@@ -5,11 +5,11 @@ plugins {
 }
 
 android {
-    namespace = Dependencies.Application.appModuleNameSpace
+    namespace = Dependencies.Application.namespace
     compileSdk = 33
 
     defaultConfig {
-        applicationId = Dependencies.Application.appModuleNameSpace
+        applicationId = Dependencies.Application.namespace
         minSdk = 28
         targetSdk = 33
         versionCode = 1
@@ -63,26 +63,16 @@ dependencies {
     implementation(Dependencies.Ktor.negotiation)
     implementation(Dependencies.Ktor.json)
     implementation(Dependencies.Ktor.logging)
-    implementation(Dependencies.Ktor.websockets)
 
     implementation(Dependencies.Coil.landscapist)
 
     implementation(Dependencies.OneSignal.oneSignal)
 
-    implementation(Dependencies.Koin.koinCore)
+    implementation(Dependencies.Koin.koin)
     implementation(Dependencies.Koin.compose)
-    implementation(Dependencies.Koin.koinLogger)
-    implementation(Dependencies.Koin.koinAndroid)
 
     implementation(Dependencies.Kotlin.serialization)
     implementation(Dependencies.Kotlin.coroutines)
-    implementation(Dependencies.Kotlin.datetime)
-
-    implementation(project(Dependencies.Modules.network))
-    implementation(project(Dependencies.Modules.setProtocol))
-    implementation(project(Dependencies.Modules.core))
-
-    testImplementation(Dependencies.Koin.koinJUnit)
 
     testImplementation(Dependencies.JUnit.jUnit)
 

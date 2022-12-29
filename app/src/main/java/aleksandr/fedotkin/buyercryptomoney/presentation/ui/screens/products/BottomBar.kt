@@ -1,6 +1,6 @@
 package aleksandr.fedotkin.buyercryptomoney.presentation.ui.screens.products
 
-import aleksandr.fedotkin.buyercryptomoney.domain.models.BuyerModel
+import aleksandr.fedotkin.buyercryptomoney.domain.model.BuyerModel
 import aleksandr.fedotkin.buyercryptomoney.presentation.viewmodels.ProductViewModel
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxWidth

@@ -1,4 +1,4 @@
-package aleksandr.fedotkin.core
+package aleksandr.fedotkin.buyercryptomoney.core
 
 import aleksandr.fedotkin.buyercryptomoney.presentation.ui.theme.BuyerCryptoMoneyTheme
 import android.os.Bundle
@@ -21,7 +21,7 @@ abstract class BaseActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            BuyerCryptoMoneyTheme {
+            BuyerCryptoMoneyTheme() {
                 Content()
                 val errorMessage by baseViewModel.errorMessage.collectAsState()
                 val errorState by baseViewModel.errorState.collectAsState()
@@ -31,6 +31,7 @@ abstract class BaseActivity : ComponentActivity() {
                     errorMessage = errorMessage,
                     closeDialog = baseViewModel.close
                 )
+
             }
         }
     }

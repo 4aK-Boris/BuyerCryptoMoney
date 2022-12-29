@@ -1,6 +1,6 @@
 package aleksandr.fedotkin.buyercryptomoney.presentation.di
 
-import aleksandr.fedotkin.buyercryptomoney.domain.models.BuyerModel
+import aleksandr.fedotkin.buyercryptomoney.domain.model.BuyerModel
 import org.koin.dsl.module
 
 val mockModule = module {
