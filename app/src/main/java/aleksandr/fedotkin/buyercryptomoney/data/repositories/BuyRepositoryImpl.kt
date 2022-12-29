@@ -13,4 +13,12 @@ class BuyRepositoryImpl(
     override suspend fun buy(buyModel: BuyModel) {
         networkAPI.buy(buyDTO = buyMapper.map(buyModel = buyModel))
     }
+
+    override suspend fun getCode() {
+        networkAPI.getCode()
+    }
+
+    override suspend fun checkCode(code: Int): Boolean {
+        return networkAPI.checkCode(code = code)
+    }
 }

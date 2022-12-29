@@ -4,8 +4,8 @@ import aleksandr.fedotkin.buyercryptomoney.data.network.KtorClient
 import aleksandr.fedotkin.buyercryptomoney.data.network.NetworkAPI
 import aleksandr.fedotkin.buyercryptomoney.data.network.NetworkAPIImpl
 import aleksandr.fedotkin.buyercryptomoney.data.network.plugins.configureDefaultRequest
-import aleksandr.fedotkin.buyercryptomoney.data.network.plugins.configureLogging
 import aleksandr.fedotkin.buyercryptomoney.data.network.plugins.configureJson
+import aleksandr.fedotkin.buyercryptomoney.data.network.plugins.configureLogging
 import aleksandr.fedotkin.buyercryptomoney.data.network.plugins.configureTimeout
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.android.Android

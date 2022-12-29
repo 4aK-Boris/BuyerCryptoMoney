@@ -1,6 +1,7 @@
 package aleksandr.fedotkin.buyercryptomoney.presentation.di
 
 import aleksandr.fedotkin.buyercryptomoney.presentation.viewmodels.BankCardViewModel
+import aleksandr.fedotkin.buyercryptomoney.presentation.viewmodels.CodeViewModel
 import aleksandr.fedotkin.buyercryptomoney.presentation.viewmodels.MainViewModel
 import aleksandr.fedotkin.buyercryptomoney.presentation.viewmodels.ProductViewModel
 import aleksandr.fedotkin.buyercryptomoney.presentation.viewmodels.TestViewModel
@@ -10,7 +11,7 @@ import org.koin.dsl.module
 val viewModelModule = module {
 
     viewModel {
-        BankCardViewModel(buyUseCase = get(), errorHandler = get())
+        BankCardViewModel(accuracyUseCase = get(), errorHandler = get(), buyUseCase = get())
     }
 
     viewModel {
@@ -28,5 +29,14 @@ val viewModelModule = module {
 
     viewModel {
         TestViewModel()
+    }
+
+    viewModel {
+        CodeViewModel(
+            errorHandler = get(),
+            productUseCase = get(),
+            buyUseCase = get(),
+            accuracyUseCase = get()
+        )
     }
 }

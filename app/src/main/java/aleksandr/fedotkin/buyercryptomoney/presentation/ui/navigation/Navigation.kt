@@ -1,6 +1,8 @@
 package aleksandr.fedotkin.buyercryptomoney.presentation.ui.navigation
 
+import aleksandr.fedotkin.buyercryptomoney.domain.model.BuyModel
 import aleksandr.fedotkin.buyercryptomoney.presentation.ui.screens.card.Card
+import aleksandr.fedotkin.buyercryptomoney.presentation.ui.screens.code.CodeScreen
 import aleksandr.fedotkin.buyercryptomoney.presentation.ui.screens.products.Products
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -8,6 +10,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import kotlinx.serialization.json.Json
 
 @Composable
 fun Navigation(
@@ -44,6 +47,16 @@ fun Navigation(
                 sellerId = sellerId,
                 productId = productId,
                 maxCount = maxCount
+            )
+        }
+        composable(
+            route = Screen.Code.route, arguments = Screen.Code.arguments
+        ) { backStackEntry ->
+            val json = backStackEntry.arguments?.getString(Screen.Code.DATA)
+            requireNotNull(json) { "json parameter wasn't found. Please make sure it's set!" }
+            CodeScreen(
+                navController = navController,
+                data = Json.decodeFromString(string = json, deserializer = BuyModel.serializer())
             )
         }
     }

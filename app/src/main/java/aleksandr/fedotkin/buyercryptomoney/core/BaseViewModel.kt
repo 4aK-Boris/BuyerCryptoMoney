@@ -1,7 +1,7 @@
 package aleksandr.fedotkin.buyercryptomoney.core
 
-import androidx.lifecycle.ViewModel
 import aleksandr.fedotkin.buyercryptomoney.domain.common.Result
+import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.StateFlow
 
 abstract class BaseViewModel(private val errorHandler: ErrorHandler): ViewModel() {

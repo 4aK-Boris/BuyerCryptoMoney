@@ -8,3 +8,4 @@ class InvalidFormatNumberCardException : BaseException(INVALID_FORMAT_NUMBER_CAR
 class InvalidFormatCvcException : BaseException(INVALID_FORMAT_CVC_EXCEPTION)
 class InvalidFormatMonthException : BaseException(INVALID_FORMAT_MONTH_EXCEPTION)
 class InvalidFormatYearException : BaseException(INVALID_FORMAT_YEAR_EXCEPTION)
+class InvalidCode : BaseException(INVALID_CODE)

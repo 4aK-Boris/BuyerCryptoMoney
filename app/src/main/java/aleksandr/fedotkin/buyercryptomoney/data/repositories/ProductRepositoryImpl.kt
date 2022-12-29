@@ -13,7 +13,16 @@ class ProductRepositoryImpl(
 ) : ProductRepository {
 
     override suspend fun getProducts(): List<ProductModel> {
-        return networkAPI.getSnippets().map { productDTO ->
+        return networkAPI.getProducts().map { productDTO ->
+            productMapper.map(
+                productDTO = productDTO,
+                sellerRepository.getSeller(sellerId = productDTO.sellerId)
+            )
+        }
+    }
+
+    override suspend fun getProduct(productId: Int): ProductModel {
+        return networkAPI.getProduct(productId = productId).let { productDTO ->
             productMapper.map(
                 productDTO = productDTO,
                 sellerRepository.getSeller(sellerId = productDTO.sellerId)
